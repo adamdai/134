@@ -119,10 +119,9 @@ while runLoop %&& frameCount < 400
             disp('tracking')
             
             x = actuator.getNextFeedback().position;
-            if ~((x > 1.5 && offset < 0) || (x < -1.5 && offset > 0))
-                cmd.velocity = - (tracking_speed / 320) * offset;
-                actuator.send(cmd);
-            end
+            if ((x < 1.5 && offset < 0) || (
+            cmd.velocity = - (tracking_speed / 320) * offset;
+            actuator.send(cmd);
             
             % Convert the box corners into the [x1 y1 x2 y2 x3 y3 x4 y4]
             % format required by insertShape.
