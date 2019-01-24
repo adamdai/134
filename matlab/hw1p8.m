@@ -7,7 +7,7 @@ gains = group.getGains();
 % Double position P gain
 gains.positionKp = 1;
 % % Halve velocity v gain
-gains.velocityKp = 0.05 * 1000;
+gains.velocityKp = 0.05;
 group.send('gains', gains);
 
 positions = zeros(500, 1);
