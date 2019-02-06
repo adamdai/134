@@ -6,6 +6,12 @@ names = {'Doc'};
 actuator = HebiLookup.newGroupFromNames(family, names);
 cmd = CommandStruct();
 
+% set up ros
+rosshutdown;
+rosinit('10.10.10.5');
+ros_pub = rospublisher('goal');
+msg = rosmessage(ros_pub);
+
 % Create the face detector object.
 faceDetector = vision.CascadeObjectDetector();
 
@@ -13,7 +19,7 @@ faceDetector = vision.CascadeObjectDetector();
 pointTracker = vision.PointTracker('MaxBidirectionalError', 2);
 
 % Create the webcam object.
-cam = webcam;
+cam = webcam(2);
 
 % Capture one frame to get its size.
 videoFrame = snapshot(cam);
@@ -36,10 +42,18 @@ frameCount = 0;
 scan_speed = 0.4;
 tracking_speed = 1.25;
 scan_range = 1.25;
+scan_target = 1.5;
 
 x = actuator.getNextFeedback().position;
 direction = - sign(x);
 hit_bound = abs(x) > scan_range;
+
+% center the camera
+while abs(x) > 0.1
+    msg.Data = 0;
+    send(ros_pub, msg);
+    x = actuator.getNextFeedback().position;
+end
 
 
 while runLoop %&& frameCount < 400
@@ -59,13 +73,18 @@ while runLoop %&& frameCount < 400
         if abs(x) > scan_range && ~hit_bound
             hit_bound = true;
             direction = direction * -1;
+            %msg.Data = -1.3;
         elseif abs(x) < scan_range
             hit_bound = false;
+            %msg.Data = 1.3;
         end
+        
+        msg.Data = -direction*scan_target;
 
-        cmd.velocity = scan_speed * direction;
-        actuator.setCommandLifetime(1.5);
-        actuator.send(cmd);
+        %cmd.velocity = scan_speed * direction;
+        %actuator.setCommandLifetime(1.5);
+        %actuator.send(cmd);
+        send(ros_pub, msg);
 
         if ~isempty(bbox)
 
@@ -123,8 +142,11 @@ while runLoop %&& frameCount < 400
             
             x = actuator.getNextFeedback().position;
             if ~((x > 1.5 && offset < 0) || (x < -1.5 && offset > 0))
-                cmd.velocity = - (tracking_speed / 320) * offset;
-                actuator.send(cmd);
+                %cmd.velocity = - (tracking_speed / 320) * offset;
+                %actuator.send(cmd);
+                msg.Data = x + offset / 320;
+                disp(offset)
+                send(ros_pub, msg);
             end
             
             % Convert the box corners into the [x1 y1 x2 y2 x3 y3 x4 y4]

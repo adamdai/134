@@ -6,6 +6,8 @@ names = {'Doc'};
 actuator = HebiLookup.newGroupFromNames(family, names);
 cmd = CommandStruct();
 
+% set up ros
+
 % Create the face detector object.
 faceDetector = vision.CascadeObjectDetector();
 
@@ -13,7 +15,7 @@ faceDetector = vision.CascadeObjectDetector();
 pointTracker = vision.PointTracker('MaxBidirectionalError', 2);
 
 % Create the webcam object.
-cam = webcam;
+cam = webcam(2);
 
 % Capture one frame to get its size.
 videoFrame = snapshot(cam);
