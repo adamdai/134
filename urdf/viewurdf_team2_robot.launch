@@ -1,0 +1,12 @@
+<launch>
+  <param name="robot_description" textfile="$(find myrobot)/urdf/team2_robot.urdf"/>
+
+  <node name="jo" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="true"/>
+  </node>
+
+  <node name="rsp" pkg="robot_state_publisher" type="robot_state_publisher">
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find myrobot)/rviz/viewrobot.rviz"/>
+</launch>
