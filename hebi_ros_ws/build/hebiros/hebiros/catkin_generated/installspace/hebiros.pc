@@ -1,0 +1,8 @@
+prefix=/home/robot/hebi_ros_ws/install
+
+Name: hebiros
+Description: Description of hebiros
+Version: 1.5.0
+Cflags: -I/home/robot/hebi_ros_ws/install/include
+Libs: -L/home/robot/hebi_ros_ws/install/lib 
+Requires: roscpp actionlib message_runtime tf

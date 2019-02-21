@@ -1,0 +1,2 @@
+hebiros/hebiros:hebiros/hebiros_advanced_examples:hebiros/hebiros_basic_examples:hebiros/hebiros_description:hebiros/hebiros_gazebo_plugin
+-DCATKIN_DEVEL_PREFIX=/home/robot/hebi_ros_ws/devel -DCMAKE_INSTALL_PREFIX=/home/robot/hebi_ros_ws/install -G Unix Makefiles

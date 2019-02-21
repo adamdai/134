@@ -1,0 +1,8 @@
+prefix=/home/robot/hebi_ros_ws/devel
+
+Name: hebiros_gazebo_plugin
+Description: Description of hebiros_gazebo_plugin
+Version: 1.5.0
+Cflags: 
+Libs: -L/home/robot/hebi_ros_ws/devel/lib 
+Requires: gazebo_ros gazebo_plugins roscpp rospy std_msgs sensor_msgs smach_viewer

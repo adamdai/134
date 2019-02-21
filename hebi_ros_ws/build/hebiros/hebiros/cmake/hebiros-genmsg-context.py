@@ -1,0 +1,11 @@
+# generated from genmsg/cmake/pkg-genmsg.context.in
+
+messages_str = "/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg/EntryMsg.msg;/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg/EntryListMsg.msg;/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg/FeedbackMsg.msg;/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg/WaypointMsg.msg;/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg/CommandMsg.msg;/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg/SettingsMsg.msg;/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg/PidGainsMsg.msg;/home/robot/hebi_ros_ws/devel/share/hebiros/msg/TrajectoryAction.msg;/home/robot/hebi_ros_ws/devel/share/hebiros/msg/TrajectoryActionGoal.msg;/home/robot/hebi_ros_ws/devel/share/hebiros/msg/TrajectoryActionResult.msg;/home/robot/hebi_ros_ws/devel/share/hebiros/msg/TrajectoryActionFeedback.msg;/home/robot/hebi_ros_ws/devel/share/hebiros/msg/TrajectoryGoal.msg;/home/robot/hebi_ros_ws/devel/share/hebiros/msg/TrajectoryResult.msg;/home/robot/hebi_ros_ws/devel/share/hebiros/msg/TrajectoryFeedback.msg"
+services_str = "/home/robot/hebi_ros_ws/src/hebiros/hebiros/srv/EntryListSrv.srv;/home/robot/hebi_ros_ws/src/hebiros/hebiros/srv/AddGroupFromNamesSrv.srv;/home/robot/hebi_ros_ws/src/hebiros/hebiros/srv/AddGroupFromUrdfSrv.srv;/home/robot/hebi_ros_ws/src/hebiros/hebiros/srv/SizeSrv.srv;/home/robot/hebi_ros_ws/src/hebiros/hebiros/srv/SetFeedbackFrequencySrv.srv;/home/robot/hebi_ros_ws/src/hebiros/hebiros/srv/SetCommandLifetimeSrv.srv;/home/robot/hebi_ros_ws/src/hebiros/hebiros/srv/SendCommandWithAcknowledgementSrv.srv"
+pkg_name = "hebiros"
+dependencies_str = "std_msgs;sensor_msgs;actionlib_msgs"
+langs = "gencpp;geneus;genlisp;gennodejs;genpy"
+dep_include_paths_str = "hebiros;/home/robot/hebi_ros_ws/src/hebiros/hebiros/msg;hebiros;/home/robot/hebi_ros_ws/devel/share/hebiros/msg;std_msgs;/opt/ros/melodic/share/std_msgs/cmake/../msg;sensor_msgs;/opt/ros/melodic/share/sensor_msgs/cmake/../msg;actionlib_msgs;/opt/ros/melodic/share/actionlib_msgs/cmake/../msg;geometry_msgs;/opt/ros/melodic/share/geometry_msgs/cmake/../msg"
+PYTHON_EXECUTABLE = "/usr/bin/python2"
+package_has_static_sources = '' == 'TRUE'
+genmsg_check_deps_script = "/opt/ros/melodic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py"
