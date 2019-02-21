@@ -1,0 +1,14 @@
+<launch>
+  <arg name="model" default="$(find moveto)/urdf/robot.urdf"/>
+  <arg name="cfg"   default="$(find moveto)/rviz/viewrobot.rviz" />
+
+  <param name="robot_description" textfile="$(arg model)"/>
+
+  <node name="jsp" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="true"/>
+  </node>
+
+  <node name="rsp" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg cfg)"/>
+</launch>

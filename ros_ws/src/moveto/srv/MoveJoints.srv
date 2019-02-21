@@ -1,0 +1,7 @@
+# Service to move the robot joints
+#
+# Request Definition
+Joints  joints
+---
+# Response Definition
+float64 movetime

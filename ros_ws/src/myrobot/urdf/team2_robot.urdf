@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+
+<robot name="myrobot">
+
+  <!-- ******************** Materials ******************** -->
+
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1"/>
+  </material>
+
+  <material name="gray">
+    <color rgba="0.6 0.6 0.6 1"/>
+  </material>
+
+  <material name="red">
+    <color rgba=".82 0.06 0.06 1"/>
+  </material>
+
+
+  <!-- ************************* ROBOT DEFINITION ************************* -->
+
+  <link name="world">
+  </link>
+
+
+  <!-- Base plate -->
+  <joint name="baseplate_attachment"  type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="world"/>
+    <child link="baseplate"/>
+  </joint>
+
+  <link name="baseplate">
+    <visual>
+      <origin xyz="0 0 -.0127" rpy="0 0 0" />
+      <geometry>
+        <box size="0.2 0.2 0.0254" />
+      </geometry>
+      <material name="white"/>
+    </visual>
+  </link>
+
+  <!-- motor1 Body -->
+  <joint name="motor1_attachment" type="fixed">
+    <parent link="baseplate"/>
+    <child  link="motor1"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="motor1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://hebiros_description/meshes/x5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+
+  <!-- Base Joint -->
+  <joint name="link1_attachment" type="continuous">
+    <parent link="motor1"/>
+    <child  link="link1"/>
+    <origin xyz="0 0 0.031" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- Link 1 -->
+  <link name="link1">
+    <visual>
+      <origin xyz="0 0 0.041275" rpy="0 0 0" />
+      <geometry>
+        <box size="0.0889 0.0762 0.08255" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+
+  <joint name="motor2_attachment" type="fixed">
+    <parent link="link1"/>
+    <child  link="motor2"/>
+    <origin xyz="0.0445 0 0.041275" rpy="0 0 0"/>
+  </joint>
+
+  <link name="motor2">
+    <visual>
+      <origin xyz="0 0 0" rpy="1.57 0 1.57" />
+      <geometry>
+        <mesh filename="package://hebiros_description/meshes/x5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+  <joint name="link2_attachment" type="continuous">
+    <parent link="motor2"/>
+    <child  link="link2"/>
+    <origin xyz="0.031 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+
+  <link name="link2">
+    <visual>
+      <origin xyz="0 0.1016 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.00635 0.2032 0.045" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+
+  <joint name="motor3_attachment" type="fixed">
+    <parent link="link2"/>
+    <child  link="motor3"/>
+    <origin xyz="0 0.2032 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="motor3">
+    <visual>
+      <origin xyz="0 0 0" rpy="-1.57 0 1.57" />
+      <geometry>
+        <mesh filename="package://hebiros_description/meshes/x5.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+  </link>
+
+
+  <joint name="link3_attachment" type="continuous">
+    <parent link="motor3"/>
+    <child  link="link3"/>
+    <origin xyz="-0.031 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+
+  <link name="link3">
+    <visual>
+      <origin xyz="0 0.1016 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.00635 0.2032 0.045" />
+      </geometry>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+</robot>

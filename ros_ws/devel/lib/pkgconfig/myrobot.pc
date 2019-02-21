@@ -1,0 +1,8 @@
+prefix=/home/robot/ros_ws/devel
+
+Name: myrobot
+Description: Description of myrobot
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/robot/ros_ws/devel/lib 
+Requires: 

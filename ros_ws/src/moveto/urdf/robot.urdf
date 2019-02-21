@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+
+<robot name="myrobot">
+
+  <!-- ******************** Materials ******************** -->
+
+  <material name="white">    <color rgba="1.00 1.00 1.00 1"/>  </material>
+  <material name="gray">     <color rgba="0.60 0.60 0.60 1"/>  </material>
+
+  <material name="hebired">  <color rgba="0.82 0.06 0.06 1"/>  </material>
+
+  <material name="red">      <color rgba="1.00 0.00 0.00 1"/>  </material>
+  <material name="green">    <color rgba="0.00 1.00 0.00 1"/>  </material>
+  <material name="blue">     <color rgba="0.00 0.00 1.00 1"/>  </material>
+
+  <material name="cyan">     <color rgba="0.00 1.00 1.00 1"/>  </material>
+  <material name="magenta">  <color rgba="1.00 0.00 1.00 1"/>  </material>
+  <material name="yellow">   <color rgba="1.00 1.00 0.00 1"/>  </material>
+  
+  <!-- ******************** Kinematics ******************** -->
+
+  <joint name="134/1" type="continuous">
+    <parent link="world"/>
+    <child  link="link1"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis   xyz="0 0 1"/>
+  </joint>
+
+  <joint name="134/2" type="continuous">
+    <parent link="link1"/>
+    <child  link="link2"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis   xyz="1 0 0"/>
+  </joint>
+
+  <joint name="134/3" type="continuous">
+    <parent link="link2"/>
+    <child  link="link3"/>
+    <origin xyz="0 0.3 0" rpy="0 0 0"/>
+    <axis   xyz="1 0 0"/>
+  </joint>
+
+  <joint name="134/4" type="continuous">
+    <parent link="link3"/>
+    <child  link="link4"/>
+    <origin xyz="0 0.3 0" rpy="0 0 0"/>
+    <axis   xyz="1 0 0"/>
+  </joint>
+
+  <joint name="134/5" type="continuous">
+    <parent link="link4"/>
+    <child  link="link5"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis   xyz="0 1 0"/>
+  </joint>
+
+  <joint name="tipshift" type="fixed">
+    <parent link="link5"/>
+    <child  link="tip"/>
+    <origin xyz="0 0.14 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ******************** World and Tip ******************** -->
+  <link name="world"> </link>
+
+  <link name="tip"> <visual>
+    <geometry> <sphere radius="0.01" /> </geometry>
+    <material name="yellow"/>
+  </visual> </link>
+
+  <!-- ******************** Baseplate and Basemotor ******************** -->
+  <joint name="baseplate_attachment" type="fixed">
+    <parent link="world"/> <child link="baseplate"/>
+  </joint>
+
+  <joint name="basemotor_attachment" type="fixed">
+    <parent link="world"/> <child link="basemotor"/>
+  </joint>
+
+  <link name="baseplate"> <visual>
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.051" />
+    <geometry>    <box size="0.2 0.2  0.02"  /> </geometry>
+    <material name="white"/>
+  </visual> </link>
+
+  <link name="basemotor"> <visual>
+    <origin rpy="0 0 1.57" xyz="0.0 0.0 -0.041" />
+    <geometry>
+      <mesh filename="package://hebiros_description/meshes/x5.stl"
+	    scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="hebired"/>
+  </visual> </link>
+
+  <!-- ******************** Intermediate Links ******************** -->
+  <link name="link1"> </link>
+
+  <link name="link2"> <visual>
+    <origin rpy="0 0 0" xyz="0.0   0.15 0.0"  />
+    <geometry>    <box size="0.005 0.28  0.02" /> </geometry>
+    <material name="blue"/>
+  </visual> </link>
+
+  <link name="link3"> <visual>
+    <origin rpy="0 0 0" xyz="0.0   0.15 0.0"  />
+    <geometry>    <box size="0.005 0.28  0.02" /> </geometry>
+    <material name="green"/>
+  </visual> </link>
+
+  <link name="link4"> <visual>
+    <origin rpy="1.57 0 0" xyz="0.0   0.05 0.0"  />
+    <geometry>  <cylinder length="0.08" radius="0.01"/> </geometry>
+    <material name="cyan"/>
+  </visual> </link>
+
+  <!-- Gripper -->
+  <link name="link5"> <visual>
+    <origin rpy="0 0 0" xyz="0.0  0.09  0.0"  />
+    <geometry>    <box size="0.06 0.005 0.02" /> </geometry>
+    <material name="magenta"/>
+  </visual> </link>
+
+  <joint name="leftfinger_attachment" type="fixed">
+    <parent link="link5"/>
+    <child  link="leftfinger"/>
+  </joint>
+
+  <link name="leftfinger"> <visual>
+    <origin rpy="0 0 0" xyz="-0.03 0.12  0.0"  />
+    <geometry>    <box size=" 0.005 0.06  0.02" /> </geometry>
+    <material name="magenta"/>
+  </visual> </link>
+
+  <joint name="rightfinger_attachment" type="fixed">
+    <parent link="link5"/>
+    <child  link="rightfinger"/>
+  </joint>
+
+  <link name="rightfinger"> <visual>
+    <origin rpy="0 0 0" xyz=" 0.03  0.12  0.0"  />
+    <geometry>    <box size=" 0.005 0.06  0.02" /> </geometry>
+    <material name="magenta"/>
+  </visual> </link>
+
+</robot>

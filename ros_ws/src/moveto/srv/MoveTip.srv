@@ -1,0 +1,7 @@
+# Service to move the robot tip
+#
+# Request Definition
+Tip     tip
+---
+# Response Definition
+float64 movetime

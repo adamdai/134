@@ -1,0 +1,6 @@
+# Message of tip values
+float64 x
+float64 y
+float64 z
+float64 pitch
+float64 roll

@@ -1,0 +1,10 @@
+# Service to compute the inverse kinematics
+#
+# Request Definition
+Tip     tip
+---
+# Response Definition
+# Singular implies the solution is either only nearby or dangerous as
+# the mechanism is singular.
+bool    singular
+Joints  joints

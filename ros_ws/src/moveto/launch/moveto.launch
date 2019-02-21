@@ -1,0 +1,13 @@
+<launch>
+  <arg name="model" default="$(find moveto)/urdf/robot.urdf"/>
+  <arg name="cfg"   default="$(find moveto)/rviz/viewrobot.rviz" />
+
+  <param name="robot_description" textfile="$(arg model)"/>
+
+  <node name="ikin"   pkg="moveto" type="ikin"/>
+  <node name="moveto" pkg="moveto" type="moveto"/>
+
+  <node name="rsp" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg cfg)"/>
+</launch>

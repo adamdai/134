@@ -1,0 +1,6 @@
+# Service to determine whether the joints are moving
+#
+# Request Definition
+---
+# Response Definition
+bool  moving
