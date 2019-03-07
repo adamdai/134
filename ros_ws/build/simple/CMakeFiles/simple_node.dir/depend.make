@@ -4,11 +4,17 @@
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrv.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrvRequest.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrvResponse.h
+simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/CommandMsg.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/EntryListMsg.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/EntryListSrv.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/EntryListSrvRequest.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/EntryListSrvResponse.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/EntryMsg.h
+simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/PidGainsMsg.h
+simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrv.h
+simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrvRequest.h
+simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrvResponse.h
+simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/SettingsMsg.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/SizeSrv.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/SizeSrvRequest.h
 simple/CMakeFiles/simple_node.dir/src/simple_node.cpp.o: /home/robot/hebi_ros_ws/devel/include/hebiros/SizeSrvResponse.h

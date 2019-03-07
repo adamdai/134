@@ -14,8 +14,8 @@
 **
 **   In general, we could/should pull these from the URDF...
 */
-#define LENA    (0.2032)
-#define LENB    (0.2032)
+#define LENA    (0.3048)
+#define LENB    (0.3048)
 #define LENC    (0.14)
 
 
@@ -50,11 +50,11 @@ bool ikin(double x, double y, double z, double pitch, double roll, double q[5])
 	    (2.0 * LENA * LENB));
   if      (cgamma <= -1.0)   { cgamma = -1.0; singular = true; }
   else if (cgamma >=  1.0)   { cgamma =  1.0; singular = true; }
-  q[2] = -(M_PI - acos(cgamma));
+  q[2] = (M_PI - acos(cgamma));
 
   // Compute the angle by which the bent elbow affects the shoulder.
   // This is only singular when the elbow is singular.
-  beta = atan2(LENB*sin(q[2]), LENA + LENB*cos(q[2]));
+  beta = atan2(LENB*sin(-q[2]), LENA + LENB*cos(-q[2]));
 
   // Finally compute the shoulder angle J2.
   if ((zwrist == 0) && (rwrist == 0))

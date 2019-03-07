@@ -106,7 +106,7 @@
     <visual>
       <origin xyz="0 0.1016 0" rpy="0 0 0" />
       <geometry>
-        <box size="0.00635 0.2032 0.045" />
+        <box size="0.00635 0.2042 0.045" />
       </geometry>
       <material name="gray"/>
     </visual>
@@ -116,7 +116,7 @@
   <joint name="motor3_attachment" type="fixed">
     <parent link="link2"/>
     <child  link="motor3"/>
-    <origin xyz="0 0.2032 0" rpy="0 0 0"/>
+    <origin xyz="0 0.2042 0" rpy="0 0 0"/>
   </joint>
 
   <link name="motor3">
@@ -142,7 +142,7 @@
     <visual>
       <origin xyz="0 0.1016 0" rpy="0 0 0" />
       <geometry>
-        <box size="0.00635 0.2032 0.045" />
+        <box size="0.00635 0.2042 0.045" />
       </geometry>
       <material name="gray"/>
     </visual>

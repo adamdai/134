@@ -3,7 +3,10 @@ project(moveto)
 
 # Basic requirements: Note message_generation is for custom message/services.
 find_package(catkin REQUIRED COMPONENTS
+  hebiros
   roscpp
+  sensor_msgs
+  std_msgs
   message_generation
 )
 

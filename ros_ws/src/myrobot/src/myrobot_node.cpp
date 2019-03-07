@@ -6,6 +6,10 @@
 #include "opencv_apps/FaceArrayStamped.h"
 #include "hebiros/AddGroupFromNamesSrv.h"
 #include "hebiros/SizeSrv.h"
+#include "hebiros/SendCommandWithAcknowledgementSrv.h"
+#include "hebiros/CommandMsg.h"
+#include "hebiros/SettingsMsg.h"
+#include "hebiros/PidGainsMsg.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -26,6 +30,8 @@ sensor_msgs::JointState feedback;       // The actuator feedback struccture
 volatile int            feedbackvalid = 0;
 volatile double         goalpos;        // The goal position
 volatile double         goalvel;        // The goal velocity
+sensor_msgs::JointState goal;       // The actuator feedback struccture
+
 
 volatile double         face_x;
 volatile double         face_y;
@@ -49,7 +55,7 @@ void feedbackCallback(sensor_msgs::JointState data)
 void posCallback(const std_msgs::Float64::ConstPtr& msg)
 {
   goalpos = msg->data;
-  ROS_INFO("I heard: [%f]", (double) msg->data);
+  //ROS_INFO("I heard: [%f]", (double) msg->data);
 }
 
 /*
@@ -108,8 +114,8 @@ int main(int argc, char **argv)
   ros::ServiceClient add_group_client = n.serviceClient<AddGroupFromNamesSrv>("/hebiros/add_group_from_names");
   AddGroupFromNamesSrv add_group_srv;
   add_group_srv.request.group_name = group_name;
-  add_group_srv.request.names = {"Doc"};
-  add_group_srv.request.families = {"134"};
+  add_group_srv.request.names = {"base", "x8-3 shoulder", "elbow", "gripper"};
+  add_group_srv.request.families = {"Team2"};
   // Repeatedly call the service until it succeeds.
   while(!add_group_client.call(add_group_srv)) ;
 
@@ -117,8 +123,68 @@ int main(int argc, char **argv)
   ros::ServiceClient size_client = n.serviceClient<SizeSrv>("/hebiros/"+group_name+"/size");
   SizeSrv size_srv;
   size_client.call(size_srv);
-  ROS_INFO("%s has been created and has size %d", group_name.c_str(), size_srv.response.size);
+  int group_size = size_srv.response.size;
+  ROS_INFO("%s has been created and has size %d", group_name.c_str(), group_size);
 
+  // ros::ServiceClient send_command_client = n.serviceClient<SendCommandWithAcknowledgementSrv>("/hebiros/send_command_with_acknowledgement");
+  // SendCommandWithAcknowledgementSrv send_command_srv;
+  //
+  // CommandMsg command;
+  // SettingsMsg settings;
+  // PidGainsMsg gains;
+  //
+  // gains.kp = {1.0, 10.0, 1.0, 1.0};
+  // gains.ki = {0.0, 0.0, 0.0, 0.0};
+  // gains.kd = {0.0, 0.0, 0.0, 0.0};
+  //
+  // settings.position_gains = gains;
+  // command.settings = settings;
+  //
+  // send_command_srv.request.command = command;
+  // send_command_client.call(send_command_srv);
+  //
+ std::vector<std::string> actuators = {"Team2/base", "Team2/x8-3 shoulder", "Team2/elbow", "Team2/gripper"};
+
+ CommandMsg full_command_msg;
+
+ full_command_msg.name = actuators;
+ full_command_msg.settings.name = actuators;
+ full_command_msg.settings.save_current_settings = {false};
+ full_command_msg.settings.control_strategy = {4};
+
+
+ full_command_msg.settings.position_gains.name = actuators;
+
+ full_command_msg.settings.position_gains.kp = {1.0, 5.0, 5.0, 1.0};
+ full_command_msg.settings.position_gains.kd = {0.0, 0.0, 0.0, 0.0};
+ full_command_msg.settings.position_gains.ki = {0.0, 0.0, 0.0, 0.0};
+
+
+ full_command_msg.settings.velocity_gains.name = actuators;
+
+ full_command_msg.settings.velocity_gains.kp = {0.005, 0.005, 0.005, 0.005};
+ full_command_msg.settings.velocity_gains.kd = {0.0, 0.0, 0.0, 0.0};
+ full_command_msg.settings.velocity_gains.ki = {0.0, 0.0, 0.0, 0.0};
+
+
+ SendCommandWithAcknowledgementSrv send_command_srv;
+ send_command_srv.request.command = full_command_msg;
+
+
+ ros::ServiceClient send_command_client =
+   n.serviceClient<SendCommandWithAcknowledgementSrv>(
+   "/hebiros/"+group_name+"/send_command_with_acknowledgement");
+
+
+ // Send the command and check for acknowledgement!
+ if (send_command_client.call(send_command_srv))
+ {
+   std::cout << "The gains were changed successfully" << std::endl;
+ }
+ else
+ {
+   std::cout << "The gains were not changed" << std::endl;
+ }
 
 
 
@@ -136,20 +202,22 @@ int main(int argc, char **argv)
   // Create a subscriber to receive feedback from the actuator group.
   ros::Subscriber feedback_subscriber = n.subscribe("/hebiros/"+group_name+"/feedback/joint_state", 100, feedbackCallback);
 
-  feedback.position.reserve(1);
-  feedback.velocity.reserve(1);
-  feedback.effort.reserve(1);
+  feedback.position.reserve(group_size);
+  feedback.velocity.reserve(group_size);
+  feedback.effort.reserve(group_size);
   std::cout << "feedback reserved\n" ;
 
   // Create a publisher to send commands to the actuator group.
   ros::Publisher command_publisher = n.advertise<sensor_msgs::JointState>("/hebiros/"+group_name+"/command/joint_state", 100);
 
   sensor_msgs::JointState command_msg;
-  command_msg.name.push_back("134/Doc");
-  command_msg.position.resize(1);
-  command_msg.velocity.resize(1);
-  command_msg.effort.resize(1);
-  std::cout << "command mssg made \n";
+  command_msg.name.push_back("Team2/base");
+  command_msg.name.push_back("Team2/x8-3 shoulder");
+  command_msg.name.push_back("Team2/elbow");
+  command_msg.name.push_back("Team2/gripper");
+  command_msg.position.resize(group_size);
+  command_msg.velocity.resize(group_size);
+  command_msg.effort.resize(group_size);
 
   // Wait until we have some feedback from the actuator.
   ROS_INFO("Waiting for initial feedback");
@@ -165,14 +233,10 @@ int main(int argc, char **argv)
   double  dt = loop_rate.expectedCycleTime().toSec();
 
   double  speed = 0.5;          // Speed to reach goal.
-  double  cmdpos = feedback.position[0];
+  double  cmdpos = feedback.position[1];
   double  cmdvel = 0.0;
 
-  // Scanning Variables
-  double x = feedback.position[0];
-  int direction = - signbit(x);
-  bool hit_bound = abs(x) > scan_range;
-
+  //goal = feedback;
   // Start where we are.
   goalpos = cmdpos;
   goalvel = cmdvel;
@@ -181,61 +245,21 @@ int main(int argc, char **argv)
   ROS_INFO("Running the servo loop with dt %f", dt);
   while(ros::ok())
     {
-      //std::cout << "entered main loop\n";
-      // Move the goal.
-      // if      (cmdpos < goalpos - speed*dt)   cmdvel = speed;
-      // else if (cmdpos > goalpos + speed*dt)   cmdvel = -speed;
-      // else                                    cmdvel = (goalpos - cmdpos)/dt;
-      // cmdpos += dt * cmdvel;
 
-      // info
-      //ROS_INFO("Command position [%f]", cmdpos);
+      //Move the goal.
+      if      (cmdpos < goalpos - speed*dt)   cmdvel = speed;
+      else if (cmdpos > goalpos + speed*dt)   cmdvel = -speed;
+      else                                    cmdvel = (goalpos - cmdpos)/dt;
+      cmdpos += dt * cmdvel;
 
-      if (detecting)
-      {
-        cmdvel = - (tracking_speed / 320) * (face_x - 320);
-        cmdpos += dt*cmdvel;
-
-        if (abs(cmdpos) > 1.5)
-        {
-          cmdpos = signbit(cmdpos) * 1.5;
-        }
-
-        if (abs(cmdvel) > 0.75)
-        {
-          cmdvel = signbit(cmdvel) * 0.75;
-        }
-
-        //std::cout<<"pos: "<<command_msg.position[0]<<"\n";
-        // std::cout<<"vel: "<<command_msg.velocity[0]<<"\n";
-        // std::cout<<"face: "<<face_x<<"\n";
-      }
-      // else
-      // {
-      //   x = feedback.position[0];
-      //   if (abs(x) > (scan_range && !hit_bound))
-      //   {
-      //       hit_bound = true;
-      //       direction = direction * -1;
-      //   }
-      //   else if (abs(x) < scan_range)
-      //   {
-      //       hit_bound = false;
-      //   }
-      //
-      //   cmdvel = scan_speed * direction;
-      //   cmdpos += dt*cmdvel;
-      //   std::cout << "scanning \n";
-      //   std::cout << x << "\n";
-      // }
+      //info
+      ROS_INFO("Command position [%f]", cmdpos);
 
       // Apply.
-      command_msg.position[0] = cmdpos;
-      command_msg.velocity[0] = cmdvel;
-      command_msg.effort[0]   = 0.0;
+      command_msg.position[1] = goalpos;
+      // command_msg.velocity[3] = cmdvel;
+      // command_msg.effort[3]   = 0.0;
       command_publisher.publish(command_msg);
-
-
 
       // Wait for next turn.
       ros::spinOnce();
