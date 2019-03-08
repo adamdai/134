@@ -51,7 +51,7 @@ class MoveTipRequest {
   }
 
   static getMessageSize(object) {
-    return 40;
+    return 25;
   }
 
   static datatype() {
@@ -61,7 +61,7 @@ class MoveTipRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '8cbaf4d4c4662d317de5c178f210e33f';
+    return '345daa59b4dd0cc9b1994a20bb0ca2a7';
   }
 
   static messageDefinition() {
@@ -78,8 +78,9 @@ class MoveTipRequest {
     float64 x
     float64 y
     float64 z
-    float64 pitch
-    float64 roll
+    #float64 pitch
+    #float64 roll
+    bool grip
     
     `;
   }
@@ -177,6 +178,6 @@ class MoveTipResponse {
 module.exports = {
   Request: MoveTipRequest,
   Response: MoveTipResponse,
-  md5sum() { return '65443b37ef9ffb7ce8e57e065d5f7bf9'; },
+  md5sum() { return '5ebb5876bcc8be930d43a2e07942295f'; },
   datatype() { return 'moveto/MoveTip'; }
 };

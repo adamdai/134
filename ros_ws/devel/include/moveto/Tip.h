@@ -27,15 +27,13 @@ struct Tip_
     : x(0.0)
     , y(0.0)
     , z(0.0)
-    , pitch(0.0)
-    , roll(0.0)  {
+    , grip(false)  {
     }
   Tip_(const ContainerAllocator& _alloc)
     : x(0.0)
     , y(0.0)
     , z(0.0)
-    , pitch(0.0)
-    , roll(0.0)  {
+    , grip(false)  {
   (void)_alloc;
     }
 
@@ -50,11 +48,8 @@ struct Tip_
    typedef double _z_type;
   _z_type z;
 
-   typedef double _pitch_type;
-  _pitch_type pitch;
-
-   typedef double _roll_type;
-  _roll_type roll;
+   typedef uint8_t _grip_type;
+  _grip_type grip;
 
 
 
@@ -134,12 +129,12 @@ struct MD5Sum< ::moveto::Tip_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "108d27920a755206e167057e9204876f";
+    return "21aca35e90d85b00f470ba50ab650aa7";
   }
 
   static const char* value(const ::moveto::Tip_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x108d27920a755206ULL;
-  static const uint64_t static_value2 = 0xe167057e9204876fULL;
+  static const uint64_t static_value1 = 0x21aca35e90d85b00ULL;
+  static const uint64_t static_value2 = 0xf470ba50ab650aa7ULL;
 };
 
 template<class ContainerAllocator>
@@ -162,8 +157,9 @@ struct Definition< ::moveto::Tip_<ContainerAllocator> >
 float64 x\n\
 float64 y\n\
 float64 z\n\
-float64 pitch\n\
-float64 roll\n\
+#float64 pitch\n\
+#float64 roll\n\
+bool grip\n\
 ";
   }
 
@@ -185,8 +181,7 @@ namespace serialization
       stream.next(m.x);
       stream.next(m.y);
       stream.next(m.z);
-      stream.next(m.pitch);
-      stream.next(m.roll);
+      stream.next(m.grip);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -211,10 +206,8 @@ struct Printer< ::moveto::Tip_<ContainerAllocator> >
     Printer<double>::stream(s, indent + "  ", v.y);
     s << indent << "z: ";
     Printer<double>::stream(s, indent + "  ", v.z);
-    s << indent << "pitch: ";
-    Printer<double>::stream(s, indent + "  ", v.pitch);
-    s << indent << "roll: ";
-    Printer<double>::stream(s, indent + "  ", v.roll);
+    s << indent << "grip: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.grip);
   }
 };
 

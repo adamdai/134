@@ -115,12 +115,12 @@ struct MD5Sum< ::moveto::MoveTipRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "8cbaf4d4c4662d317de5c178f210e33f";
+    return "345daa59b4dd0cc9b1994a20bb0ca2a7";
   }
 
   static const char* value(const ::moveto::MoveTipRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x8cbaf4d4c4662d31ULL;
-  static const uint64_t static_value2 = 0x7de5c178f210e33fULL;
+  static const uint64_t static_value1 = 0x345daa59b4dd0cc9ULL;
+  static const uint64_t static_value2 = 0xb1994a20bb0ca2a7ULL;
 };
 
 template<class ContainerAllocator>
@@ -150,8 +150,9 @@ MSG: moveto/Tip\n\
 float64 x\n\
 float64 y\n\
 float64 z\n\
-float64 pitch\n\
-float64 roll\n\
+#float64 pitch\n\
+#float64 roll\n\
+bool grip\n\
 ";
   }
 

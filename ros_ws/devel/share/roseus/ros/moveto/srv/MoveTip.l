@@ -100,7 +100,7 @@
   :super ros::object
   :slots ())
 
-(setf (get moveto::MoveTip :md5sum-) "65443b37ef9ffb7ce8e57e065d5f7bf9")
+(setf (get moveto::MoveTip :md5sum-) "5ebb5876bcc8be930d43a2e07942295f")
 (setf (get moveto::MoveTip :datatype-) "moveto/MoveTip")
 (setf (get moveto::MoveTip :request) moveto::MoveTipRequest)
 (setf (get moveto::MoveTip :response) moveto::MoveTipResponse)
@@ -108,7 +108,7 @@
 (defmethod moveto::MoveTipRequest
   (:response () (instance moveto::MoveTipResponse :init)))
 
-(setf (get moveto::MoveTipRequest :md5sum-) "65443b37ef9ffb7ce8e57e065d5f7bf9")
+(setf (get moveto::MoveTipRequest :md5sum-) "5ebb5876bcc8be930d43a2e07942295f")
 (setf (get moveto::MoveTipRequest :datatype-) "moveto/MoveTipRequest")
 (setf (get moveto::MoveTipRequest :definition-)
       "
@@ -122,15 +122,16 @@ MSG: moveto/Tip
 float64 x
 float64 y
 float64 z
-float64 pitch
-float64 roll
+#float64 pitch
+#float64 roll
+bool grip
 ---
 
 float64 movetime
 
 ")
 
-(setf (get moveto::MoveTipResponse :md5sum-) "65443b37ef9ffb7ce8e57e065d5f7bf9")
+(setf (get moveto::MoveTipResponse :md5sum-) "5ebb5876bcc8be930d43a2e07942295f")
 (setf (get moveto::MoveTipResponse :datatype-) "moveto/MoveTipResponse")
 (setf (get moveto::MoveTipResponse :definition-)
       "
@@ -144,8 +145,9 @@ MSG: moveto/Tip
 float64 x
 float64 y
 float64 z
-float64 pitch
-float64 roll
+#float64 pitch
+#float64 roll
+bool grip
 ---
 
 float64 movetime
@@ -154,6 +156,6 @@ float64 movetime
 
 
 
-(provide :moveto/MoveTip "65443b37ef9ffb7ce8e57e065d5f7bf9")
+(provide :moveto/MoveTip "5ebb5876bcc8be930d43a2e07942295f")
 
 

@@ -43,16 +43,16 @@
   "moveto/MoveTipRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<MoveTip-request>)))
   "Returns md5sum for a message object of type '<MoveTip-request>"
-  "65443b37ef9ffb7ce8e57e065d5f7bf9")
+  "5ebb5876bcc8be930d43a2e07942295f")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'MoveTip-request)))
   "Returns md5sum for a message object of type 'MoveTip-request"
-  "65443b37ef9ffb7ce8e57e065d5f7bf9")
+  "5ebb5876bcc8be930d43a2e07942295f")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<MoveTip-request>)))
   "Returns full string definition for message of type '<MoveTip-request>"
-  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%float64 pitch~%float64 roll~%~%~%"))
+  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%#float64 pitch~%#float64 roll~%bool grip~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'MoveTip-request)))
   "Returns full string definition for message of type 'MoveTip-request"
-  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%float64 pitch~%float64 roll~%~%~%"))
+  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%#float64 pitch~%#float64 roll~%bool grip~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <MoveTip-request>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'tip))
@@ -118,10 +118,10 @@
   "moveto/MoveTipResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<MoveTip-response>)))
   "Returns md5sum for a message object of type '<MoveTip-response>"
-  "65443b37ef9ffb7ce8e57e065d5f7bf9")
+  "5ebb5876bcc8be930d43a2e07942295f")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'MoveTip-response)))
   "Returns md5sum for a message object of type 'MoveTip-response"
-  "65443b37ef9ffb7ce8e57e065d5f7bf9")
+  "5ebb5876bcc8be930d43a2e07942295f")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<MoveTip-response>)))
   "Returns full string definition for message of type '<MoveTip-response>"
   (cl:format cl:nil "~%float64 movetime~%~%~%~%"))

@@ -101,8 +101,7 @@ bool movetipCallback(moveto::MoveTip::Request  &req,
   iKinSrv.request.tip.x     = req.tip.x;
   iKinSrv.request.tip.y     = req.tip.y;
   iKinSrv.request.tip.z     = req.tip.z;
-  iKinSrv.request.tip.pitch = req.tip.pitch;
-  iKinSrv.request.tip.roll  = req.tip.roll;
+  iKinSrv.request.tip.grip  = req.tip.grip;
   ikinClientPtr->call(iKinSrv);
 
   // Move to the joints.

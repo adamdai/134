@@ -115,7 +115,7 @@
   :super ros::object
   :slots ())
 
-(setf (get moveto::IKin :md5sum-) "1e8f025e4a7f0e73d00d1166f7ab7aff")
+(setf (get moveto::IKin :md5sum-) "8376ea47d34c717b6054bbcbb75d672f")
 (setf (get moveto::IKin :datatype-) "moveto/IKin")
 (setf (get moveto::IKin :request) moveto::IKinRequest)
 (setf (get moveto::IKin :response) moveto::IKinResponse)
@@ -123,7 +123,7 @@
 (defmethod moveto::IKinRequest
   (:response () (instance moveto::IKinResponse :init)))
 
-(setf (get moveto::IKinRequest :md5sum-) "1e8f025e4a7f0e73d00d1166f7ab7aff")
+(setf (get moveto::IKinRequest :md5sum-) "8376ea47d34c717b6054bbcbb75d672f")
 (setf (get moveto::IKinRequest :datatype-) "moveto/IKinRequest")
 (setf (get moveto::IKinRequest :definition-)
       "
@@ -137,8 +137,9 @@ MSG: moveto/Tip
 float64 x
 float64 y
 float64 z
-float64 pitch
-float64 roll
+#float64 pitch
+#float64 roll
+bool grip
 ---
 
 
@@ -153,7 +154,7 @@ MSG: moveto/Joints
 float64[5] joint
 ")
 
-(setf (get moveto::IKinResponse :md5sum-) "1e8f025e4a7f0e73d00d1166f7ab7aff")
+(setf (get moveto::IKinResponse :md5sum-) "8376ea47d34c717b6054bbcbb75d672f")
 (setf (get moveto::IKinResponse :datatype-) "moveto/IKinResponse")
 (setf (get moveto::IKinResponse :definition-)
       "
@@ -167,8 +168,9 @@ MSG: moveto/Tip
 float64 x
 float64 y
 float64 z
-float64 pitch
-float64 roll
+#float64 pitch
+#float64 roll
+bool grip
 ---
 
 
@@ -185,6 +187,6 @@ float64[5] joint
 
 
 
-(provide :moveto/IKin "1e8f025e4a7f0e73d00d1166f7ab7aff")
+(provide :moveto/IKin "8376ea47d34c717b6054bbcbb75d672f")
 
 

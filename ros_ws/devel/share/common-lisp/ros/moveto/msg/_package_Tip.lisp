@@ -5,8 +5,6 @@
           Y
           Z-VAL
           Z
-          PITCH-VAL
-          PITCH
-          ROLL-VAL
-          ROLL
+          GRIP-VAL
+          GRIP
 ))

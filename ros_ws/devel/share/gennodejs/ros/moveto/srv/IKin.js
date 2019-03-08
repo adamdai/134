@@ -52,7 +52,7 @@ class IKinRequest {
   }
 
   static getMessageSize(object) {
-    return 40;
+    return 25;
   }
 
   static datatype() {
@@ -62,7 +62,7 @@ class IKinRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '8cbaf4d4c4662d317de5c178f210e33f';
+    return '345daa59b4dd0cc9b1994a20bb0ca2a7';
   }
 
   static messageDefinition() {
@@ -79,8 +79,9 @@ class IKinRequest {
     float64 x
     float64 y
     float64 z
-    float64 pitch
-    float64 roll
+    #float64 pitch
+    #float64 roll
+    bool grip
     
     `;
   }
@@ -204,6 +205,6 @@ class IKinResponse {
 module.exports = {
   Request: IKinRequest,
   Response: IKinResponse,
-  md5sum() { return '1e8f025e4a7f0e73d00d1166f7ab7aff'; },
+  md5sum() { return '8376ea47d34c717b6054bbcbb75d672f'; },
   datatype() { return 'moveto/IKin'; }
 };

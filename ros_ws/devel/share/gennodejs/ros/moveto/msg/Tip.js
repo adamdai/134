@@ -21,8 +21,7 @@ class Tip {
       this.x = null;
       this.y = null;
       this.z = null;
-      this.pitch = null;
-      this.roll = null;
+      this.grip = null;
     }
     else {
       if (initObj.hasOwnProperty('x')) {
@@ -43,17 +42,11 @@ class Tip {
       else {
         this.z = 0.0;
       }
-      if (initObj.hasOwnProperty('pitch')) {
-        this.pitch = initObj.pitch
+      if (initObj.hasOwnProperty('grip')) {
+        this.grip = initObj.grip
       }
       else {
-        this.pitch = 0.0;
-      }
-      if (initObj.hasOwnProperty('roll')) {
-        this.roll = initObj.roll
-      }
-      else {
-        this.roll = 0.0;
+        this.grip = false;
       }
     }
   }
@@ -66,10 +59,8 @@ class Tip {
     bufferOffset = _serializer.float64(obj.y, buffer, bufferOffset);
     // Serialize message field [z]
     bufferOffset = _serializer.float64(obj.z, buffer, bufferOffset);
-    // Serialize message field [pitch]
-    bufferOffset = _serializer.float64(obj.pitch, buffer, bufferOffset);
-    // Serialize message field [roll]
-    bufferOffset = _serializer.float64(obj.roll, buffer, bufferOffset);
+    // Serialize message field [grip]
+    bufferOffset = _serializer.bool(obj.grip, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -83,15 +74,13 @@ class Tip {
     data.y = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [z]
     data.z = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [pitch]
-    data.pitch = _deserializer.float64(buffer, bufferOffset);
-    // Deserialize message field [roll]
-    data.roll = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [grip]
+    data.grip = _deserializer.bool(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 40;
+    return 25;
   }
 
   static datatype() {
@@ -101,7 +90,7 @@ class Tip {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '108d27920a755206e167057e9204876f';
+    return '21aca35e90d85b00f470ba50ab650aa7';
   }
 
   static messageDefinition() {
@@ -111,8 +100,9 @@ class Tip {
     float64 x
     float64 y
     float64 z
-    float64 pitch
-    float64 roll
+    #float64 pitch
+    #float64 roll
+    bool grip
     
     `;
   }
@@ -144,18 +134,11 @@ class Tip {
       resolved.z = 0.0
     }
 
-    if (msg.pitch !== undefined) {
-      resolved.pitch = msg.pitch;
+    if (msg.grip !== undefined) {
+      resolved.grip = msg.grip;
     }
     else {
-      resolved.pitch = 0.0
-    }
-
-    if (msg.roll !== undefined) {
-      resolved.roll = msg.roll;
-    }
-    else {
-      resolved.roll = 0.0
+      resolved.grip = false
     }
 
     return resolved;

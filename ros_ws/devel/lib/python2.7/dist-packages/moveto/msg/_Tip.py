@@ -7,18 +7,19 @@ import struct
 
 
 class Tip(genpy.Message):
-  _md5sum = "108d27920a755206e167057e9204876f"
+  _md5sum = "21aca35e90d85b00f470ba50ab650aa7"
   _type = "moveto/Tip"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """# Message of tip values
 float64 x
 float64 y
 float64 z
-float64 pitch
-float64 roll
+#float64 pitch
+#float64 roll
+bool grip
 """
-  __slots__ = ['x','y','z','pitch','roll']
-  _slot_types = ['float64','float64','float64','float64','float64']
+  __slots__ = ['x','y','z','grip']
+  _slot_types = ['float64','float64','float64','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -28,7 +29,7 @@ float64 roll
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       x,y,z,pitch,roll
+       x,y,z,grip
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -43,16 +44,13 @@ float64 roll
         self.y = 0.
       if self.z is None:
         self.z = 0.
-      if self.pitch is None:
-        self.pitch = 0.
-      if self.roll is None:
-        self.roll = 0.
+      if self.grip is None:
+        self.grip = False
     else:
       self.x = 0.
       self.y = 0.
       self.z = 0.
-      self.pitch = 0.
-      self.roll = 0.
+      self.grip = False
 
   def _get_types(self):
     """
@@ -67,7 +65,7 @@ float64 roll
     """
     try:
       _x = self
-      buff.write(_get_struct_5d().pack(_x.x, _x.y, _x.z, _x.pitch, _x.roll))
+      buff.write(_get_struct_3dB().pack(_x.x, _x.y, _x.z, _x.grip))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -80,8 +78,9 @@ float64 roll
       end = 0
       _x = self
       start = end
-      end += 40
-      (_x.x, _x.y, _x.z, _x.pitch, _x.roll,) = _get_struct_5d().unpack(str[start:end])
+      end += 25
+      (_x.x, _x.y, _x.z, _x.grip,) = _get_struct_3dB().unpack(str[start:end])
+      self.grip = bool(self.grip)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -95,7 +94,7 @@ float64 roll
     """
     try:
       _x = self
-      buff.write(_get_struct_5d().pack(_x.x, _x.y, _x.z, _x.pitch, _x.roll))
+      buff.write(_get_struct_3dB().pack(_x.x, _x.y, _x.z, _x.grip))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -109,8 +108,9 @@ float64 roll
       end = 0
       _x = self
       start = end
-      end += 40
-      (_x.x, _x.y, _x.z, _x.pitch, _x.roll,) = _get_struct_5d().unpack(str[start:end])
+      end += 25
+      (_x.x, _x.y, _x.z, _x.grip,) = _get_struct_3dB().unpack(str[start:end])
+      self.grip = bool(self.grip)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -119,9 +119,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_5d = None
-def _get_struct_5d():
-    global _struct_5d
-    if _struct_5d is None:
-        _struct_5d = struct.Struct("<5d")
-    return _struct_5d
+_struct_3dB = None
+def _get_struct_3dB():
+    global _struct_3dB
+    if _struct_3dB is None:
+        _struct_3dB = struct.Struct("<3dB")
+    return _struct_3dB

@@ -43,16 +43,16 @@
   "moveto/IKinRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<IKin-request>)))
   "Returns md5sum for a message object of type '<IKin-request>"
-  "1e8f025e4a7f0e73d00d1166f7ab7aff")
+  "8376ea47d34c717b6054bbcbb75d672f")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'IKin-request)))
   "Returns md5sum for a message object of type 'IKin-request"
-  "1e8f025e4a7f0e73d00d1166f7ab7aff")
+  "8376ea47d34c717b6054bbcbb75d672f")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<IKin-request>)))
   "Returns full string definition for message of type '<IKin-request>"
-  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%float64 pitch~%float64 roll~%~%~%"))
+  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%#float64 pitch~%#float64 roll~%bool grip~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'IKin-request)))
   "Returns full string definition for message of type 'IKin-request"
-  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%float64 pitch~%float64 roll~%~%~%"))
+  (cl:format cl:nil "~%~%~%Tip     tip~%~%================================================================================~%MSG: moveto/Tip~%# Message of tip values~%float64 x~%float64 y~%float64 z~%#float64 pitch~%#float64 roll~%bool grip~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <IKin-request>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'tip))
@@ -113,10 +113,10 @@
   "moveto/IKinResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<IKin-response>)))
   "Returns md5sum for a message object of type '<IKin-response>"
-  "1e8f025e4a7f0e73d00d1166f7ab7aff")
+  "8376ea47d34c717b6054bbcbb75d672f")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'IKin-response)))
   "Returns md5sum for a message object of type 'IKin-response"
-  "1e8f025e4a7f0e73d00d1166f7ab7aff")
+  "8376ea47d34c717b6054bbcbb75d672f")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<IKin-response>)))
   "Returns full string definition for message of type '<IKin-response>"
   (cl:format cl:nil "~%~%~%bool    singular~%Joints  joints~%~%~%================================================================================~%MSG: moveto/Joints~%# Message of joint values~%float64[5] joint~%~%~%"))
