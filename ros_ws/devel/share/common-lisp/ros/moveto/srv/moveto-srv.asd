@@ -13,4 +13,6 @@
     (:file "_package_MoveJoints" :depends-on ("_package"))
     (:file "MoveTip" :depends-on ("_package_MoveTip"))
     (:file "_package_MoveTip" :depends-on ("_package"))
+    (:file "ThrowTo" :depends-on ("_package_ThrowTo"))
+    (:file "_package_ThrowTo" :depends-on ("_package"))
   ))

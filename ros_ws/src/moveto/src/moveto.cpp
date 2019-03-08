@@ -13,6 +13,7 @@
 #include "moveto/IKin.h"
 #include "moveto/MoveJoints.h"
 #include "moveto/MoveTip.h"
+#include "moveto/ThrowTo.h"
 #include "sensor_msgs/JointState.h"
 #include "hebiros/EntryListSrv.h"
 #include "hebiros/AddGroupFromNamesSrv.h"
@@ -22,6 +23,13 @@
 
 
 using namespace hebiros;
+
+#define TABLE_WIDTH  (1.0)
+#define THROW_MAX  (2.0)
+#define THROW_MIN  (1.0)
+#define WINDUP    (0.5)    // distance from gripper to base for winding up for the throw
+
+
 
 /*
 **   Global Variables.  So the callbacks can pass information.
@@ -121,6 +129,59 @@ bool movejointsCallback(moveto::MoveJoints::Request  &req,
   res.movetime = loadmove(&req.joints.joint[0]);
 
   return true;
+}
+
+/*
+**   Throw to Callback
+*/
+bool throwtoCallback(moveto::ThrowTo::Request  &req,
+			moveto::ThrowTo::Response &res)
+{
+  bool valid_throw = true;
+  double x = req.point.x;
+  double y = req.point.y;
+  double z = req.point.z;
+
+  // Check bounds - make sure throw is not out of range
+  // also need to check bounds for arm hitting frame - need dimensions
+  if(y < THROW_MIN)
+  {
+    valid_throw = false;
+    ROS_INFO("Throw target too short");
+  }
+  if(abs(x) > TABLE_WIDTH / 2)
+  {
+    valid_throw = false;
+    ROS_INFO("Throw target outside of table bounds");
+  }
+
+  double throw_dist = sqrt(x*x + y*y);
+  if(throw_dist > THROW_MAX)
+  {
+    valid_throw = false;
+    ROS_INFO("Throw target too far");
+  }
+
+  if (valid_throw)
+  {
+    // Move the arm to initial "wind up" position
+    // calculate
+    double w_x = - x * (WINDUP / throw_dist);
+    double w_y = - y * (WINDUP / throw_dist);
+    moveto::IKin iKinSrv;
+    iKinSrv.request.tip.x     = w_x;
+    iKinSrv.request.tip.y     = w_y;
+    iKinSrv.request.tip.z     = 0;
+    iKinSrv.request.tip.grip  = true;
+    ikinClientPtr->call(iKinSrv);
+
+    // Move to the joints.
+    res.movetime = loadmove(&iKinSrv.response.joints.joint[0]);
+
+    // Execute throw
+  }
+
+  return valid_throw;
 }
 
 

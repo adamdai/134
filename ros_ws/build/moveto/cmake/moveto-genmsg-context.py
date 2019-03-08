@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/robot/ros_ws/src/moveto/msg/Joints.msg;/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-services_str = "/home/robot/ros_ws/src/moveto/srv/IKin.srv;/home/robot/ros_ws/src/moveto/srv/IsMoving.srv;/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv;/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
+messages_str = "/home/robot/ros_ws/src/moveto/msg/Joints.msg;/home/robot/ros_ws/src/moveto/msg/Tip.msg;/home/robot/ros_ws/src/moveto/msg/Point.msg"
+services_str = "/home/robot/ros_ws/src/moveto/srv/IKin.srv;/home/robot/ros_ws/src/moveto/srv/IsMoving.srv;/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv;/home/robot/ros_ws/src/moveto/srv/MoveTip.srv;/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
 pkg_name = "moveto"
 dependencies_str = ""
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

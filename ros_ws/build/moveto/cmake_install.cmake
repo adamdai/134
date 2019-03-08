@@ -41,6 +41,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/msg" TYPE FILE FILES
     "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
     "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
+    "/home/robot/ros_ws/src/moveto/msg/Point.msg"
     )
 endif()
 
@@ -50,6 +51,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv"
     "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv"
     "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
+    "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
     )
 endif()
 

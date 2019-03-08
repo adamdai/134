@@ -1,0 +1,7 @@
+# Service to throw to a point
+#
+# Request Definition
+Point     point
+---
+# Response Definition
+float64 movetime

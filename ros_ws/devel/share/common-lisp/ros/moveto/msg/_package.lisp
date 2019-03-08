@@ -3,6 +3,8 @@
   (:export
    "<JOINTS>"
    "JOINTS"
+   "<POINT>"
+   "POINT"
    "<TIP>"
    "TIP"
   ))

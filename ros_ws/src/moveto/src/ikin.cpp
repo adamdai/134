@@ -38,7 +38,7 @@ bool ikin(double x, double y, double z, bool grip, double q[4])
   // Solve for J1 and convert into polar coordinates.
   if ((x == 0) && (y == 0))
     singular = true;
-  q[0] = -atan2(x, y);
+  q[0] = - atan2(x, y);
   rtip = - sin(q[0])*x + cos(q[0])*y;
 
   // "Trick" = Undo the pitch and compute wrist point.

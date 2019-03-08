@@ -54,8 +54,10 @@ CMAKE_BINARY_DIR = /home/robot/ros_ws/build
 include moveto/CMakeFiles/moveto_generate_messages_cpp.dir/progress.make
 
 moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/Joints.h
+moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/Point.h
 moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/Tip.h
 moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/MoveTip.h
+moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/ThrowTo.h
 moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/IsMoving.h
 moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/IKin.h
 moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/MoveJoints.h
@@ -67,10 +69,16 @@ moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from moveto/Joints.msg"
 	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/msg/Joints.msg -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
 
+/home/robot/ros_ws/devel/include/moveto/Point.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/robot/ros_ws/devel/include/moveto/Point.h: /home/robot/ros_ws/src/moveto/msg/Point.msg
+/home/robot/ros_ws/devel/include/moveto/Point.h: /opt/ros/melodic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from moveto/Point.msg"
+	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/msg/Point.msg -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
+
 /home/robot/ros_ws/devel/include/moveto/Tip.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
 /home/robot/ros_ws/devel/include/moveto/Tip.h: /home/robot/ros_ws/src/moveto/msg/Tip.msg
 /home/robot/ros_ws/devel/include/moveto/Tip.h: /opt/ros/melodic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from moveto/Tip.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from moveto/Tip.msg"
 	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/msg/Tip.msg -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
 
 /home/robot/ros_ws/devel/include/moveto/MoveTip.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
@@ -78,14 +86,22 @@ moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include
 /home/robot/ros_ws/devel/include/moveto/MoveTip.h: /home/robot/ros_ws/src/moveto/msg/Tip.msg
 /home/robot/ros_ws/devel/include/moveto/MoveTip.h: /opt/ros/melodic/share/gencpp/msg.h.template
 /home/robot/ros_ws/devel/include/moveto/MoveTip.h: /opt/ros/melodic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from moveto/MoveTip.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from moveto/MoveTip.srv"
 	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/srv/MoveTip.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
+
+/home/robot/ros_ws/devel/include/moveto/ThrowTo.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/robot/ros_ws/devel/include/moveto/ThrowTo.h: /home/robot/ros_ws/src/moveto/srv/ThrowTo.srv
+/home/robot/ros_ws/devel/include/moveto/ThrowTo.h: /home/robot/ros_ws/src/moveto/msg/Point.msg
+/home/robot/ros_ws/devel/include/moveto/ThrowTo.h: /opt/ros/melodic/share/gencpp/msg.h.template
+/home/robot/ros_ws/devel/include/moveto/ThrowTo.h: /opt/ros/melodic/share/gencpp/srv.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from moveto/ThrowTo.srv"
+	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/srv/ThrowTo.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
 
 /home/robot/ros_ws/devel/include/moveto/IsMoving.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
 /home/robot/ros_ws/devel/include/moveto/IsMoving.h: /home/robot/ros_ws/src/moveto/srv/IsMoving.srv
 /home/robot/ros_ws/devel/include/moveto/IsMoving.h: /opt/ros/melodic/share/gencpp/msg.h.template
 /home/robot/ros_ws/devel/include/moveto/IsMoving.h: /opt/ros/melodic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from moveto/IsMoving.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from moveto/IsMoving.srv"
 	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/srv/IsMoving.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
 
 /home/robot/ros_ws/devel/include/moveto/IKin.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
@@ -94,7 +110,7 @@ moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include
 /home/robot/ros_ws/devel/include/moveto/IKin.h: /home/robot/ros_ws/src/moveto/msg/Tip.msg
 /home/robot/ros_ws/devel/include/moveto/IKin.h: /opt/ros/melodic/share/gencpp/msg.h.template
 /home/robot/ros_ws/devel/include/moveto/IKin.h: /opt/ros/melodic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from moveto/IKin.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating C++ code from moveto/IKin.srv"
 	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/srv/IKin.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
 
 /home/robot/ros_ws/devel/include/moveto/MoveJoints.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
@@ -102,13 +118,15 @@ moveto/CMakeFiles/moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include
 /home/robot/ros_ws/devel/include/moveto/MoveJoints.h: /home/robot/ros_ws/src/moveto/msg/Joints.msg
 /home/robot/ros_ws/devel/include/moveto/MoveJoints.h: /opt/ros/melodic/share/gencpp/msg.h.template
 /home/robot/ros_ws/devel/include/moveto/MoveJoints.h: /opt/ros/melodic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating C++ code from moveto/MoveJoints.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating C++ code from moveto/MoveJoints.srv"
 	cd /home/robot/ros_ws/src/moveto && /home/robot/ros_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/robot/ros_ws/src/moveto/srv/MoveJoints.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/include/moveto -e /opt/ros/melodic/share/gencpp/cmake/..
 
 moveto_generate_messages_cpp: moveto/CMakeFiles/moveto_generate_messages_cpp
 moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/Joints.h
+moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/Point.h
 moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/Tip.h
 moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/MoveTip.h
+moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/ThrowTo.h
 moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/IsMoving.h
 moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/IKin.h
 moveto_generate_messages_cpp: /home/robot/ros_ws/devel/include/moveto/MoveJoints.h

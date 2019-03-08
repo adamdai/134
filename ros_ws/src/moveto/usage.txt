@@ -1,0 +1,8 @@
+To run:
+ - make sure you can connect to motors
+ - run roscore: $roscore
+ - run hebiros: $rosrun hebiros hebiros_node
+ - run moveto moveto: $rosrun moveto moveto
+ - run moveto ikin: $rosrun moveto ikin
+ - in new terminal, call services
+    - rosservice call /movetip " (use tab completion to get message format)

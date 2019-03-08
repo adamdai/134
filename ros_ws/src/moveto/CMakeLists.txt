@@ -19,6 +19,7 @@ add_message_files(
   FILES
   Joints.msg
   Tip.msg
+  Point.msg
 )
 
 # Generate services in the 'srv' folder
@@ -28,6 +29,7 @@ add_service_files(
   IsMoving.srv
   MoveJoints.srv
   MoveTip.srv
+  ThrowTo.srv
 )
 
 # Note any dependencies in the messages/services.

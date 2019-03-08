@@ -54,8 +54,10 @@ CMAKE_BINARY_DIR = /home/robot/ros_ws/build
 include moveto/CMakeFiles/moveto_generate_messages_eus.dir/progress.make
 
 moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Joints.l
+moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Point.l
 moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Tip.l
 moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveTip.l
+moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/ThrowTo.l
 moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IsMoving.l
 moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IKin.l
 moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveJoints.l
@@ -67,43 +69,56 @@ moveto/CMakeFiles/moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/r
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating EusLisp code from moveto/Joints.msg"
 	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/msg/Joints.msg -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg
 
+/home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Point.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Point.l: /home/robot/ros_ws/src/moveto/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from moveto/Point.msg"
+	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/msg/Point.msg -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg
+
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Tip.l: /opt/ros/melodic/lib/geneus/gen_eus.py
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Tip.l: /home/robot/ros_ws/src/moveto/msg/Tip.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating EusLisp code from moveto/Tip.msg"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from moveto/Tip.msg"
 	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/msg/Tip.msg -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg
 
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveTip.l: /opt/ros/melodic/lib/geneus/gen_eus.py
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveTip.l: /home/robot/ros_ws/src/moveto/srv/MoveTip.srv
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveTip.l: /home/robot/ros_ws/src/moveto/msg/Tip.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating EusLisp code from moveto/MoveTip.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from moveto/MoveTip.srv"
 	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/srv/MoveTip.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv
+
+/home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/ThrowTo.l: /opt/ros/melodic/lib/geneus/gen_eus.py
+/home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/ThrowTo.l: /home/robot/ros_ws/src/moveto/srv/ThrowTo.srv
+/home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/ThrowTo.l: /home/robot/ros_ws/src/moveto/msg/Point.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from moveto/ThrowTo.srv"
+	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/srv/ThrowTo.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv
 
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IsMoving.l: /opt/ros/melodic/lib/geneus/gen_eus.py
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IsMoving.l: /home/robot/ros_ws/src/moveto/srv/IsMoving.srv
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating EusLisp code from moveto/IsMoving.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp code from moveto/IsMoving.srv"
 	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/srv/IsMoving.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv
 
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IKin.l: /opt/ros/melodic/lib/geneus/gen_eus.py
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IKin.l: /home/robot/ros_ws/src/moveto/srv/IKin.srv
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IKin.l: /home/robot/ros_ws/src/moveto/msg/Joints.msg
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IKin.l: /home/robot/ros_ws/src/moveto/msg/Tip.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating EusLisp code from moveto/IKin.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating EusLisp code from moveto/IKin.srv"
 	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/srv/IKin.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv
 
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveJoints.l: /opt/ros/melodic/lib/geneus/gen_eus.py
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveJoints.l: /home/robot/ros_ws/src/moveto/srv/MoveJoints.srv
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveJoints.l: /home/robot/ros_ws/src/moveto/msg/Joints.msg
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating EusLisp code from moveto/MoveJoints.srv"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating EusLisp code from moveto/MoveJoints.srv"
 	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py /home/robot/ros_ws/src/moveto/srv/MoveJoints.srv -Imoveto:/home/robot/ros_ws/src/moveto/msg -p moveto -o /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv
 
 /home/robot/ros_ws/devel/share/roseus/ros/moveto/manifest.l: /opt/ros/melodic/lib/geneus/gen_eus.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating EusLisp manifest code for moveto"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/robot/ros_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating EusLisp manifest code for moveto"
 	cd /home/robot/ros_ws/build/moveto && ../catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/geneus/cmake/../../../lib/geneus/gen_eus.py -m -o /home/robot/ros_ws/devel/share/roseus/ros/moveto moveto
 
 moveto_generate_messages_eus: moveto/CMakeFiles/moveto_generate_messages_eus
 moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Joints.l
+moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Point.l
 moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/msg/Tip.l
 moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveTip.l
+moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/ThrowTo.l
 moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IsMoving.l
 moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/IKin.l
 moveto_generate_messages_eus: /home/robot/ros_ws/devel/share/roseus/ros/moveto/srv/MoveJoints.l
