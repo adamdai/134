@@ -28,7 +28,7 @@ using namespace hebiros;
 #define THROW_MAX  (2.0)
 #define THROW_MIN  (1.0)
 #define WINDUP    (0.5)    // distance from gripper to base for winding up for the throw
-
+#define GRIPPOS (-0.75)
 
 
 /*
@@ -52,6 +52,11 @@ static double  a[5], b[5], c[5], d[5];
 // Max speeds.
 static double  qdotmax[5] = {3.14, 3.14, 3.14, 3.14, 3.14};
 
+static bool throwing; // This is true if executing throwing motion (trapezoid)
+static double max_v;
+static double elbow_throwtime;
+static double shoulder_throwtime;
+static bool throw_error;
 
 /*
 **   Move To Computation
@@ -64,7 +69,7 @@ double loadmove(double qfinal[5])
 
   // Pick a move time.  Note this is approximate.  We could compute
   // the absolute fastest time or pass as an argument.
-  tmove = 0.25;
+  tmove = 5; 
   for (i = 0 ; i < 5 ; i++)
     {
       tmp = 2.0 * fabs(qfinal[i] - q[i]) / qdotmax[i];
@@ -138,50 +143,102 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
 			moveto::ThrowTo::Response &res)
 {
   bool valid_throw = true;
-  double x = req.point.x;
-  double y = req.point.y;
-  double z = req.point.z;
 
-  // Check bounds - make sure throw is not out of range
-  // also need to check bounds for arm hitting frame - need dimensions
-  if(y < THROW_MIN)
-  {
+  throwing = req.throw_b;
+  max_v = req.max_v;
+  double maxv_time = .25;
+
+  double q[4];
+  double elbow_sat_speed = std::min(max_v, 3.14); // use x5-4 max for computing bigger throw time.
+  double shoulder_sat_speed = std::min(max_v, 3.14);
+  
+  elbow_throwtime = 3.14/elbow_sat_speed - maxv_time; // elbow throwtime
+  shoulder_throwtime = 3.14/shoulder_sat_speed - maxv_time;
+  
+  // handle error cases.
+  if(throwing && (shoulder_throwtime < maxv_time || elbow_throwtime < maxv_time)) {
+    ROS_INFO("Invalid params : decrease speed.");
     valid_throw = false;
-    ROS_INFO("Throw target too short");
-  }
-  if(abs(x) > TABLE_WIDTH / 2)
-  {
-    valid_throw = false;
-    ROS_INFO("Throw target outside of table bounds");
   }
 
-  double throw_dist = sqrt(x*x + y*y);
-  if(throw_dist > THROW_MAX)
-  {
-    valid_throw = false;
-    ROS_INFO("Throw target too far");
+  throw_error = !valid_throw;
+  // throwing being false means we wind up.
+  if(!throwing) {
+    q[0] = 0;
+    q[1] = 2.35;
+    q[2] = -1.57;
+    q[3] = GRIPPOS;
+  } // Else, throw.
+  else if(throwing && valid_throw) {
+    q[0] = 0;
+    q[1] = .785;
+    q[2] = 0;
+    q[3] = 0; // release grip
+  }
+  res.movetime = loadmove(q);
+  if(throwing)
+    t = -elbow_throwtime; // Time begins when elbow starts moving.
+  else
+    t = -5; // fixed windup time.
+  
+  if (throwing)
+    return valid_throw;
+  else
+    return true;
+}
+
+// Return the velocity of the trapezoid profile.
+double trapezoid_motion(double max_speed, double limit, double throwing_time) {
+  // Compute the profile based on the limits of the motors.
+  double sat_speed = std::min(max_speed, limit);
+  //double maxv_time = 3.14 / sat_speed - throwing_time;
+  double maxv_time = .25;
+  
+  double speed = 0;
+  double time_offset = (elbow_throwtime - throwing_time) / 2;
+  
+  //std::cout << "First part: " << (-throwtime + (throwtime - maxv_time)/ 2) << std::endl;
+  //std::cout << "Second part: " <<(-(throwtime - maxv_time)/ 2) << std::endl;
+  //std::cout << "Max V Time : " << maxv_time << std::endl;
+  double new_time = t + time_offset;
+  double time = throwing_time + new_time;
+
+  if(new_time > -(throwing_time) && new_time < (-(throwing_time) + (throwing_time - maxv_time)/ 2)) {
+    speed = (2 * sat_speed) / (throwing_time - maxv_time)*time;
+    //speed = sat_speed;
+    /*std::cout << "RAMP UP" << std::endl;
+    std::cout << "time offset:" << time_offset << std::endl;
+    std::cout << "max v time : " << maxv_time << std::endl;
+    std::cout << "time : " << time << std::endl;
+    std::cout << "t :" << t << std::endl;
+    std::cout << "sat : " << sat_speed << std::endl;
+    std::cout << "v: " << speed << std::endl; */
+  }
+  else if (new_time > (-(throwing_time) + (throwing_time - maxv_time)/ 2) && new_time < -(throwing_time - maxv_time) / 2) {
+    speed = sat_speed;
+    /*std::cout << "MAX" << std::endl;
+    std::cout << "time offset:" << time_offset << std::endl;
+    std::cout << "time : " << time << std::endl;
+    std::cout << "t :" << t << std::endl;
+    std::cout << "v: :" << speed << std::endl;*/
+  }
+  else if (new_time  > -(throwing_time - maxv_time) / 2 && new_time < 0.0){
+    speed = (throwing_time * (2 * sat_speed) / (throwing_time - maxv_time)) - (2 * sat_speed) / (throwing_time - maxv_time) * time;
+    /*std::cout << "RAMP DOWN" << std::endl;
+    std::cout << "time offset:" << time_offset << std::endl;
+    std::cout << "time : " << time << std::endl;
+    std::cout << "t :" << t << std::endl;
+    std::cout << "v :" << speed << std::endl; */
+  }
+  else {
+    /* std::cout << "NOT MOVING " << std::endl;
+    std::cout << "time offset:" << time_offset << std::endl;
+    std::cout << "time : " << time << std::endl;
+    std::cout << "t :" << t << std::endl;
+    speed = 0; */
   }
 
-  if (valid_throw)
-  {
-    // Move the arm to initial "wind up" position
-    // calculate
-    double w_x = - x * (WINDUP / throw_dist);
-    double w_y = - y * (WINDUP / throw_dist);
-    moveto::IKin iKinSrv;
-    iKinSrv.request.tip.x     = w_x;
-    iKinSrv.request.tip.y     = w_y;
-    iKinSrv.request.tip.z     = 0;
-    iKinSrv.request.tip.grip  = true;
-    ikinClientPtr->call(iKinSrv);
-
-    // Move to the joints.
-    res.movetime = loadmove(&iKinSrv.response.joints.joint[0]);
-
-    // Execute throw
-  }
-
-  return valid_throw;
+  return speed;
 }
 
 
@@ -290,6 +347,10 @@ int main(int argc, char **argv)
   ros::ServiceServer movejointsServer =
     nh.advertiseService("/movejoints", movejointsCallback);
 
+  // Make throwing server
+  ros::ServiceServer throwServer =
+    nh.advertiseService("/throw", throwtoCallback);
+
   // Create a subscriber to receive feedback from the actuator group.
   ros::Subscriber feedback_subscriber = nh.subscribe("/hebiros/"+group_name+"/feedback/joint_state", 100, feedbackCallback);
 
@@ -325,27 +386,61 @@ int main(int argc, char **argv)
   // Run the servo loop until shutdown.
   double  dt = loop_rate.expectedCycleTime().toSec();
   ROS_INFO("MoveTo: Running the servo loop with dt %f", dt);
+  
   while(ros::ok())
   {
     // Advance time, but hold at t=0 to stay at the final position.
     t += dt;
     if (t > 0.0)
-	     t = 0.0;
+      t = 0.0;
 
-    // Compute the new position and velocity commands.
-    for (i = 0 ; i < 3 ; i++)
-	  {
-	     q[i]    = a[i]+t*(b[i]+t*(c[i]+t*d[i]));
-	     qdot[i] = b[i]+t*(2.0*c[i]+t*3.0*d[i]);
+    
+    if(!throwing) {
+      
+      // Use spline for all non-throwing motion.
+      for (i = 0 ; i < 4 ; i++){
+	q[i]    = a[i]+t*(b[i]+t*(c[i]+t*d[i]));
+	qdot[i] = b[i]+t*(2.0*c[i]+t*3.0*d[i]);
+	  
+	cmdMsg.position[i] = q[i];
+	cmdMsg.velocity[i] = qdot[i];
+	  
+	// std::cout << "pos: " << q[i] << "\n";
+	// std::cout << "vel: " << qdot[i] << "\n";
+      }
+    }
+    else {
+      if(!throw_error) {
+	qdot[1] = trapezoid_motion(max_v, 3.14, shoulder_throwtime); // shoulder
+	
+	qdot[2] = trapezoid_motion(max_v, 3.14, elbow_throwtime); // elbow
+	
+	q[1] -= qdot[1] * dt;
+	q[2] += qdot[2] * dt;
 
-	     cmdMsg.position[i] = q[i];
-	     cmdMsg.velocity[i] = qdot[i];
+	cmdMsg.position[0] = 0;
+	cmdMsg.velocity[0] = 0;
+	
+	cmdMsg.position[1] = q[1];
+	cmdMsg.velocity[1] = -qdot[1];
 
-       // std::cout << "pos: " << q[i] << "\n";
-       // std::cout << "vel: " << qdot[i] << "\n";
-	   }
+	cmdMsg.position[2] = q[2];
+	cmdMsg.velocity[2] = qdot[2];
 
+	float grip_cond = (5.1 - feedback.position[1] + feedback.position[2] + asin(12/16.5 * sin(2 - feedback.position[1])));
+	
+	// Release gripper at vertical shoulder.
+	if(std::abs(grip_cond - 3.14) < .05) {
+	  cmdMsg.position[3] = 0;
+	  std::cout << "shoulder v : " << feedback.velocity[1] << std::endl;
+	  std::cout << "Elbow v : " << feedback.velocity[2] << std::endl;
+	  std::cout << "shoulder q : " << feedback.position[1] << std::endl;
+	  std::cout << "Elbow q : " << feedback.position[2] << std::endl;
+	}
+      }
+    }
     // Publish.
+    
     cmdMsg.header.stamp = ros::Time::now();
     cmdPub.publish(cmdMsg);
 
