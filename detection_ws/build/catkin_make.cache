@@ -1,0 +1,2 @@
+detection
+-DCATKIN_DEVEL_PREFIX=/home/rohan/detection_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rohan/detection_ws/install -G Unix Makefiles

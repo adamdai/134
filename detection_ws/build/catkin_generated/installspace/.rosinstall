@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/rohan/detection_ws/install/setup.sh
