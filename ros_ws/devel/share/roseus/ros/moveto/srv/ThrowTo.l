@@ -20,41 +20,59 @@
 
 (defclass moveto::ThrowToRequest
   :super ros::object
-  :slots (_point ))
+  :slots (_throw_b _max_v _shoulder_release ))
 
 (defmethod moveto::ThrowToRequest
   (:init
    (&key
-    ((:point __point) (instance moveto::Point :init))
+    ((:throw_b __throw_b) nil)
+    ((:max_v __max_v) 0.0)
+    ((:shoulder_release __shoulder_release) 0.0)
     )
    (send-super :init)
-   (setq _point __point)
+   (setq _throw_b __throw_b)
+   (setq _max_v (float __max_v))
+   (setq _shoulder_release (float __shoulder_release))
    self)
-  (:point
-   (&rest __point)
-   (if (keywordp (car __point))
-       (send* _point __point)
-     (progn
-       (if __point (setq _point (car __point)))
-       _point)))
+  (:throw_b
+   (&optional __throw_b)
+   (if __throw_b (setq _throw_b __throw_b)) _throw_b)
+  (:max_v
+   (&optional __max_v)
+   (if __max_v (setq _max_v __max_v)) _max_v)
+  (:shoulder_release
+   (&optional __shoulder_release)
+   (if __shoulder_release (setq _shoulder_release __shoulder_release)) _shoulder_release)
   (:serialization-length
    ()
    (+
-    ;; moveto/Point _point
-    (send _point :serialization-length)
+    ;; bool _throw_b
+    1
+    ;; float64 _max_v
+    8
+    ;; float64 _shoulder_release
+    8
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; moveto/Point _point
-       (send _point :serialize s)
+     ;; bool _throw_b
+       (if _throw_b (write-byte -1 s) (write-byte 0 s))
+     ;; float64 _max_v
+       (sys::poke _max_v (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _shoulder_release
+       (sys::poke _shoulder_release (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; moveto/Point _point
-     (send _point :deserialize buf ptr-) (incf ptr- (send _point :serialization-length))
+   ;; bool _throw_b
+     (setq _throw_b (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
+   ;; float64 _max_v
+     (setq _max_v (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _shoulder_release
+     (setq _shoulder_release (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;;
    self)
   )
@@ -100,7 +118,7 @@
   :super ros::object
   :slots ())
 
-(setf (get moveto::ThrowTo :md5sum-) "f5d911aee700e2e2bb9670f06078b78f")
+(setf (get moveto::ThrowTo :md5sum-) "3ada36ddbca49a75913be34d13f65529")
 (setf (get moveto::ThrowTo :datatype-) "moveto/ThrowTo")
 (setf (get moveto::ThrowTo :request) moveto::ThrowToRequest)
 (setf (get moveto::ThrowTo :response) moveto::ThrowToResponse)
@@ -108,42 +126,30 @@
 (defmethod moveto::ThrowToRequest
   (:response () (instance moveto::ThrowToResponse :init)))
 
-(setf (get moveto::ThrowToRequest :md5sum-) "f5d911aee700e2e2bb9670f06078b78f")
+(setf (get moveto::ThrowToRequest :md5sum-) "3ada36ddbca49a75913be34d13f65529")
 (setf (get moveto::ThrowToRequest :datatype-) "moveto/ThrowToRequest")
 (setf (get moveto::ThrowToRequest :definition-)
       "
 
 
-Point     point
-
-================================================================================
-MSG: moveto/Point
-# Message of tip values
-float64 x
-float64 y
-float64 z
-
+bool     throw_b
+float64  max_v
+float64  shoulder_release
 ---
 
 float64 movetime
 
 ")
 
-(setf (get moveto::ThrowToResponse :md5sum-) "f5d911aee700e2e2bb9670f06078b78f")
+(setf (get moveto::ThrowToResponse :md5sum-) "3ada36ddbca49a75913be34d13f65529")
 (setf (get moveto::ThrowToResponse :datatype-) "moveto/ThrowToResponse")
 (setf (get moveto::ThrowToResponse :definition-)
       "
 
 
-Point     point
-
-================================================================================
-MSG: moveto/Point
-# Message of tip values
-float64 x
-float64 y
-float64 z
-
+bool     throw_b
+float64  max_v
+float64  shoulder_release
 ---
 
 float64 movetime
@@ -152,6 +158,6 @@ float64 movetime
 
 
 
-(provide :moveto/ThrowTo "f5d911aee700e2e2bb9670f06078b78f")
+(provide :moveto/ThrowTo "3ada36ddbca49a75913be34d13f65529")
 
 

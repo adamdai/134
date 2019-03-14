@@ -15,7 +15,6 @@
 #include <ros/builtin_message_traits.h>
 #include <ros/message_operations.h>
 
-#include <moveto/Point.h>
 
 namespace moveto
 {
@@ -25,17 +24,27 @@ struct ThrowToRequest_
   typedef ThrowToRequest_<ContainerAllocator> Type;
 
   ThrowToRequest_()
-    : point()  {
+    : throw_b(false)
+    , max_v(0.0)
+    , shoulder_release(0.0)  {
     }
   ThrowToRequest_(const ContainerAllocator& _alloc)
-    : point(_alloc)  {
+    : throw_b(false)
+    , max_v(0.0)
+    , shoulder_release(0.0)  {
   (void)_alloc;
     }
 
 
 
-   typedef  ::moveto::Point_<ContainerAllocator>  _point_type;
-  _point_type point;
+   typedef uint8_t _throw_b_type;
+  _throw_b_type throw_b;
+
+   typedef double _max_v_type;
+  _max_v_type max_v;
+
+   typedef double _shoulder_release_type;
+  _shoulder_release_type shoulder_release;
 
 
 
@@ -72,7 +81,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'moveto': ['/home/robot/ros_ws/src/moveto/msg']}
+// {'moveto': ['/home/rohan/ros_ws/src/moveto/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -115,12 +124,12 @@ struct MD5Sum< ::moveto::ThrowToRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "a7c84ff13976aa04656e56e300124444";
+    return "9daa3841bbe29d3ba1587d5af820e1aa";
   }
 
   static const char* value(const ::moveto::ThrowToRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xa7c84ff13976aa04ULL;
-  static const uint64_t static_value2 = 0x656e56e300124444ULL;
+  static const uint64_t static_value1 = 0x9daa3841bbe29d3bULL;
+  static const uint64_t static_value2 = 0xa1587d5af820e1aaULL;
 };
 
 template<class ContainerAllocator>
@@ -142,15 +151,9 @@ struct Definition< ::moveto::ThrowToRequest_<ContainerAllocator> >
     return "\n\
 \n\
 \n\
-Point     point\n\
-\n\
-================================================================================\n\
-MSG: moveto/Point\n\
-# Message of tip values\n\
-float64 x\n\
-float64 y\n\
-float64 z\n\
-\n\
+bool     throw_b\n\
+float64  max_v\n\
+float64  shoulder_release\n\
 ";
   }
 
@@ -169,7 +172,9 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.point);
+      stream.next(m.throw_b);
+      stream.next(m.max_v);
+      stream.next(m.shoulder_release);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -188,9 +193,12 @@ struct Printer< ::moveto::ThrowToRequest_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::moveto::ThrowToRequest_<ContainerAllocator>& v)
   {
-    s << indent << "point: ";
-    s << std::endl;
-    Printer< ::moveto::Point_<ContainerAllocator> >::stream(s, indent + "  ", v.point);
+    s << indent << "throw_b: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.throw_b);
+    s << indent << "max_v: ";
+    Printer<double>::stream(s, indent + "  ", v.max_v);
+    s << indent << "shoulder_release: ";
+    Printer<double>::stream(s, indent + "  ", v.shoulder_release);
   }
 };
 

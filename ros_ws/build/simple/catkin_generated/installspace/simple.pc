@@ -1,8 +1,8 @@
-prefix=/home/robot/ros_ws/install
+prefix=/home/rohan/ros_ws/install
 
 Name: simple
 Description: Description of simple
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/robot/ros_ws/install/lib 
+Libs: -L/home/rohan/ros_ws/install/lib 
 Requires: 

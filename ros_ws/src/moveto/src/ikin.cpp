@@ -75,7 +75,7 @@ bool ikin(double x, double y, double z, bool grip, double q[4])
   }
   else
   {
-    q[3] = 0;
+    q[3] = 0; // release grip  
   }
 
   q[4] = 0;

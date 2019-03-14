@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/robot/ros_ws/src
+CMAKE_SOURCE_DIR = /home/rohan/ros_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/robot/ros_ws/build
+CMAKE_BINARY_DIR = /home/rohan/ros_ws/build
 
 # Utility rule file for rosgraph_msgs_generate_messages_nodejs.
 
@@ -63,10 +63,10 @@ ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build: rosgraph_msgs_
 .PHONY : ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 
 ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean:
-	cd /home/robot/ros_ws/build/ikin && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
+	cd /home/rohan/ros_ws/build/ikin && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/cmake_clean.cmake
 .PHONY : ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
 
 ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/robot/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/ros_ws/src /home/robot/ros_ws/src/ikin /home/robot/ros_ws/build /home/robot/ros_ws/build/ikin /home/robot/ros_ws/build/ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rohan/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rohan/ros_ws/src /home/rohan/ros_ws/src/ikin /home/rohan/ros_ws/build /home/rohan/ros_ws/build/ikin /home/rohan/ros_ws/build/ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ikin/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/depend
 

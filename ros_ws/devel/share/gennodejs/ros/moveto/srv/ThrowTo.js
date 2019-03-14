@@ -11,7 +11,6 @@ const _deserializer = _ros_msg_utils.Deserialize;
 const _arrayDeserializer = _deserializer.Array;
 const _finder = _ros_msg_utils.Find;
 const _getByteLength = _ros_msg_utils.getByteLength;
-let Point = require('../msg/Point.js');
 
 //-----------------------------------------------------------
 
@@ -22,22 +21,40 @@ class ThrowToRequest {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.point = null;
+      this.throw_b = null;
+      this.max_v = null;
+      this.shoulder_release = null;
     }
     else {
-      if (initObj.hasOwnProperty('point')) {
-        this.point = initObj.point
+      if (initObj.hasOwnProperty('throw_b')) {
+        this.throw_b = initObj.throw_b
       }
       else {
-        this.point = new Point();
+        this.throw_b = false;
+      }
+      if (initObj.hasOwnProperty('max_v')) {
+        this.max_v = initObj.max_v
+      }
+      else {
+        this.max_v = 0.0;
+      }
+      if (initObj.hasOwnProperty('shoulder_release')) {
+        this.shoulder_release = initObj.shoulder_release
+      }
+      else {
+        this.shoulder_release = 0.0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type ThrowToRequest
-    // Serialize message field [point]
-    bufferOffset = Point.serialize(obj.point, buffer, bufferOffset);
+    // Serialize message field [throw_b]
+    bufferOffset = _serializer.bool(obj.throw_b, buffer, bufferOffset);
+    // Serialize message field [max_v]
+    bufferOffset = _serializer.float64(obj.max_v, buffer, bufferOffset);
+    // Serialize message field [shoulder_release]
+    bufferOffset = _serializer.float64(obj.shoulder_release, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -45,13 +62,17 @@ class ThrowToRequest {
     //deserializes a message object of type ThrowToRequest
     let len;
     let data = new ThrowToRequest(null);
-    // Deserialize message field [point]
-    data.point = Point.deserialize(buffer, bufferOffset);
+    // Deserialize message field [throw_b]
+    data.throw_b = _deserializer.bool(buffer, bufferOffset);
+    // Deserialize message field [max_v]
+    data.max_v = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [shoulder_release]
+    data.shoulder_release = _deserializer.float64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 24;
+    return 17;
   }
 
   static datatype() {
@@ -61,7 +82,7 @@ class ThrowToRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'a7c84ff13976aa04656e56e300124444';
+    return '9daa3841bbe29d3ba1587d5af820e1aa';
   }
 
   static messageDefinition() {
@@ -70,15 +91,9 @@ class ThrowToRequest {
     
     
     
-    Point     point
-    
-    ================================================================================
-    MSG: moveto/Point
-    # Message of tip values
-    float64 x
-    float64 y
-    float64 z
-    
+    bool     throw_b
+    float64  max_v
+    float64  shoulder_release
     
     `;
   }
@@ -89,11 +104,25 @@ class ThrowToRequest {
       msg = {};
     }
     const resolved = new ThrowToRequest(null);
-    if (msg.point !== undefined) {
-      resolved.point = Point.Resolve(msg.point)
+    if (msg.throw_b !== undefined) {
+      resolved.throw_b = msg.throw_b;
     }
     else {
-      resolved.point = new Point()
+      resolved.throw_b = false
+    }
+
+    if (msg.max_v !== undefined) {
+      resolved.max_v = msg.max_v;
+    }
+    else {
+      resolved.max_v = 0.0
+    }
+
+    if (msg.shoulder_release !== undefined) {
+      resolved.shoulder_release = msg.shoulder_release;
+    }
+    else {
+      resolved.shoulder_release = 0.0
     }
 
     return resolved;
@@ -176,6 +205,6 @@ class ThrowToResponse {
 module.exports = {
   Request: ThrowToRequest,
   Response: ThrowToResponse,
-  md5sum() { return 'f5d911aee700e2e2bb9670f06078b78f'; },
+  md5sum() { return '3ada36ddbca49a75913be34d13f65529'; },
   datatype() { return 'moveto/ThrowTo'; }
 };
