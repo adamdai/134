@@ -1,8 +1,0 @@
-prefix=/home/rohan/detection_ws/devel
-
-Name: detection
-Description: Description of detection
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/rohan/detection_ws/devel/lib 
-Requires: 

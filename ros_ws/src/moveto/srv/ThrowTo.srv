@@ -1,8 +1,0 @@
-# Service to throw to a point
-#
-# Request Definition
-bool     throw_b
-float64  max_v
----
-# Response Definition
-float64 movetime
