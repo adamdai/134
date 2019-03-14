@@ -93,10 +93,10 @@ public:
     cv::Vec3b ycbPixel(hsv.at<cv::Vec3b>(0, 0));
     cv::Vec3b labPixel(hsv.at<cv::Vec3b>(0, 0));
 
-    int thresh = 30;
+    int thresh = 20;
 
-    cv::Scalar minBGR = cv::Scalar(bgrPixel[0] - thresh-20, bgrPixel[1] - thresh, bgrPixel[2] - thresh);
-    cv::Scalar maxBGR = cv::Scalar(bgrPixel[0] + thresh+20, bgrPixel[1] + thresh, bgrPixel[2] + thresh);
+    cv::Scalar minBGR = cv::Scalar(bgrPixel[0] - thresh, bgrPixel[1] - thresh, bgrPixel[2] - thresh-20);
+    cv::Scalar maxBGR = cv::Scalar(bgrPixel[0] + thresh, bgrPixel[1] + thresh, bgrPixel[2] + thresh+20);
 
     cv::Mat maskBGR, resultBGR;
     cv::inRange(cv_ptr->image, minBGR, maxBGR, maskBGR);
@@ -119,7 +119,7 @@ public:
     std::vector<cv::Moments> mu(contours.size());
     std::vector<std::vector<cv::Point>> contours_poly(contours.size());
     std::vector<cv::Rect> boundRect(contours.size());
-
+    std::cout <<"\nPRINTING OUT CENTERS:" << std::endl;
     for(size_t i = 0; i < contours.size(); i++) {
       // Determine bounding box of contour.
       cv::approxPolyDP(cv::Mat(contours[i]), contours_poly[i], 3, true);
@@ -129,22 +129,20 @@ public:
       cv::Scalar color = cv::Scalar(256, 256, 256);
       //cv::drawContours(drawing, contours, (int) i, color, 2, cv::LINE_8, hierarchy, 0);
       // only draw rectangle if above certain threshold
-      if(cv::norm(boundRect[i].br() - boundRect[i].tl()) > 20) {
+      if(cv::norm(boundRect[i].br() - boundRect[i].tl()) > 10) {
 	cv::Point center = .5 * (boundRect[i].br() + boundRect[i].tl());
 	cv::rectangle(cv_ptr->image, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0);
 	cv::circle(cv_ptr->image, center, 8, cv::Scalar(0, 0, 256), -1, 8, 0);
 	//std::cout << cv_ptr->image.size() << "\n";
-	//std::cout << center.x << ", " << center.y << "\n" ;
+        std::cout << "x: " << center.x << ", y: " << center.y << std::endl;
       }
       
     }
 
     //Publish image.
     image_pub.publish(cv_ptr->toImageMsg());
- 
-    // Compute positions from bounding boxes and publish them to the locations.
-    // Use the depth point cloud.
-    // unclear how to do this still
+    // Write to image.
+    cv::imwrite("detected.png", cv_ptr->image);
   }
 };
 
