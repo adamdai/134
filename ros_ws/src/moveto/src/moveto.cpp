@@ -30,6 +30,7 @@ using namespace hebiros;
 #define WINDUP    (0.5)    // distance from gripper to base for winding up for the throw
 #define GRIPPOS (-0.4)
 #define SPEED_MULT (2.75)
+#define  MAX_ANGLE (0.4)
 
 
 /*
@@ -54,6 +55,7 @@ static double  a[5], b[5], c[5], d[5];
 static double  qdotmax[5] = {3.14, 3.14, 3.14, 3.14, 3.14};
 
 static bool throwing; // This is true if executing throwing motion (trapezoid)
+static double throw_angle;
 static double max_v;
 static double elbow_throwtime;
 static double shoulder_throwtime;
@@ -71,7 +73,7 @@ double loadmove(double qfinal[5])
 
   // Pick a move time.  Note this is approximate.  We could compute
   // the absolute fastest time or pass as an argument.
-  tmove = 5; 
+  tmove = 5;
   for (i = 0 ; i < 5 ; i++)
     {
       tmp = 2.0 * fabs(qfinal[i] - q[i]) / qdotmax[i];
@@ -149,31 +151,37 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
   throwing = req.throw_b;
   shoulder_release = req.shoulder_release;
   max_v = req.max_v;
+  throw_angle = req.angle;
   double maxv_time = .1;
 
   double q[4];
-  double elbow_sat_speed = std::min(SPEED_MULT * max_v, 8.75); 
+  double elbow_sat_speed = std::min(SPEED_MULT * max_v, 8.75);
   double shoulder_sat_speed = std::min(max_v, 3.14);// use x5-4 max for computing bigger throw time.
-  
+
   elbow_throwtime = 3.14/elbow_sat_speed - maxv_time; // elbow throwtime
   shoulder_throwtime = 3.14/shoulder_sat_speed - maxv_time;
-  
+
   // handle error cases.
   if(throwing && (shoulder_throwtime < maxv_time || elbow_throwtime < maxv_time)) {
     ROS_INFO("Invalid params : decrease speed.");
     valid_throw = false;
   }
 
+  if(std::abs(throw_angle) > MAX_ANGLE) {
+    ROS_INFO("Invalid params : angle out of bounds.");
+    valid_throw = false;
+  }
+
   throw_error = !valid_throw;
   // throwing being false means we wind up.
-  if(!throwing) {
-    q[0] = 0;
+  if(!throwing && valid_throw) {
+    q[0] = throw_angle;
     q[1] = 2.35;
     q[2] = -1.57;
     q[3] = GRIPPOS;
   } // Else, throw.
   else if(throwing && valid_throw) {
-    q[0] = 0;
+    q[0] = throw_angle;
     q[1] = .785;
     q[2] = 0;
     q[3] = 0; // release grip
@@ -183,7 +191,7 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
     t = -shoulder_throwtime; // Time begins when shoulder starts moving.
   else
     t = -5; // fixed windup time.
-  
+
   if (throwing)
     return valid_throw;
   else
@@ -196,10 +204,10 @@ double trapezoid_motion(double max_speed, double limit, double throwing_time) {
   double sat_speed = std::min(max_speed, limit);
   //double maxv_time = 3.14 / sat_speed - throwing_time;
   double maxv_time = .1;
-  
+
   double speed = 0;
   double time_offset = (shoulder_throwtime - throwing_time) / 2;
-  
+
   //std::cout << "First part: " << (-throwtime + (throwtime - maxv_time)/ 2) << std::endl;
   //std::cout << "Second part: " <<(-(throwtime - maxv_time)/ 2) << std::endl;
   //std::cout << "Max V Time : " << maxv_time << std::endl;
@@ -222,7 +230,7 @@ double trapezoid_motion(double max_speed, double limit, double throwing_time) {
     /*std::cout << "MAX" << std::endl;
     std::cout << "time offset:" << time_offset << std::endl;
     std::cout << "time : " << time << std::endl;
-    std::cout << "t :" << t << std::endl; 
+    std::cout << "t :" << t << std::endl;
     std::cout << "v: :" << speed << std::endl; */
   }
   else if (new_time  > -(throwing_time - maxv_time) / 2 && new_time < 0.0){
@@ -303,7 +311,7 @@ int main(int argc, char **argv)
 
   full_command_msg.settings.velocity_gains.name = actuators;
 
-  full_command_msg.settings.velocity_gains.kp = {0.5, 0.1, 0.1, 0.1};
+  full_command_msg.settings.velocity_gains.kp = {0.25, 0.1, 0.1, 0.1};
   full_command_msg.settings.velocity_gains.kd = {0.0, 0.0, 0.0, 0.0};
   full_command_msg.settings.velocity_gains.ki = {0.0, 0.0, 0.0, 0.0};
 
@@ -389,7 +397,7 @@ int main(int argc, char **argv)
   // Run the servo loop until shutdown.
   double  dt = loop_rate.expectedCycleTime().toSec();
   ROS_INFO("MoveTo: Running the servo loop with dt %f", dt);
-  
+
   while(ros::ok())
   {
     // Advance time, but hold at t=0 to stay at the final position.
@@ -397,17 +405,17 @@ int main(int argc, char **argv)
     if (t > 0.0)
       t = 0.0;
 
-    
+
     if(!throwing) {
-      
+
       // Use spline for all non-throwing motion.
       for (i = 0 ; i < 4 ; i++){
 	q[i]    = a[i]+t*(b[i]+t*(c[i]+t*d[i]));
 	qdot[i] = b[i]+t*(2.0*c[i]+t*3.0*d[i]);
-	  
+
 	cmdMsg.position[i] = q[i];
 	cmdMsg.velocity[i] = qdot[i];
-	  
+
 	// std::cout << "pos: " << q[i] << "\n";
 	// std::cout << "vel: " << qdot[i] << "\n";
       }
@@ -415,15 +423,15 @@ int main(int argc, char **argv)
     else {
       if(!throw_error) {
 	qdot[1] = trapezoid_motion(max_v, 3.14, shoulder_throwtime); // shoulder
-	
+
 	qdot[2] = trapezoid_motion(SPEED_MULT * max_v, 8.79, elbow_throwtime); // elbow
-	
+
 	q[1] -= qdot[1] * dt;
 	q[2] += qdot[2] * dt;
 
-	cmdMsg.position[0] = 0;
+	cmdMsg.position[0] = throw_angle;
 	cmdMsg.velocity[0] = 0;
-	
+
 	cmdMsg.position[1] = q[1];
 	cmdMsg.velocity[1] = -qdot[1];
 
@@ -443,7 +451,7 @@ int main(int argc, char **argv)
       }
     }
     // Publish.
-    
+
     cmdMsg.header.stamp = ros::Time::now();
     cmdPub.publish(cmdMsg);
 
