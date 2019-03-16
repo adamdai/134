@@ -4,6 +4,8 @@
 #include <image_transport/image_transport.h>
 #include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
+#include <detection/Coord.h>
+#include <detection/CoordVec.h>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
@@ -54,9 +56,9 @@ class ImageConverter {
   ros::NodeHandle nh;
   image_transport::ImageTransport it;
   image_transport::Subscriber image_sub;
-  image_transport::Subscriber depth_sub;
   image_transport::Publisher image_pub;
-  image_transport::Publisher depth_pub;
+  ros::Publisher posPub;
+  
   std::vector<cv::Mat> images;
   
   int maxNumImages;
@@ -68,9 +70,8 @@ public:
 
     //TODO: Make this poll less, it doesn't need to poll as much rn.
     image_sub = it.subscribe("/camera/color/image_raw", 1000, &ImageConverter::imageCallBack, this);
-    depth_sub = it.subscribe("/camera/aligned_depth_to_color/image_raw", 1000, &ImageConverter::depthCallBack, this);
     image_pub = it.advertise("/cup_detector/output_video", 1000);
-    depth_pub = it.advertise("/cup_detector/depth_video", 100);
+    posPub = nh.advertise<detection::CoordVec>("/detection/coordinates", 100);
 
     maxNumImages = 100;
     currNumImages = 0;
@@ -81,11 +82,14 @@ public:
     //cv::destroyWindow("test window");
   }
 
-  double radius_converter(cv::Point& pix_pt) {
+  std::vector<double> radius_converter(cv::Point& pix_pt) {
     cv::Point center = pix_pt;
     /* Do this masking in the center detection. */
     //std::cout << "x: " << center.x << ", y: " << center.y << std::endl;
-
+    std::vector<double> pos;
+    pos.push_back(-1);
+    pos.push_back(-1);
+    
     // Find the y cell first.
     int y_cell_num = 0;
     int x_cell_num = 0;
@@ -120,7 +124,7 @@ public:
 	  double y_pos = y_real_positions[y_cell][x_cell] + y_off;
 	  double x_pos = x_real_positions[y_cell][x_cell] + x_off;
 	  
-	  std::cout << "pix x : " << center.x << " pix y : " << center.y << " x off: " << x_off << std::endl;
+	  //std::cout << "pix x : " << center.x << " pix y : " << center.y << " x off: " << x_off << std::endl;
 	  /*std::cout << "x cell : " << x_cell << " y cell" << y_cell << std::endl;
 	  std::cout << "offset from top pair :" << x_l_off << " offset from bottom pair: " << x_l_off2 << std::endl;
 	  std::cout << "computed x : " << x_real_positions[y_cell][x_cell] + x_off << std::endl;
@@ -130,45 +134,14 @@ public:
 	  // compute radius
 	  double rad = std::sqrt(y_pos * y_pos + x_pos * x_pos);
 	  double angle = std::atan(x_pos / y_pos);
-	  std::cout << "Radius : " << rad << std::endl;
-	  std::cout << "Angle : " << angle << std::endl;
+	  pos[0] = rad;
+	  pos[1] = angle;
 	}
     
-    return 0.0;
+    return pos;
   }
+
   
-  void depthCallBack(const sensor_msgs::ImageConstPtr&msg) {
-    cv_bridge::CvImagePtr depth_ptr;
-    depth_ptr = cv_bridge::toCvCopy(msg);
-    
-    /*cv::Mat curr_image = depth_ptr->image;
-    if(images.size() < maxNumImages)
-      images.push_back(curr_image);
-    
-    // we can publish the depth image in a bit to check
-    if (images.size() == maxNumImages) {
-      cv::Mat avg_depth_image = cv::Mat(images[0].rows, images[0].cols, CV_64FC1);
-      avg_depth_image.setTo(cv::Scalar(0, 0, 0, 0));
-      cv::Mat temp;
-      for (int i = 0; i < images.size(); i++) {
-	images[i].convertTo(temp, avg_depth_image.type());
-	if(images[i].size() != avg_depth_image.size())
-	  std::cout<<"ERROR";
-	cv::accumulate(avg_depth_image, temp);
-      }
-      
-      //avg_depth_image.convertTo(avg_depth_image, curr_image.type(), 1. / maxNumImages);
-      //cv::Scalar depth_val = cv::mean(avg_depth_image);
-      cv::Scalar depth_val = curr_image.at<char>(326, 370);
-      std::cout << depth_val << "\n";
-      cv::circle(depth_ptr->image, cv::Point(326, 370), 8, cv::Scalar(0, 0, 256), -1, 8, 0);
-      depth_pub.publish(depth_ptr->toImageMsg());
-      images.clear();
-      }*/
-    cv::Scalar depth_val = depth_ptr->image.at<uchar>(cv::Point(326, 370));
-    cv::Scalar depth_mean = cv::mean(depth_ptr->image);
-    std::cout<< depth_val<< "\n";
-  }
   
   void imageCallBack(const sensor_msgs::ImageConstPtr& msg) {
     cv_bridge::CvImagePtr cv_ptr;
@@ -216,6 +189,8 @@ public:
     std::vector<std::vector<cv::Point>> contours_poly(contours.size());
     std::vector<cv::Rect> boundRect(contours.size());
     std::cout <<"\nPRINTING OUT CENTERS:" << std::endl;
+    std::vector<std::vector<double>> pol_coords;
+    
     for(size_t i = 0; i < contours.size(); i++) {
       // Determine bounding box of contour.
       cv::approxPolyDP(cv::Mat(contours[i]), contours_poly[i], 3, true);
@@ -233,14 +208,35 @@ public:
 	  cv::rectangle(cv_ptr->image, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0);
 	  cv::circle(cv_ptr->image, center, 8, cv::Scalar(0, 0, 256), -1, 8, 0);
 	
-	  double temp = radius_converter(center);
+	  std::vector<double> pos = radius_converter(center);
+	  pol_coords.push_back(pos);
 	}
       }
       
     }
 
+    // Print out coords if desired.
+    for(int i = 0; i < pol_coords.size(); i++) {
+      if(pol_coords[i][0] != -1 && pol_coords[i][1] != -1) {
+	std::cout << "Radius : " << pol_coords[i][0] << std::endl;
+	std::cout << "Angle : " << pol_coords[i][1] << std::endl;
+      }
+    }
+
     //Publish image.
     image_pub.publish(cv_ptr->toImageMsg());
+
+    // Publish coordinates.
+    detection::CoordVec coordinates;
+    for(int count = 0; count < pol_coords.size(); count++) {
+      detection::Coord coord;
+      coord.rad = pol_coords[count][0];
+      coord.angle = pol_coords[count][1];
+      if(coord.angle != -1 && coord.rad != -1)
+	coordinates.coord_vec.push_back(coord);
+    }
+    posPub.publish(coordinates);
+      
     // Write to image.
     cv::imwrite("detected.png", cv_ptr->image);
   }
