@@ -1,8 +1,8 @@
-prefix=/home/rohan/ros_ws/install
+prefix=/home/robot/ros_ws/install
 
 Name: moveto
 Description: Description of moveto
 Version: 0.0.0
-Cflags: -I/home/rohan/ros_ws/install/include
-Libs: -L/home/rohan/ros_ws/install/lib 
+Cflags: -I/home/robot/ros_ws/install/include
+Libs: -L/home/robot/ros_ws/install/lib 
 Requires: message_runtime

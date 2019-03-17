@@ -24,6 +24,7 @@ class ThrowToRequest {
       this.throw_b = null;
       this.max_v = null;
       this.shoulder_release = null;
+      this.angle = null;
     }
     else {
       if (initObj.hasOwnProperty('throw_b')) {
@@ -44,6 +45,12 @@ class ThrowToRequest {
       else {
         this.shoulder_release = 0.0;
       }
+      if (initObj.hasOwnProperty('angle')) {
+        this.angle = initObj.angle
+      }
+      else {
+        this.angle = 0.0;
+      }
     }
   }
 
@@ -55,6 +62,8 @@ class ThrowToRequest {
     bufferOffset = _serializer.float64(obj.max_v, buffer, bufferOffset);
     // Serialize message field [shoulder_release]
     bufferOffset = _serializer.float64(obj.shoulder_release, buffer, bufferOffset);
+    // Serialize message field [angle]
+    bufferOffset = _serializer.float64(obj.angle, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -68,11 +77,13 @@ class ThrowToRequest {
     data.max_v = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [shoulder_release]
     data.shoulder_release = _deserializer.float64(buffer, bufferOffset);
+    // Deserialize message field [angle]
+    data.angle = _deserializer.float64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 17;
+    return 25;
   }
 
   static datatype() {
@@ -82,7 +93,7 @@ class ThrowToRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '9daa3841bbe29d3ba1587d5af820e1aa';
+    return '402b62759e0bcb3334bcc3da42a3ecd9';
   }
 
   static messageDefinition() {
@@ -94,6 +105,7 @@ class ThrowToRequest {
     bool     throw_b
     float64  max_v
     float64  shoulder_release
+    float64  angle
     
     `;
   }
@@ -123,6 +135,13 @@ class ThrowToRequest {
     }
     else {
       resolved.shoulder_release = 0.0
+    }
+
+    if (msg.angle !== undefined) {
+      resolved.angle = msg.angle;
+    }
+    else {
+      resolved.angle = 0.0
     }
 
     return resolved;
@@ -205,6 +224,6 @@ class ThrowToResponse {
 module.exports = {
   Request: ThrowToRequest,
   Response: ThrowToResponse,
-  md5sum() { return '3ada36ddbca49a75913be34d13f65529'; },
+  md5sum() { return '7a5dee11bcdbd664d3ebfe6ff4c1db9f'; },
   datatype() { return 'moveto/ThrowTo'; }
 };

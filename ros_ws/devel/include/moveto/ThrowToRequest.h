@@ -26,12 +26,14 @@ struct ThrowToRequest_
   ThrowToRequest_()
     : throw_b(false)
     , max_v(0.0)
-    , shoulder_release(0.0)  {
+    , shoulder_release(0.0)
+    , angle(0.0)  {
     }
   ThrowToRequest_(const ContainerAllocator& _alloc)
     : throw_b(false)
     , max_v(0.0)
-    , shoulder_release(0.0)  {
+    , shoulder_release(0.0)
+    , angle(0.0)  {
   (void)_alloc;
     }
 
@@ -45,6 +47,9 @@ struct ThrowToRequest_
 
    typedef double _shoulder_release_type;
   _shoulder_release_type shoulder_release;
+
+   typedef double _angle_type;
+  _angle_type angle;
 
 
 
@@ -81,7 +86,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'moveto': ['/home/rohan/ros_ws/src/moveto/msg']}
+// {'moveto': ['/home/robot/ros_ws/src/moveto/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -124,12 +129,12 @@ struct MD5Sum< ::moveto::ThrowToRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "9daa3841bbe29d3ba1587d5af820e1aa";
+    return "402b62759e0bcb3334bcc3da42a3ecd9";
   }
 
   static const char* value(const ::moveto::ThrowToRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x9daa3841bbe29d3bULL;
-  static const uint64_t static_value2 = 0xa1587d5af820e1aaULL;
+  static const uint64_t static_value1 = 0x402b62759e0bcb33ULL;
+  static const uint64_t static_value2 = 0x34bcc3da42a3ecd9ULL;
 };
 
 template<class ContainerAllocator>
@@ -154,6 +159,7 @@ struct Definition< ::moveto::ThrowToRequest_<ContainerAllocator> >
 bool     throw_b\n\
 float64  max_v\n\
 float64  shoulder_release\n\
+float64  angle\n\
 ";
   }
 
@@ -175,6 +181,7 @@ namespace serialization
       stream.next(m.throw_b);
       stream.next(m.max_v);
       stream.next(m.shoulder_release);
+      stream.next(m.angle);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -199,6 +206,8 @@ struct Printer< ::moveto::ThrowToRequest_<ContainerAllocator> >
     Printer<double>::stream(s, indent + "  ", v.max_v);
     s << indent << "shoulder_release: ";
     Printer<double>::stream(s, indent + "  ", v.shoulder_release);
+    s << indent << "angle: ";
+    Printer<double>::stream(s, indent + "  ", v.angle);
   }
 };
 

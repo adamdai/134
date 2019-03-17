@@ -1,12 +1,12 @@
 
 "use strict";
 
-let Point = require('./Point.js');
-let Tip = require('./Tip.js');
 let Joints = require('./Joints.js');
+let Tip = require('./Tip.js');
+let Point = require('./Point.js');
 
 module.exports = {
-  Point: Point,
-  Tip: Tip,
   Joints: Joints,
+  Tip: Tip,
+  Point: Point,
 };

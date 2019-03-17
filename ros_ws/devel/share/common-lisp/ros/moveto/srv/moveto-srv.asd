@@ -5,6 +5,8 @@
   :depends-on (:roslisp-msg-protocol :roslisp-utils :moveto-msg
 )
   :components ((:file "_package")
+    (:file "Grab" :depends-on ("_package_Grab"))
+    (:file "_package_Grab" :depends-on ("_package"))
     (:file "IKin" :depends-on ("_package_IKin"))
     (:file "_package_IKin" :depends-on ("_package"))
     (:file "IsMoving" :depends-on ("_package_IsMoving"))

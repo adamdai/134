@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/myrobot_node.dir/src/myrobot_node.cpp.o"
-  "/home/rohan/ros_ws/devel/lib/myrobot/myrobot_node.pdb"
-  "/home/rohan/ros_ws/devel/lib/myrobot/myrobot_node"
+  "/home/robot/ros_ws/devel/lib/myrobot/myrobot_node.pdb"
+  "/home/robot/ros_ws/devel/lib/myrobot/myrobot_node"
 )
 
 # Per-language clean rules from dependency scanning.

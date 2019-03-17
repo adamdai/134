@@ -14,6 +14,7 @@
 #include "moveto/MoveJoints.h"
 #include "moveto/MoveTip.h"
 #include "moveto/ThrowTo.h"
+#include "moveto/IsMoving.h"
 #include "sensor_msgs/JointState.h"
 #include "hebiros/EntryListSrv.h"
 #include "hebiros/AddGroupFromNamesSrv.h"
@@ -28,7 +29,7 @@ using namespace hebiros;
 #define THROW_MAX  (2.0)
 #define THROW_MIN  (1.0)
 #define WINDUP    (0.5)    // distance from gripper to base for winding up for the throw
-#define GRIPPOS (-0.4)
+#define GRIPPOS (-0.45)
 #define SPEED_MULT (2.75)
 #define  MAX_ANGLE (0.4)
 
@@ -45,6 +46,7 @@ static ros::ServiceClient  *ikinClientPtr;
 
 // Time and current position/velocity commands.
 static double  t;
+static ros::Time tfinal;
 static double  q[5];
 static double  qdot[5];
 
@@ -92,6 +94,9 @@ double loadmove(double qfinal[5])
 
   // Set the time, so the move starts t<0 and ends t=0.
   t = -tmove;
+  tfinal = ros::Time::now() + ros::Duration(tmove);
+
+  return tmove;
 }
 
 
@@ -113,13 +118,20 @@ void feedbackCallback(sensor_msgs::JointState data)
 bool movetipCallback(moveto::MoveTip::Request  &req,
 		     moveto::MoveTip::Response &res)
 {
+  ROS_INFO("moving tip to [%f, %f, %f]", req.tip.x, req.tip.y, req.tip.z);
+
   // Call the inverse kinematics.
   moveto::IKin iKinSrv;
   iKinSrv.request.tip.x     = req.tip.x;
   iKinSrv.request.tip.y     = req.tip.y;
   iKinSrv.request.tip.z     = req.tip.z;
   iKinSrv.request.tip.grip  = req.tip.grip;
-  ikinClientPtr->call(iKinSrv);
+
+  if(!ikinClientPtr->call(iKinSrv))
+  {
+    ROS_INFO("ikin call unsuccessful");
+    return false;
+  }
 
   // Move to the joints.
   res.movetime = loadmove(&iKinSrv.response.joints.joint[0]);
@@ -134,8 +146,22 @@ bool movetipCallback(moveto::MoveTip::Request  &req,
 bool movejointsCallback(moveto::MoveJoints::Request  &req,
 			moveto::MoveJoints::Response &res)
 {
+  // ROS_INFO("moving joints to [%f, %f, %f]", req.tip.x, req.tip.y, req.tip.z);
+
   // Move to the joints.
   res.movetime = loadmove(&req.joints.joint[0]);
+
+  return true;
+}
+
+/*
+**   Move Joints Callback
+*/
+bool ismovingCallback(moveto::IsMoving::Request  &req,
+			moveto::IsMoving::Response &res)
+{
+  // Move to the joints.
+  res.moving = (t < 0);
 
   return true;
 }
@@ -146,6 +172,8 @@ bool movejointsCallback(moveto::MoveJoints::Request  &req,
 bool throwtoCallback(moveto::ThrowTo::Request  &req,
 			moveto::ThrowTo::Response &res)
 {
+  ROS_INFO("starting throw");
+
   bool valid_throw = true;
 
   throwing = req.throw_b;
@@ -192,11 +220,15 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
   else
     t = -5; // fixed windup time.
 
+  tfinal = ros::Time::now() + ros::Duration(-t);
+
   if (throwing)
     return valid_throw;
   else
     return true;
 }
+
+
 
 // Return the velocity of the trapezoid profile.
 double trapezoid_motion(double max_speed, double limit, double throwing_time) {
@@ -294,6 +326,7 @@ int main(int argc, char **argv)
 
   std::vector<std::string> actuators = {"Team2/base", "Team2/x8-9 shoulder", "Team2/x8-3 elbow", "Team2/gripper"};
 
+  // Init actuator settings / gains
   CommandMsg full_command_msg;
 
   full_command_msg.name = actuators;
@@ -304,16 +337,20 @@ int main(int argc, char **argv)
 
   full_command_msg.settings.position_gains.name = actuators;
 
-  full_command_msg.settings.position_gains.kp = {60.0, 15.0, 20.0, 70.0};
+  full_command_msg.settings.position_gains.kp = {60.0, 60.0, 30.0, 70.0};
   full_command_msg.settings.position_gains.kd = {0.0, 0.0, 0.0, 0.0};
   full_command_msg.settings.position_gains.ki = {0.0, 0.0, 0.0, 0.0};
 
+  full_command_msg.settings.position_gains.target_lowpass = {0.01, 0.01, 0.01, 1};
 
   full_command_msg.settings.velocity_gains.name = actuators;
 
-  full_command_msg.settings.velocity_gains.kp = {0.25, 0.1, 0.1, 0.1};
+  full_command_msg.settings.velocity_gains.kp = {0.6, 0.4, 0.1, 0.1};
   full_command_msg.settings.velocity_gains.kd = {0.0, 0.0, 0.0, 0.0};
   full_command_msg.settings.velocity_gains.ki = {0.0, 0.0, 0.0, 0.0};
+
+  full_command_msg.settings.velocity_gains.target_lowpass = {0.01, 0.01, 0.01, 1};
+  full_command_msg.settings.velocity_gains.output_lowpass = {0.03, 0.06, 0.06, 0.75};
 
 
   SendCommandWithAcknowledgementSrv send_command_srv;
@@ -337,6 +374,7 @@ int main(int argc, char **argv)
 
   // Initialize the global variables before setting up the services.
   t = 0.0;
+  tfinal = ros::Time::now();
   for (i = 0 ; i < 5 ; i++)
   {
     q[i]    = 0.0;
@@ -344,8 +382,6 @@ int main(int argc, char **argv)
 
     a[i] = b[i] = c[i] = d[i] = 0.0;
   }
-  q[1] = 0.9;
-  q[2] = 1.75;
 
 
   // Create a client to the IKin service.
@@ -361,6 +397,10 @@ int main(int argc, char **argv)
   // Make throwing server
   ros::ServiceServer throwServer =
     nh.advertiseService("/throw", throwtoCallback);
+
+  // Is moving feedback
+  ros::ServiceServer ismovingServer =
+    nh.advertiseService("/ismoving", ismovingCallback);
 
   // Create a subscriber to receive feedback from the actuator group.
   ros::Subscriber feedback_subscriber = nh.subscribe("/hebiros/"+group_name+"/feedback/joint_state", 100, feedbackCallback);
@@ -393,6 +433,16 @@ int main(int argc, char **argv)
     std::cout << "waiting for valid feedback \n";
   }
 
+  // Now reinitialize params to match current position
+  for (i = 0 ; i < 5 ; i++)
+  {
+    q[i]    = feedback.position[i];
+    qdot[i] = 0.0;
+
+    a[i] = feedback.position[i];
+    b[i] = c[i] = d[i] = 0.0;
+  }
+
 
   // Run the servo loop until shutdown.
   double  dt = loop_rate.expectedCycleTime().toSec();
@@ -402,6 +452,7 @@ int main(int argc, char **argv)
   {
     // Advance time, but hold at t=0 to stay at the final position.
     t += dt;
+    //t = (ros::Time::now() - tfinal).toSec();
     if (t > 0.0)
       t = 0.0;
 

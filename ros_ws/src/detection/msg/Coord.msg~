@@ -1,0 +1,3 @@
+# Message definition of a coordinate
+float64 rad
+float64 pos

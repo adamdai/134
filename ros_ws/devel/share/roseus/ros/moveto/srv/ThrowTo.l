@@ -20,7 +20,7 @@
 
 (defclass moveto::ThrowToRequest
   :super ros::object
-  :slots (_throw_b _max_v _shoulder_release ))
+  :slots (_throw_b _max_v _shoulder_release _angle ))
 
 (defmethod moveto::ThrowToRequest
   (:init
@@ -28,11 +28,13 @@
     ((:throw_b __throw_b) nil)
     ((:max_v __max_v) 0.0)
     ((:shoulder_release __shoulder_release) 0.0)
+    ((:angle __angle) 0.0)
     )
    (send-super :init)
    (setq _throw_b __throw_b)
    (setq _max_v (float __max_v))
    (setq _shoulder_release (float __shoulder_release))
+   (setq _angle (float __angle))
    self)
   (:throw_b
    (&optional __throw_b)
@@ -43,6 +45,9 @@
   (:shoulder_release
    (&optional __shoulder_release)
    (if __shoulder_release (setq _shoulder_release __shoulder_release)) _shoulder_release)
+  (:angle
+   (&optional __angle)
+   (if __angle (setq _angle __angle)) _angle)
   (:serialization-length
    ()
    (+
@@ -51,6 +56,8 @@
     ;; float64 _max_v
     8
     ;; float64 _shoulder_release
+    8
+    ;; float64 _angle
     8
     ))
   (:serialize
@@ -63,6 +70,8 @@
        (sys::poke _max_v (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;; float64 _shoulder_release
        (sys::poke _shoulder_release (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
+     ;; float64 _angle
+       (sys::poke _angle (send s :buffer) (send s :count) :double) (incf (stream-count s) 8)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -73,6 +82,8 @@
      (setq _max_v (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;; float64 _shoulder_release
      (setq _shoulder_release (sys::peek buf ptr- :double)) (incf ptr- 8)
+   ;; float64 _angle
+     (setq _angle (sys::peek buf ptr- :double)) (incf ptr- 8)
    ;;
    self)
   )
@@ -118,7 +129,7 @@
   :super ros::object
   :slots ())
 
-(setf (get moveto::ThrowTo :md5sum-) "3ada36ddbca49a75913be34d13f65529")
+(setf (get moveto::ThrowTo :md5sum-) "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 (setf (get moveto::ThrowTo :datatype-) "moveto/ThrowTo")
 (setf (get moveto::ThrowTo :request) moveto::ThrowToRequest)
 (setf (get moveto::ThrowTo :response) moveto::ThrowToResponse)
@@ -126,7 +137,7 @@
 (defmethod moveto::ThrowToRequest
   (:response () (instance moveto::ThrowToResponse :init)))
 
-(setf (get moveto::ThrowToRequest :md5sum-) "3ada36ddbca49a75913be34d13f65529")
+(setf (get moveto::ThrowToRequest :md5sum-) "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 (setf (get moveto::ThrowToRequest :datatype-) "moveto/ThrowToRequest")
 (setf (get moveto::ThrowToRequest :definition-)
       "
@@ -135,13 +146,14 @@
 bool     throw_b
 float64  max_v
 float64  shoulder_release
+float64  angle
 ---
 
 float64 movetime
 
 ")
 
-(setf (get moveto::ThrowToResponse :md5sum-) "3ada36ddbca49a75913be34d13f65529")
+(setf (get moveto::ThrowToResponse :md5sum-) "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 (setf (get moveto::ThrowToResponse :datatype-) "moveto/ThrowToResponse")
 (setf (get moveto::ThrowToResponse :definition-)
       "
@@ -150,6 +162,7 @@ float64 movetime
 bool     throw_b
 float64  max_v
 float64  shoulder_release
+float64  angle
 ---
 
 float64 movetime
@@ -158,6 +171,6 @@ float64 movetime
 
 
 
-(provide :moveto/ThrowTo "3ada36ddbca49a75913be34d13f65529")
+(provide :moveto/ThrowTo "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 
 

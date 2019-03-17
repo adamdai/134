@@ -1,16 +1,18 @@
 
 "use strict";
 
-let IKin = require('./IKin.js')
-let MoveJoints = require('./MoveJoints.js')
+let Grab = require('./Grab.js')
 let MoveTip = require('./MoveTip.js')
-let IsMoving = require('./IsMoving.js')
+let IKin = require('./IKin.js')
 let ThrowTo = require('./ThrowTo.js')
+let IsMoving = require('./IsMoving.js')
+let MoveJoints = require('./MoveJoints.js')
 
 module.exports = {
-  IKin: IKin,
-  MoveJoints: MoveJoints,
+  Grab: Grab,
   MoveTip: MoveTip,
-  IsMoving: IsMoving,
+  IKin: IKin,
   ThrowTo: ThrowTo,
+  IsMoving: IsMoving,
+  MoveJoints: MoveJoints,
 };

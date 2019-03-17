@@ -1,6 +1,11 @@
 (cl:defpackage moveto-srv
   (:use )
   (:export
+   "GRAB"
+   "<GRAB-REQUEST>"
+   "GRAB-REQUEST"
+   "<GRAB-RESPONSE>"
+   "GRAB-RESPONSE"
    "IKIN"
    "<IKIN-REQUEST>"
    "IKIN-REQUEST"

@@ -21,6 +21,11 @@
     :reader shoulder_release
     :initarg :shoulder_release
     :type cl:float
+    :initform 0.0)
+   (angle
+    :reader angle
+    :initarg :angle
+    :type cl:float
     :initform 0.0))
 )
 
@@ -46,6 +51,11 @@
 (cl:defmethod shoulder_release-val ((m <ThrowTo-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader moveto-srv:shoulder_release-val is deprecated.  Use moveto-srv:shoulder_release instead.")
   (shoulder_release m))
+
+(cl:ensure-generic-function 'angle-val :lambda-list '(m))
+(cl:defmethod angle-val ((m <ThrowTo-request>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader moveto-srv:angle-val is deprecated.  Use moveto-srv:angle instead.")
+  (angle m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <ThrowTo-request>) ostream)
   "Serializes a message object of type '<ThrowTo-request>"
   (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'throw_b) 1 0)) ostream)
@@ -59,6 +69,15 @@
     (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
   (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'shoulder_release))))
+    (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 24) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 32) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 40) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 48) bits) ostream)
+    (cl:write-byte (cl:ldb (cl:byte 8 56) bits) ostream))
+  (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'angle))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 16) bits) ostream)
@@ -91,6 +110,16 @@
       (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
     (cl:setf (cl:slot-value msg 'shoulder_release) (roslisp-utils:decode-double-float-bits bits)))
+    (cl:let ((bits 0))
+      (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 16) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 24) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 32) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 40) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 48) bits) (cl:read-byte istream))
+      (cl:setf (cl:ldb (cl:byte 8 56) bits) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'angle) (roslisp-utils:decode-double-float-bits bits)))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<ThrowTo-request>)))
@@ -101,19 +130,20 @@
   "moveto/ThrowToRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ThrowTo-request>)))
   "Returns md5sum for a message object of type '<ThrowTo-request>"
-  "3ada36ddbca49a75913be34d13f65529")
+  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ThrowTo-request)))
   "Returns md5sum for a message object of type 'ThrowTo-request"
-  "3ada36ddbca49a75913be34d13f65529")
+  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ThrowTo-request>)))
   "Returns full string definition for message of type '<ThrowTo-request>"
-  (cl:format cl:nil "~%~%~%bool     throw_b~%float64  max_v~%float64  shoulder_release~%~%~%"))
+  (cl:format cl:nil "~%~%~%bool     throw_b~%float64  max_v~%float64  shoulder_release~%float64  angle~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'ThrowTo-request)))
   "Returns full string definition for message of type 'ThrowTo-request"
-  (cl:format cl:nil "~%~%~%bool     throw_b~%float64  max_v~%float64  shoulder_release~%~%~%"))
+  (cl:format cl:nil "~%~%~%bool     throw_b~%float64  max_v~%float64  shoulder_release~%float64  angle~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <ThrowTo-request>))
   (cl:+ 0
      1
+     8
      8
      8
 ))
@@ -123,6 +153,7 @@
     (cl:cons ':throw_b (throw_b msg))
     (cl:cons ':max_v (max_v msg))
     (cl:cons ':shoulder_release (shoulder_release msg))
+    (cl:cons ':angle (angle msg))
 ))
 ;//! \htmlinclude ThrowTo-response.msg.html
 
@@ -180,10 +211,10 @@
   "moveto/ThrowToResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ThrowTo-response>)))
   "Returns md5sum for a message object of type '<ThrowTo-response>"
-  "3ada36ddbca49a75913be34d13f65529")
+  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ThrowTo-response)))
   "Returns md5sum for a message object of type 'ThrowTo-response"
-  "3ada36ddbca49a75913be34d13f65529")
+  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ThrowTo-response>)))
   "Returns full string definition for message of type '<ThrowTo-response>"
   (cl:format cl:nil "~%float64 movetime~%~%~%~%"))

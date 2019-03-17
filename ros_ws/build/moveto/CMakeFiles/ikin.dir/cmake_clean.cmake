@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ikin.dir/src/ikin.cpp.o"
-  "/home/rohan/ros_ws/devel/lib/moveto/ikin.pdb"
-  "/home/rohan/ros_ws/devel/lib/moveto/ikin"
+  "/home/robot/ros_ws/devel/lib/moveto/ikin.pdb"
+  "/home/robot/ros_ws/devel/lib/moveto/ikin"
 )
 
 # Per-language clean rules from dependency scanning.

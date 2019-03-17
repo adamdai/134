@@ -30,6 +30,7 @@ add_service_files(
   MoveJoints.srv
   MoveTip.srv
   ThrowTo.srv
+  Grab.srv
 )
 
 # Note any dependencies in the messages/services.

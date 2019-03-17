@@ -1,2 +1,2 @@
-ikin:moveto:myrobot:simple
--DCATKIN_DEVEL_PREFIX=/home/rohan/ros_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rohan/ros_ws/install -G Unix Makefiles
+command:detection:ikin:moveto:myrobot:realsense/ddynamic_reconfigure:realsense/realsense2_camera:simple
+-DCATKIN_DEVEL_PREFIX=/home/robot/ros_ws/devel -DCMAKE_INSTALL_PREFIX=/home/robot/ros_ws/install -G Unix Makefiles
