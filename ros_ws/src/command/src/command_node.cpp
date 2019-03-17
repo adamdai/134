@@ -48,7 +48,7 @@ void detectionCallback(detection::CoordVec data)
       if (data.coord_vec[i].dist < target_dist)
       {
         target_dist = data.coord_vec[i].dist;
-        target_angle = data.coord_vec[i].angle;
+        target_angle = -data.coord_vec[i].angle;
       }
     }
     // std::cout << "target dist : " << target_dist << std::endl;
@@ -90,7 +90,6 @@ bool grabBall()
 {
   // Declare services
   moveto::MoveTip movetip_srv;
-  //moveto::IsMoving ismoving_srv;
 
   // Move to position above ball_x
   movetip_srv.request.tip.x = ball_x;
@@ -137,27 +136,44 @@ bool grabBall()
 
 
 /*
-**   Move arm to grab ball
+**   Windup the arm to prepare for a throw
 */
-bool throwTo()
+bool windup()
 {
-  // Declare services
-  moveto::ThrowTo throwto_srv;
-  //moveto::IsMoving ismoving_srv;
+  ROS_INFO("winding up to angle: %f", target_angle);
 
-  // Wind up arm
-  throwto_srv.request.throw_b = false;
-  throwto_srv.request.angle = 0.0;
-  throwto_client.call(throwto_srv);
+  // Declare services
+  moveto::MoveJoints movejoints_srv;
+
+  // Move to initial throwing position
+  movejoints_srv.request.joints.joint[0] = target_angle;
+  movejoints_srv.request.joints.joint[1] = 2.35;
+  movejoints_srv.request.joints.joint[2] = -1.57;
+  movejoints_srv.request.joints.joint[3] = -0.45;
+
+  movejoints_client.call(movejoints_srv);
 
   // Block until motion is complete
   waitMove();
 
-  // Wind up arm
-  throwto_srv.request.throw_b = true;
+  return true;
+}
+
+
+/*
+**   Throw the ball to target location
+*/
+bool throwTo()
+{
+  ROS_INFO("throwing to dist, angle [%f, %f]", target_dist, target_angle);
+
+  // Declare services
+  moveto::ThrowTo throwto_srv;
+
+  // Throw
   throwto_srv.request.max_v = 3.0;
   throwto_srv.request.shoulder_release = 1.85;
-  throwto_srv.request.angle = 0.0;
+  throwto_srv.request.angle = target_angle;
   throwto_client.call(throwto_srv);
 
   // Block until motion is complete
@@ -196,17 +212,21 @@ int main(int argc, char **argv)
   ROS_INFO("Running the servo loop with dt %f", dt);
   while(ros::ok())
     {
-      movejoints_srv.request.joints.joint[0] = target_angle;
-      movejoints_srv.request.joints.joint[1] = 1.3;
-      movejoints_srv.request.joints.joint[2] = 1.6;
+      // movejoints_srv.request.joints.joint[0] = target_angle;
+      // movejoints_srv.request.joints.joint[1] = 1.3;
+      // movejoints_srv.request.joints.joint[2] = 1.6;
+      //
+      // movejoints_client.call(movejoints_srv);
 
-      movejoints_client.call(movejoints_srv);
+      if (target_acquired)
+      {
+        grabBall();
+        windup();
+        throwTo();
 
-      // if (target_acquired)
-      // {
-      //   // grabBall();
-      //   // throw();
-      // }
+        // delay for a few seconds
+        usleep(2000000);
+      }
 
       // Wait for next turn.
       ros::spinOnce();

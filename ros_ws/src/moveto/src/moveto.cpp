@@ -77,20 +77,20 @@ double loadmove(double qfinal[5])
   // the absolute fastest time or pass as an argument.
   tmove = 5;
   for (i = 0 ; i < 5 ; i++)
-    {
-      tmp = 2.0 * fabs(qfinal[i] - q[i]) / qdotmax[i];
-      if (tmp > tmove)
-	tmove = tmp;
-    }
+  {
+    tmp = 2.0 * fabs(qfinal[i] - q[i]) / qdotmax[i];
+    if (tmp > tmove)
+	   tmove = tmp;
+  }
 
   // Set the cubic spline parameters.
   for (i = 0 ; i < 5 ; i++)
-    {
-      a[i] = qfinal[i];
-      b[i] = 0.0;
-      c[i] = (3.0*(q[i]-qfinal[i])/tmove + qdot[i])/tmove;
-      d[i] = (2.0*(q[i]-qfinal[i])/tmove + qdot[i])/tmove/tmove;
-    }
+  {
+    a[i] = qfinal[i];
+    b[i] = 0.0;
+    c[i] = (3.0*(q[i]-qfinal[i])/tmove + qdot[i])/tmove;
+    d[i] = (2.0*(q[i]-qfinal[i])/tmove + qdot[i])/tmove/tmove;
+  }
 
   // Set the time, so the move starts t<0 and ends t=0.
   t = -tmove;
@@ -120,6 +120,9 @@ bool movetipCallback(moveto::MoveTip::Request  &req,
 {
   ROS_INFO("moving tip to [%f, %f, %f]", req.tip.x, req.tip.y, req.tip.z);
 
+  // Disable throwing mode
+  throwing = false;
+
   // Call the inverse kinematics.
   moveto::IKin iKinSrv;
   iKinSrv.request.tip.x     = req.tip.x;
@@ -133,7 +136,7 @@ bool movetipCallback(moveto::MoveTip::Request  &req,
     return false;
   }
 
-  // Move to the joints.
+  // Move the joints to the point
   res.movetime = loadmove(&iKinSrv.response.joints.joint[0]);
 
   return true;
@@ -148,19 +151,22 @@ bool movejointsCallback(moveto::MoveJoints::Request  &req,
 {
   // ROS_INFO("moving joints to [%f, %f, %f]", req.tip.x, req.tip.y, req.tip.z);
 
-  // Move to the joints.
+  // Disable throwing mode
+  throwing = false;
+
+  // Move the joints.
   res.movetime = loadmove(&req.joints.joint[0]);
 
   return true;
 }
 
 /*
-**   Move Joints Callback
+**   Is Moving Callback
 */
 bool ismovingCallback(moveto::IsMoving::Request  &req,
 			moveto::IsMoving::Response &res)
 {
-  // Move to the joints.
+  // return moving status
   res.moving = (t < 0);
 
   return true;
@@ -173,10 +179,11 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
 			moveto::ThrowTo::Response &res)
 {
   ROS_INFO("starting throw");
+  throwing = true;
 
   bool valid_throw = true;
 
-  throwing = req.throw_b;
+  //throwing = req.throw_b;
   shoulder_release = req.shoulder_release;
   max_v = req.max_v;
   throw_angle = req.angle;
@@ -190,7 +197,7 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
   shoulder_throwtime = 3.14/shoulder_sat_speed - maxv_time;
 
   // handle error cases.
-  if(throwing && (shoulder_throwtime < maxv_time || elbow_throwtime < maxv_time)) {
+  if((shoulder_throwtime < maxv_time || elbow_throwtime < maxv_time)) {
     ROS_INFO("Invalid params : decrease speed.");
     valid_throw = false;
   }
@@ -202,30 +209,40 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
 
   throw_error = !valid_throw;
   // throwing being false means we wind up.
-  if(!throwing && valid_throw) {
-    q[0] = throw_angle;
-    q[1] = 2.35;
-    q[2] = -1.57;
-    q[3] = GRIPPOS;
-  } // Else, throw.
-  else if(throwing && valid_throw) {
+  // if(!throwing && valid_throw) {
+  //   q[0] = throw_angle;
+  //   q[1] = 2.35;
+  //   q[2] = -1.57;
+  //   q[3] = GRIPPOS;
+  // } // Else, throw.
+  // else if(throwing && valid_throw) {
+  //   q[0] = throw_angle;
+  //   q[1] = .785;
+  //   q[2] = 0;
+  //   q[3] = 0; // release grip
+  // }
+  if(valid_throw)
+  {
     q[0] = throw_angle;
     q[1] = .785;
     q[2] = 0;
     q[3] = 0; // release grip
   }
   res.movetime = loadmove(q);
-  if(throwing)
-    t = -shoulder_throwtime; // Time begins when shoulder starts moving.
-  else
-    t = -5; // fixed windup time.
+
+  t = -shoulder_throwtime; // Time begins when shoulder starts moving.
+  // if(throwing)
+  //   t = -shoulder_throwtime; // Time begins when shoulder starts moving.
+  // else
+  //   t = -5; // fixed windup time.
 
   tfinal = ros::Time::now() + ros::Duration(-t);
 
-  if (throwing)
-    return valid_throw;
-  else
-    return true;
+  return valid_throw;
+  // if (throwing)
+  //   return valid_throw;
+  // else
+  //   return true;
 }
 
 
@@ -461,48 +478,49 @@ int main(int argc, char **argv)
 
       // Use spline for all non-throwing motion.
       for (i = 0 ; i < 4 ; i++){
-	q[i]    = a[i]+t*(b[i]+t*(c[i]+t*d[i]));
-	qdot[i] = b[i]+t*(2.0*c[i]+t*3.0*d[i]);
+      	q[i]    = a[i]+t*(b[i]+t*(c[i]+t*d[i]));
+      	qdot[i] = b[i]+t*(2.0*c[i]+t*3.0*d[i]);
 
-	cmdMsg.position[i] = q[i];
-	cmdMsg.velocity[i] = qdot[i];
+      	cmdMsg.position[i] = q[i];
+      	cmdMsg.velocity[i] = qdot[i];
 
-	// std::cout << "pos: " << q[i] << "\n";
-	// std::cout << "vel: " << qdot[i] << "\n";
+      	// std::cout << "pos: " << q[i] << "\n";
+      	// std::cout << "vel: " << qdot[i] << "\n";
       }
     }
     else {
+      // use trapezoid profile for throwing motion 
       if(!throw_error) {
-	qdot[1] = trapezoid_motion(max_v, 3.14, shoulder_throwtime); // shoulder
+      	qdot[1] = trapezoid_motion(max_v, 3.14, shoulder_throwtime); // shoulder
 
-	qdot[2] = trapezoid_motion(SPEED_MULT * max_v, 8.79, elbow_throwtime); // elbow
+      	qdot[2] = trapezoid_motion(SPEED_MULT * max_v, 8.79, elbow_throwtime); // elbow
 
-	q[1] -= qdot[1] * dt;
-	q[2] += qdot[2] * dt;
+      	q[1] -= qdot[1] * dt;
+      	q[2] += qdot[2] * dt;
 
-	cmdMsg.position[0] = throw_angle;
-	cmdMsg.velocity[0] = 0;
+      	cmdMsg.position[0] = throw_angle;
+      	cmdMsg.velocity[0] = 0;
 
-	cmdMsg.position[1] = q[1];
-	cmdMsg.velocity[1] = -qdot[1];
+      	cmdMsg.position[1] = q[1];
+      	cmdMsg.velocity[1] = -qdot[1];
 
-	cmdMsg.position[2] = q[2];
-	cmdMsg.velocity[2] = qdot[2];
+      	cmdMsg.position[2] = q[2];
+      	cmdMsg.velocity[2] = qdot[2];
 
-	//float grip_cond = (5.3 - feedback.position[1] + feedback.position[2] + asin(12/16.5 * sin(2.3 - feedback.position[1])));
+      	//float grip_cond = (5.3 - feedback.position[1] + feedback.position[2] + asin(12/16.5 * sin(2.3 - feedback.position[1])));
 
-	// release after given shoulder position.
-	if(feedback.position[1] < shoulder_release) {
-	  cmdMsg.position[3] = 0.2;
-	  /*std::cout << "shoulder v : " << feedback.velocity[1] << std::endl;
-	  std::cout << "elbow v : " << feedback.velocity[2] << std::endl;
-	  std::cout << "shoulder q : " << feedback.position[1] << std::endl;
-	  std::cout << "elbow q : " << feedback.position[2] << std::endl; */
-	}
+      	// release after given shoulder position.
+      	if(feedback.position[1] < shoulder_release) {
+      	  cmdMsg.position[3] = 0.2;
+      	  /*std::cout << "shoulder v : " << feedback.velocity[1] << std::endl;
+      	  std::cout << "elbow v : " << feedback.velocity[2] << std::endl;
+      	  std::cout << "shoulder q : " << feedback.position[1] << std::endl;
+      	  std::cout << "elbow q : " << feedback.position[2] << std::endl; */
+      	}
       }
     }
-    // Publish.
 
+    // Publish.
     cmdMsg.header.stamp = ros::Time::now();
     cmdPub.publish(cmdMsg);
 

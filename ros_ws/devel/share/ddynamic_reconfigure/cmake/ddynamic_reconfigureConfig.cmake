@@ -67,14 +67,14 @@ set(ddynamic_reconfigure_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(ddynamic_reconfigure_SOURCE_PREFIX /home/robot/ros_ws/src/realsense/ddynamic_reconfigure)
-  set(ddynamic_reconfigure_DEVEL_PREFIX /home/robot/ros_ws/devel)
+  set(ddynamic_reconfigure_SOURCE_PREFIX /home/adam/ros_ws/src/realsense/ddynamic_reconfigure)
+  set(ddynamic_reconfigure_DEVEL_PREFIX /home/adam/ros_ws/devel)
   set(ddynamic_reconfigure_INSTALL_PREFIX "")
   set(ddynamic_reconfigure_PREFIX ${ddynamic_reconfigure_DEVEL_PREFIX})
 else()
   set(ddynamic_reconfigure_SOURCE_PREFIX "")
   set(ddynamic_reconfigure_DEVEL_PREFIX "")
-  set(ddynamic_reconfigure_INSTALL_PREFIX /home/robot/ros_ws/install)
+  set(ddynamic_reconfigure_INSTALL_PREFIX /home/adam/ros_ws/install)
   set(ddynamic_reconfigure_PREFIX ${ddynamic_reconfigure_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(ddynamic_reconfigure_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/robot/ros_ws/devel/include;/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/include " STREQUAL " ")
+if(NOT "/home/adam/ros_ws/devel/include;/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/include " STREQUAL " ")
   set(ddynamic_reconfigure_INCLUDE_DIRS "")
-  set(_include_dirs "/home/robot/ros_ws/devel/include;/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/include")
+  set(_include_dirs "/home/adam/ros_ws/devel/include;/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/robot/ros_ws/devel/include;/home/robot/ros_ws/src/realsense/ddynam
         message(FATAL_ERROR "Project 'ddynamic_reconfigure' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'ddynamic_reconfigure' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'ddynamic_reconfigure' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/${idir}'.  ${_report}")
     endif()
     _list_append_unique(ddynamic_reconfigure_INCLUDE_DIRS ${include})
   endforeach()
@@ -129,7 +129,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/robot/ros_ws/devel/lib;/home/robot/ros_ws/devel/lib;/home/robot/hebi_ros_ws/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/adam/ros_ws/devel/lib;/home/adam/ros_ws/devel/lib;/home/adam/hebi_ros_ws/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

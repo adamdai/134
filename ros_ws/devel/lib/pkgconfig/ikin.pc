@@ -1,8 +1,8 @@
-prefix=/home/robot/ros_ws/devel
+prefix=/home/adam/ros_ws/devel
 
 Name: ikin
 Description: Description of ikin
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/robot/ros_ws/devel/lib 
+Libs: -L/home/adam/ros_ws/devel/lib 
 Requires: 

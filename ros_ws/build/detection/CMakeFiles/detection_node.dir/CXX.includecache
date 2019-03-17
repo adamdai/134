@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/robot/ros_ws/devel/include/detection/Coord.h
+/home/adam/ros_ws/devel/include/detection/Coord.h
 string
 -
 vector
@@ -22,7 +22,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/ros_ws/devel/include/detection/CoordVec.h
+/home/adam/ros_ws/devel/include/detection/CoordVec.h
 string
 -
 vector
@@ -40,9 +40,9 @@ ros/message_operations.h
 detection/Coord.h
 -
 
-/home/robot/ros_ws/src/detection/src/detection_node.cpp
+/home/adam/ros_ws/src/detection/src/detection_node.cpp
 ros/ros.h
-/home/robot/ros_ws/src/detection/src/ros/ros.h
+/home/adam/ros_ws/src/detection/src/ros/ros.h
 image_transport/image_transport.h
 -
 cv_bridge/cv_bridge.h

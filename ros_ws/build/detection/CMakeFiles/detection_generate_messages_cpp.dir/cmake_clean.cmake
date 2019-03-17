@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/detection_generate_messages_cpp"
-  "/home/robot/ros_ws/devel/include/detection/Coord.h"
-  "/home/robot/ros_ws/devel/include/detection/CoordVec.h"
+  "/home/adam/ros_ws/devel/include/detection/CoordVec.h"
+  "/home/adam/ros_ws/devel/include/detection/Coord.h"
 )
 
 # Per-language clean rules from dependency scanning.

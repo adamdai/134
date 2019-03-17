@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ddynamic_reconfigure_generate_messages_eus"
-  "/home/robot/ros_ws/devel/share/roseus/ros/ddynamic_reconfigure/srv/TutorialParams.l"
-  "/home/robot/ros_ws/devel/share/roseus/ros/ddynamic_reconfigure/manifest.l"
+  "/home/adam/ros_ws/devel/share/roseus/ros/ddynamic_reconfigure/srv/TutorialParams.l"
+  "/home/adam/ros_ws/devel/share/roseus/ros/ddynamic_reconfigure/manifest.l"
 )
 
 # Per-language clean rules from dependency scanning.

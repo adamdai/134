@@ -1,8 +1,8 @@
-prefix=/home/robot/ros_ws/devel
+prefix=/home/adam/ros_ws/devel
 
 Name: realsense2_camera
 Description: Description of realsense2_camera
 Version: 2.2.0
-Cflags: -I/home/robot/ros_ws/devel/include
-Libs: -L/home/robot/ros_ws/devel/lib -lrealsense2_camera
+Cflags: -I/home/adam/ros_ws/devel/include
+Libs: -L/home/adam/ros_ws/devel/lib -lrealsense2_camera
 Requires: message_runtime roscpp sensor_msgs std_msgs nodelet cv_bridge image_transport ddynamic_reconfigure

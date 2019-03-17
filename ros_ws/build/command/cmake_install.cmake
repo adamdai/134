@@ -1,8 +1,8 @@
-# Install script for directory: /home/robot/ros_ws/src/command
+# Install script for directory: /home/adam/ros_ws/src/command
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/robot/ros_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/adam/ros_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/robot/ros_ws/build/command/catkin_generated/installspace/command.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/adam/ros_ws/build/command/catkin_generated/installspace/command.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/command/cmake" TYPE FILE FILES
-    "/home/robot/ros_ws/build/command/catkin_generated/installspace/commandConfig.cmake"
-    "/home/robot/ros_ws/build/command/catkin_generated/installspace/commandConfig-version.cmake"
+    "/home/adam/ros_ws/build/command/catkin_generated/installspace/commandConfig.cmake"
+    "/home/adam/ros_ws/build/command/catkin_generated/installspace/commandConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/command" TYPE FILE FILES "/home/robot/ros_ws/src/command/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/command" TYPE FILE FILES "/home/adam/ros_ws/src/command/package.xml")
 endif()
 

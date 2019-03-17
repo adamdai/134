@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/robot/ros_ws/src
+CMAKE_SOURCE_DIR = /home/adam/ros_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/robot/ros_ws/build
+CMAKE_BINARY_DIR = /home/adam/ros_ws/build
 
 # Utility rule file for detection_gencpp.
 
@@ -63,10 +63,10 @@ detection/CMakeFiles/detection_gencpp.dir/build: detection_gencpp
 .PHONY : detection/CMakeFiles/detection_gencpp.dir/build
 
 detection/CMakeFiles/detection_gencpp.dir/clean:
-	cd /home/robot/ros_ws/build/detection && $(CMAKE_COMMAND) -P CMakeFiles/detection_gencpp.dir/cmake_clean.cmake
+	cd /home/adam/ros_ws/build/detection && $(CMAKE_COMMAND) -P CMakeFiles/detection_gencpp.dir/cmake_clean.cmake
 .PHONY : detection/CMakeFiles/detection_gencpp.dir/clean
 
 detection/CMakeFiles/detection_gencpp.dir/depend:
-	cd /home/robot/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/ros_ws/src /home/robot/ros_ws/src/detection /home/robot/ros_ws/build /home/robot/ros_ws/build/detection /home/robot/ros_ws/build/detection/CMakeFiles/detection_gencpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/adam/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/adam/ros_ws/src /home/adam/ros_ws/src/detection /home/adam/ros_ws/build /home/adam/ros_ws/build/detection /home/adam/ros_ws/build/detection/CMakeFiles/detection_gencpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : detection/CMakeFiles/detection_gencpp.dir/depend
 

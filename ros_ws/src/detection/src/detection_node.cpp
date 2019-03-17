@@ -67,7 +67,6 @@ class ImageConverter {
 
 public:
   ImageConverter() : it(nh){
-
     //TODO: Make this poll less, it doesn't need to poll as much rn.
     image_sub = it.subscribe("/camera/color/image_raw", 1000, &ImageConverter::imageCallBack, this);
     image_pub = it.advertise("/cup_detector/output_video", 1000);
@@ -95,48 +94,48 @@ public:
     int x_cell_num = 0;
     for(int y_cell = 0; y_cell < 4; y_cell++)
       for(int x_cell = 0; x_cell < 2; x_cell++)
-	if(center.y > y_pix_positions[y_cell][x_cell] && center.y <= y_pix_positions[y_cell+1][x_cell]
-	   && center.x > x_pix_positions[y_cell][x_cell] && center.x <= x_pix_positions[y_cell][x_cell+1]) {
-	  //std::cout << "y cell: " << y_cell << ", x cell: " << x_cell << std::endl;
-	  // Compute real x position.
+      	if(center.y > y_pix_positions[y_cell][x_cell] && center.y <= y_pix_positions[y_cell+1][x_cell]
+      	   && center.x > x_pix_positions[y_cell][x_cell] && center.x <= x_pix_positions[y_cell][x_cell+1]) {
+      	  //std::cout << "y cell: " << y_cell << ", x cell: " << x_cell << std::endl;
+      	  // Compute real x position.
 
-	  // Need to redo this calculation my dude, there is some mess up
-	  // with the way u structureed the array.
-	  double x_l_off = (double(center.x) - x_pix_positions[y_cell][x_cell]) /
-	    (double(x_pix_positions[y_cell][x_cell+1]) - x_pix_positions[y_cell][x_cell]) *
-	     (x_real_positions[y_cell][x_cell+1] - x_real_positions[y_cell][x_cell]);
+      	  // Need to redo this calculation my dude, there is some mess up
+      	  // with the way u structureed the array.
+      	  double x_l_off = (double(center.x) - x_pix_positions[y_cell][x_cell]) /
+      	    (double(x_pix_positions[y_cell][x_cell+1]) - x_pix_positions[y_cell][x_cell]) *
+      	     (x_real_positions[y_cell][x_cell+1] - x_real_positions[y_cell][x_cell]);
 
-	  double x_l_off2 = (double(center.x) - x_pix_positions[y_cell+1][x_cell]) /
-	    (double(x_pix_positions[y_cell+1][x_cell+1]) - x_pix_positions[y_cell+1][x_cell]) *
-	     (x_real_positions[y_cell+1][x_cell+1] - x_real_positions[y_cell+1][x_cell]);
+      	  double x_l_off2 = (double(center.x) - x_pix_positions[y_cell+1][x_cell]) /
+      	    (double(x_pix_positions[y_cell+1][x_cell+1]) - x_pix_positions[y_cell+1][x_cell]) *
+      	     (x_real_positions[y_cell+1][x_cell+1] - x_real_positions[y_cell+1][x_cell]);
 
-	  double x_off = (x_l_off + x_l_off2) / 2;
+      	  double x_off = (x_l_off + x_l_off2) / 2;
 
-	  double y_t_off = (double(center.y) - y_pix_positions[y_cell][x_cell]) /
-	    (double(y_pix_positions[y_cell+1][x_cell]) - y_pix_positions[y_cell][x_cell]) *
-	    (y_real_positions[y_cell+1][x_cell] - y_real_positions[y_cell][x_cell]);
+      	  double y_t_off = (double(center.y) - y_pix_positions[y_cell][x_cell]) /
+      	    (double(y_pix_positions[y_cell+1][x_cell]) - y_pix_positions[y_cell][x_cell]) *
+      	    (y_real_positions[y_cell+1][x_cell] - y_real_positions[y_cell][x_cell]);
 
-	  double y_t_off2 = (double(center.y) - y_pix_positions[y_cell][x_cell+1]) /
-	    (double(y_pix_positions[y_cell+1][x_cell+1]) - y_pix_positions[y_cell][x_cell+1]) *
-	     (y_real_positions[y_cell+1][x_cell+1] - y_real_positions[y_cell][x_cell+1]);
+      	  double y_t_off2 = (double(center.y) - y_pix_positions[y_cell][x_cell+1]) /
+      	    (double(y_pix_positions[y_cell+1][x_cell+1]) - y_pix_positions[y_cell][x_cell+1]) *
+      	     (y_real_positions[y_cell+1][x_cell+1] - y_real_positions[y_cell][x_cell+1]);
 
-	  double y_off = (y_t_off + y_t_off2) / 2;
-	  double y_pos = y_real_positions[y_cell][x_cell] + y_off;
-	  double x_pos = x_real_positions[y_cell][x_cell] + x_off;
+      	  double y_off = (y_t_off + y_t_off2) / 2;
+      	  double y_pos = y_real_positions[y_cell][x_cell] + y_off;
+      	  double x_pos = x_real_positions[y_cell][x_cell] + x_off;
 
-	  //std::cout << "pix x : " << center.x << " pix y : " << center.y << " x off: " << x_off << std::endl;
-	  /*std::cout << "x cell : " << x_cell << " y cell" << y_cell << std::endl;
-	  std::cout << "offset from top pair :" << x_l_off << " offset from bottom pair: " << x_l_off2 << std::endl;
-	  std::cout << "computed x : " << x_real_positions[y_cell][x_cell] + x_off << std::endl;
-	  std::cout << "computed y : " << y_real_positions[y_cell][x_cell] + y_off << std::endl;
-	  std::cout << "\n\n"; */
+      	  //std::cout << "pix x : " << center.x << " pix y : " << center.y << " x off: " << x_off << std::endl;
+      	  /*std::cout << "x cell : " << x_cell << " y cell" << y_cell << std::endl;
+      	  std::cout << "offset from top pair :" << x_l_off << " offset from bottom pair: " << x_l_off2 << std::endl;
+      	  std::cout << "computed x : " << x_real_positions[y_cell][x_cell] + x_off << std::endl;
+      	  std::cout << "computed y : " << y_real_positions[y_cell][x_cell] + y_off << std::endl;
+      	  std::cout << "\n\n"; */
 
-	  // compute distance and angle
-	  double dist = std::sqrt(y_pos * y_pos + x_pos * x_pos);
-	  double angle = std::atan(x_pos / y_pos);
-	  pos[0] = dist;
-	  pos[1] = angle;
-	}
+      	  // compute distance and angle
+      	  double dist = std::sqrt(y_pos * y_pos + x_pos * x_pos);
+      	  double angle = std::atan(x_pos / y_pos);
+      	  pos[0] = dist;
+      	  pos[1] = angle;
+      	}
 
     return pos;
   }
@@ -200,15 +199,15 @@ public:
       // only draw rectangle if above certain threshold
       // Mask out unless center x,y within acceptabler ange.
       if(cv::norm(boundRect[i].br() - boundRect[i].tl()) > 10) {
-	cv::Point center = .5 * (boundRect[i].br() + boundRect[i].tl());
-	// Filter by x.
-	if(center.x < right_pix_bound && center.x > left_pix_bound && center.y < bot_pix_bound && center.y > top_pix_bound) {
-	  cv::rectangle(cv_ptr->image, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0);
-	  cv::circle(cv_ptr->image, center, 8, cv::Scalar(0, 0, 256), -1, 8, 0);
+      	cv::Point center = .5 * (boundRect[i].br() + boundRect[i].tl());
+      	// Filter by x.
+        	if(center.x < right_pix_bound && center.x > left_pix_bound && center.y < bot_pix_bound && center.y > top_pix_bound) {
+        	  cv::rectangle(cv_ptr->image, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0);
+        	  cv::circle(cv_ptr->image, center, 8, cv::Scalar(0, 0, 256), -1, 8, 0);
 
-	  std::vector<double> pos = radius_converter(center);
-	  pol_coords.push_back(pos);
-	}
+        	  std::vector<double> pos = radius_converter(center);
+        	  pol_coords.push_back(pos);
+        	}
       }
 
     }
@@ -216,8 +215,8 @@ public:
     // Print out coords if desired.
     for(int i = 0; i < pol_coords.size(); i++) {
       if(pol_coords[i][0] != -1 && pol_coords[i][1] != -1) {
-	// std::cout << "Radius : " << pol_coords[i][0] << std::endl;
-	// std::cout << "Angle : " << pol_coords[i][1] << std::endl;
+      	std::cout << "Radius : " << pol_coords[i][0] << std::endl;
+      	std::cout << "Angle : " << pol_coords[i][1] << std::endl;
       }
     }
 
@@ -231,7 +230,7 @@ public:
       coord.dist = pol_coords[count][0];
       coord.angle = pol_coords[count][1];
       if(coord.angle != -1 && coord.dist != -1)
-	coordinates.coord_vec.push_back(coord);
+	       coordinates.coord_vec.push_back(coord);
     }
     posPub.publish(coordinates);
 

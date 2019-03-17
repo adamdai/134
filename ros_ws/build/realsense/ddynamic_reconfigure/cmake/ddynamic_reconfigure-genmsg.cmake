@@ -17,9 +17,9 @@ add_custom_target(ddynamic_reconfigure_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
 add_custom_target(_ddynamic_reconfigure_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ddynamic_reconfigure" "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ddynamic_reconfigure" "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" ""
 )
 
 #
@@ -31,7 +31,7 @@ add_custom_target(_ddynamic_reconfigure_generate_messages_check_deps_${_filename
 
 ### Generating Services
 _generate_srv_cpp(ddynamic_reconfigure
-  "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
+  "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ddynamic_reconfigure
@@ -49,7 +49,7 @@ add_custom_target(ddynamic_reconfigure_generate_messages_cpp
 add_dependencies(ddynamic_reconfigure_generate_messages ddynamic_reconfigure_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
 add_dependencies(ddynamic_reconfigure_generate_messages_cpp _ddynamic_reconfigure_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -64,7 +64,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ddynamic_reconfigure_generate_messa
 
 ### Generating Services
 _generate_srv_eus(ddynamic_reconfigure
-  "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
+  "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ddynamic_reconfigure
@@ -82,7 +82,7 @@ add_custom_target(ddynamic_reconfigure_generate_messages_eus
 add_dependencies(ddynamic_reconfigure_generate_messages ddynamic_reconfigure_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
 add_dependencies(ddynamic_reconfigure_generate_messages_eus _ddynamic_reconfigure_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -97,7 +97,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ddynamic_reconfigure_generate_messa
 
 ### Generating Services
 _generate_srv_lisp(ddynamic_reconfigure
-  "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
+  "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ddynamic_reconfigure
@@ -115,7 +115,7 @@ add_custom_target(ddynamic_reconfigure_generate_messages_lisp
 add_dependencies(ddynamic_reconfigure_generate_messages ddynamic_reconfigure_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
 add_dependencies(ddynamic_reconfigure_generate_messages_lisp _ddynamic_reconfigure_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -130,7 +130,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ddynamic_reconfigure_generate_messa
 
 ### Generating Services
 _generate_srv_nodejs(ddynamic_reconfigure
-  "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
+  "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ddynamic_reconfigure
@@ -148,7 +148,7 @@ add_custom_target(ddynamic_reconfigure_generate_messages_nodejs
 add_dependencies(ddynamic_reconfigure_generate_messages ddynamic_reconfigure_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
 add_dependencies(ddynamic_reconfigure_generate_messages_nodejs _ddynamic_reconfigure_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -163,7 +163,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ddynamic_reconfigure_generate_messa
 
 ### Generating Services
 _generate_srv_py(ddynamic_reconfigure
-  "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
+  "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ddynamic_reconfigure
@@ -181,7 +181,7 @@ add_custom_target(ddynamic_reconfigure_generate_messages_py
 add_dependencies(ddynamic_reconfigure_generate_messages ddynamic_reconfigure_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv" NAME_WE)
 add_dependencies(ddynamic_reconfigure_generate_messages_py _ddynamic_reconfigure_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

@@ -6,8 +6,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ddynamic_reconfigure.dir/src/param/dd_string_param.cpp.o"
   "CMakeFiles/ddynamic_reconfigure.dir/src/param/dd_enum_param.cpp.o"
   "CMakeFiles/ddynamic_reconfigure.dir/src/dd_param.cpp.o"
-  "/home/robot/ros_ws/devel/lib/libddynamic_reconfigure.pdb"
-  "/home/robot/ros_ws/devel/lib/libddynamic_reconfigure.so"
+  "/home/adam/ros_ws/devel/lib/libddynamic_reconfigure.pdb"
+  "/home/adam/ros_ws/devel/lib/libddynamic_reconfigure.so"
 )
 
 # Per-language clean rules from dependency scanning.

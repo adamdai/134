@@ -1,8 +1,8 @@
-prefix=/home/robot/ros_ws/install
+prefix=/home/adam/ros_ws/install
 
 Name: myrobot
 Description: Description of myrobot
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/robot/ros_ws/install/lib 
+Libs: -L/home/adam/ros_ws/install/lib 
 Requires: 

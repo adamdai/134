@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/dd_string-test.dir/test/dd_param/test_dd_string.cpp.o"
-  "/home/robot/ros_ws/devel/lib/ddynamic_reconfigure/dd_string-test.pdb"
-  "/home/robot/ros_ws/devel/lib/ddynamic_reconfigure/dd_string-test"
+  "/home/adam/ros_ws/devel/lib/ddynamic_reconfigure/dd_string-test.pdb"
+  "/home/adam/ros_ws/devel/lib/ddynamic_reconfigure/dd_string-test"
 )
 
 # Per-language clean rules from dependency scanning.

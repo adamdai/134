@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ddynamic_reconfigure_generate_messages_py"
-  "/home/robot/ros_ws/devel/lib/python2.7/dist-packages/ddynamic_reconfigure/srv/_TutorialParams.py"
-  "/home/robot/ros_ws/devel/lib/python2.7/dist-packages/ddynamic_reconfigure/srv/__init__.py"
+  "/home/adam/ros_ws/devel/lib/python2.7/dist-packages/ddynamic_reconfigure/srv/_TutorialParams.py"
+  "/home/adam/ros_ws/devel/lib/python2.7/dist-packages/ddynamic_reconfigure/srv/__init__.py"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrv.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrv.h
 ros/service_traits.h
 -
 hebiros/AddGroupFromNamesSrvRequest.h
@@ -14,7 +14,7 @@ hebiros/AddGroupFromNamesSrvRequest.h
 hebiros/AddGroupFromNamesSrvResponse.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrvRequest.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrvRequest.h
 string
 -
 vector
@@ -30,7 +30,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrvResponse.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/AddGroupFromNamesSrvResponse.h
 string
 -
 vector
@@ -46,7 +46,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/CommandMsg.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/CommandMsg.h
 string
 -
 vector
@@ -64,7 +64,7 @@ ros/message_operations.h
 hebiros/SettingsMsg.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/EntryListMsg.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/EntryListMsg.h
 string
 -
 vector
@@ -82,7 +82,7 @@ ros/message_operations.h
 hebiros/EntryMsg.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/EntryListSrv.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/EntryListSrv.h
 ros/service_traits.h
 -
 hebiros/EntryListSrvRequest.h
@@ -90,7 +90,7 @@ hebiros/EntryListSrvRequest.h
 hebiros/EntryListSrvResponse.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/EntryListSrvRequest.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/EntryListSrvRequest.h
 string
 -
 vector
@@ -106,7 +106,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/EntryListSrvResponse.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/EntryListSrvResponse.h
 string
 -
 vector
@@ -124,7 +124,7 @@ ros/message_operations.h
 hebiros/EntryListMsg.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/EntryMsg.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/EntryMsg.h
 string
 -
 vector
@@ -140,7 +140,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/PidGainsMsg.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/PidGainsMsg.h
 string
 -
 vector
@@ -156,7 +156,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrv.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrv.h
 ros/service_traits.h
 -
 hebiros/SendCommandWithAcknowledgementSrvRequest.h
@@ -164,7 +164,7 @@ hebiros/SendCommandWithAcknowledgementSrvRequest.h
 hebiros/SendCommandWithAcknowledgementSrvResponse.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrvRequest.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrvRequest.h
 string
 -
 vector
@@ -182,7 +182,7 @@ ros/message_operations.h
 hebiros/CommandMsg.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrvResponse.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/SendCommandWithAcknowledgementSrvResponse.h
 string
 -
 vector
@@ -198,7 +198,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/SettingsMsg.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/SettingsMsg.h
 string
 -
 vector
@@ -220,7 +220,7 @@ hebiros/PidGainsMsg.h
 hebiros/PidGainsMsg.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/SizeSrv.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/SizeSrv.h
 ros/service_traits.h
 -
 hebiros/SizeSrvRequest.h
@@ -228,7 +228,7 @@ hebiros/SizeSrvRequest.h
 hebiros/SizeSrvResponse.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/SizeSrvRequest.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/SizeSrvRequest.h
 string
 -
 vector
@@ -244,7 +244,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/hebi_ros_ws/devel/include/hebiros/SizeSrvResponse.h
+/home/adam/hebi_ros_ws/devel/include/hebiros/SizeSrvResponse.h
 string
 -
 vector
@@ -260,88 +260,32 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/robot/ros_ws/src/myrobot/src/myrobot_node.cpp
+/home/adam/ros_ws/src/myrobot/src/myrobot_node.cpp
 ros/ros.h
-/home/robot/ros_ws/src/myrobot/src/ros/ros.h
+/home/adam/ros_ws/src/myrobot/src/ros/ros.h
 std_msgs/Float64.h
-/home/robot/ros_ws/src/myrobot/src/std_msgs/Float64.h
+/home/adam/ros_ws/src/myrobot/src/std_msgs/Float64.h
 sensor_msgs/JointState.h
-/home/robot/ros_ws/src/myrobot/src/sensor_msgs/JointState.h
+/home/adam/ros_ws/src/myrobot/src/sensor_msgs/JointState.h
 hebiros/EntryListSrv.h
-/home/robot/ros_ws/src/myrobot/src/hebiros/EntryListSrv.h
+/home/adam/ros_ws/src/myrobot/src/hebiros/EntryListSrv.h
 opencv_apps/FaceArrayStamped.h
-/home/robot/ros_ws/src/myrobot/src/opencv_apps/FaceArrayStamped.h
+/home/adam/ros_ws/src/myrobot/src/opencv_apps/FaceArrayStamped.h
 hebiros/AddGroupFromNamesSrv.h
-/home/robot/ros_ws/src/myrobot/src/hebiros/AddGroupFromNamesSrv.h
+/home/adam/ros_ws/src/myrobot/src/hebiros/AddGroupFromNamesSrv.h
 hebiros/SizeSrv.h
-/home/robot/ros_ws/src/myrobot/src/hebiros/SizeSrv.h
+/home/adam/ros_ws/src/myrobot/src/hebiros/SizeSrv.h
 hebiros/SendCommandWithAcknowledgementSrv.h
-/home/robot/ros_ws/src/myrobot/src/hebiros/SendCommandWithAcknowledgementSrv.h
+/home/adam/ros_ws/src/myrobot/src/hebiros/SendCommandWithAcknowledgementSrv.h
 hebiros/CommandMsg.h
-/home/robot/ros_ws/src/myrobot/src/hebiros/CommandMsg.h
+/home/adam/ros_ws/src/myrobot/src/hebiros/CommandMsg.h
 hebiros/SettingsMsg.h
-/home/robot/ros_ws/src/myrobot/src/hebiros/SettingsMsg.h
+/home/adam/ros_ws/src/myrobot/src/hebiros/SettingsMsg.h
 hebiros/PidGainsMsg.h
-/home/robot/ros_ws/src/myrobot/src/hebiros/PidGainsMsg.h
+/home/adam/ros_ws/src/myrobot/src/hebiros/PidGainsMsg.h
 stdio.h
 -
 math.h
--
-
-/opt/ros/melodic/include/opencv_apps/Face.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-opencv_apps/Rect.h
--
-opencv_apps/Rect.h
--
-
-/opt/ros/melodic/include/opencv_apps/FaceArrayStamped.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
--
-std_msgs/Header.h
--
-opencv_apps/Face.h
--
-
-/opt/ros/melodic/include/opencv_apps/Rect.h
-string
--
-vector
--
-map
--
-ros/types.h
--
-ros/serialization.h
--
-ros/builtin_message_traits.h
--
-ros/message_operations.h
 -
 
 /opt/ros/melodic/include/ros/advertise_options.h

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/moveto.dir/src/moveto.cpp.o"
-  "/home/robot/ros_ws/devel/lib/moveto/moveto.pdb"
-  "/home/robot/ros_ws/devel/lib/moveto/moveto"
+  "/home/adam/ros_ws/devel/lib/moveto/moveto.pdb"
+  "/home/adam/ros_ws/devel/lib/moveto/moveto"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::moveto::ThrowTo > {
   static const char* value()
   {
-    return "7a5dee11bcdbd664d3ebfe6ff4c1db9f";
+    return "102e4dc19d7d8ac3d2894eae14ba256e";
   }
 
   static const char* value(const ::moveto::ThrowTo&) { return value(); }

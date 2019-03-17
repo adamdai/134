@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/robot/ros_ws/src
+CMAKE_SOURCE_DIR = /home/adam/ros_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/robot/ros_ws/build
+CMAKE_BINARY_DIR = /home/adam/ros_ws/build
 
 # Utility rule file for realsense2_camera_gencpp.
 
@@ -63,10 +63,10 @@ realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/build: reals
 .PHONY : realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/build
 
 realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/clean:
-	cd /home/robot/ros_ws/build/realsense/realsense2_camera && $(CMAKE_COMMAND) -P CMakeFiles/realsense2_camera_gencpp.dir/cmake_clean.cmake
+	cd /home/adam/ros_ws/build/realsense/realsense2_camera && $(CMAKE_COMMAND) -P CMakeFiles/realsense2_camera_gencpp.dir/cmake_clean.cmake
 .PHONY : realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/clean
 
 realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/depend:
-	cd /home/robot/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/robot/ros_ws/src /home/robot/ros_ws/src/realsense/realsense2_camera /home/robot/ros_ws/build /home/robot/ros_ws/build/realsense/realsense2_camera /home/robot/ros_ws/build/realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/adam/ros_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/adam/ros_ws/src /home/adam/ros_ws/src/realsense/realsense2_camera /home/adam/ros_ws/build /home/adam/ros_ws/build/realsense/realsense2_camera /home/adam/ros_ws/build/realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : realsense/realsense2_camera/CMakeFiles/realsense2_camera_gencpp.dir/depend
 

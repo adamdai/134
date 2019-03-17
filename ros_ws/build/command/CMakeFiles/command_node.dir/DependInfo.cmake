@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/robot/ros_ws/src/command/src/command_node.cpp" "/home/robot/ros_ws/build/command/CMakeFiles/command_node.dir/src/command_node.cpp.o"
+  "/home/adam/ros_ws/src/command/src/command_node.cpp" "/home/adam/ros_ws/build/command/CMakeFiles/command_node.dir/src/command_node.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -17,8 +17,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/robot/ros_ws/devel/include"
-  "/home/robot/hebi_ros_ws/devel/include"
+  "/home/adam/ros_ws/devel/include"
+  "/home/adam/hebi_ros_ws/devel/include"
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   )

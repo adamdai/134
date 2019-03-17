@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = ""
-services_str = "/home/robot/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
+services_str = "/home/adam/ros_ws/src/realsense/ddynamic_reconfigure/test/TutorialParams.srv"
 pkg_name = "ddynamic_reconfigure"
 dependencies_str = "std_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

@@ -24,23 +24,18 @@ struct ThrowToRequest_
   typedef ThrowToRequest_<ContainerAllocator> Type;
 
   ThrowToRequest_()
-    : throw_b(false)
-    , max_v(0.0)
+    : max_v(0.0)
     , shoulder_release(0.0)
     , angle(0.0)  {
     }
   ThrowToRequest_(const ContainerAllocator& _alloc)
-    : throw_b(false)
-    , max_v(0.0)
+    : max_v(0.0)
     , shoulder_release(0.0)
     , angle(0.0)  {
   (void)_alloc;
     }
 
 
-
-   typedef uint8_t _throw_b_type;
-  _throw_b_type throw_b;
 
    typedef double _max_v_type;
   _max_v_type max_v;
@@ -86,7 +81,7 @@ namespace message_traits
 
 
 // BOOLTRAITS {'IsFixedSize': True, 'IsMessage': True, 'HasHeader': False}
-// {'moveto': ['/home/robot/ros_ws/src/moveto/msg']}
+// {'moveto': ['/home/adam/ros_ws/src/moveto/msg']}
 
 // !!!!!!!!!!! ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_parsed_fields', 'constants', 'fields', 'full_name', 'has_header', 'header_present', 'names', 'package', 'parsed_fields', 'short_name', 'text', 'types']
 
@@ -129,12 +124,12 @@ struct MD5Sum< ::moveto::ThrowToRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "402b62759e0bcb3334bcc3da42a3ecd9";
+    return "38aaae39b3b64fbf8bdb1b8d8179dcef";
   }
 
   static const char* value(const ::moveto::ThrowToRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x402b62759e0bcb33ULL;
-  static const uint64_t static_value2 = 0x34bcc3da42a3ecd9ULL;
+  static const uint64_t static_value1 = 0x38aaae39b3b64fbfULL;
+  static const uint64_t static_value2 = 0x8bdb1b8d8179dcefULL;
 };
 
 template<class ContainerAllocator>
@@ -156,7 +151,6 @@ struct Definition< ::moveto::ThrowToRequest_<ContainerAllocator> >
     return "\n\
 \n\
 \n\
-bool     throw_b\n\
 float64  max_v\n\
 float64  shoulder_release\n\
 float64  angle\n\
@@ -178,7 +172,6 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.throw_b);
       stream.next(m.max_v);
       stream.next(m.shoulder_release);
       stream.next(m.angle);
@@ -200,8 +193,6 @@ struct Printer< ::moveto::ThrowToRequest_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::moveto::ThrowToRequest_<ContainerAllocator>& v)
   {
-    s << indent << "throw_b: ";
-    Printer<uint8_t>::stream(s, indent + "  ", v.throw_b);
     s << indent << "max_v: ";
     Printer<double>::stream(s, indent + "  ", v.max_v);
     s << indent << "shoulder_release: ";

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/dd_server.dir/test/dd_full_scale/dd_server.cpp.o"
-  "/home/robot/ros_ws/devel/lib/ddynamic_reconfigure/dd_server.pdb"
-  "/home/robot/ros_ws/devel/lib/ddynamic_reconfigure/dd_server"
+  "/home/adam/ros_ws/devel/lib/ddynamic_reconfigure/dd_server.pdb"
+  "/home/adam/ros_ws/devel/lib/ddynamic_reconfigure/dd_server"
 )
 
 # Per-language clean rules from dependency scanning.

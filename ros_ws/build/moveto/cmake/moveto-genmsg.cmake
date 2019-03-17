@@ -2,7 +2,7 @@
 
 message(STATUS "moveto: 3 messages, 6 services")
 
-set(MSG_I_FLAGS "-Imoveto:/home/robot/ros_ws/src/moveto/msg")
+set(MSG_I_FLAGS "-Imoveto:/home/adam/ros_ws/src/moveto/msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,49 +17,49 @@ add_custom_target(moveto_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/msg/Joints.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/srv/Grab.srv" ""
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/srv/Grab.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/srv/IKin.srv" "moveto/Tip:moveto/Joints"
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv" "moveto/Joints"
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/msg/Point.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv" "moveto/Tip"
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv" "moveto/Joints"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/msg/Joints.msg" ""
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/srv/IKin.srv" "moveto/Joints:moveto/Tip"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/msg/Point.msg" ""
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv" "moveto/Tip"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv" ""
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv" ""
 )
 
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
 add_custom_target(_moveto_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/robot/ros_ws/src/moveto/msg/Tip.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "moveto" "/home/adam/ros_ws/src/moveto/msg/Tip.msg" ""
 )
 
 #
@@ -69,19 +69,19 @@ add_custom_target(_moveto_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
 )
 _generate_msg_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Point.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
 )
 _generate_msg_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Point.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
@@ -89,37 +89,37 @@ _generate_msg_cpp(moveto
 
 ### Generating Services
 _generate_srv_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/Grab.srv"
+  "/home/adam/ros_ws/src/moveto/srv/Grab.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
 )
 _generate_srv_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
+  "/home/adam/ros_ws/src/moveto/srv/IKin.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg;/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
+)
+_generate_srv_cpp(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
+)
+_generate_srv_cpp(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
+)
+_generate_srv_cpp(moveto
+  "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
 )
 _generate_srv_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
-)
-_generate_srv_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IKin.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg;/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
-)
-_generate_srv_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
-)
-_generate_srv_cpp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv"
+  "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/moveto
@@ -137,23 +137,23 @@ add_custom_target(moveto_generate_messages_cpp
 add_dependencies(moveto_generate_messages moveto_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_cpp _moveto_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -166,19 +166,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS moveto_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
 )
 _generate_msg_eus(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Point.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
 )
 _generate_msg_eus(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Point.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
@@ -186,37 +186,37 @@ _generate_msg_eus(moveto
 
 ### Generating Services
 _generate_srv_eus(moveto
-  "/home/robot/ros_ws/src/moveto/srv/Grab.srv"
+  "/home/adam/ros_ws/src/moveto/srv/Grab.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
 )
 _generate_srv_eus(moveto
-  "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
+  "/home/adam/ros_ws/src/moveto/srv/IKin.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg;/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
+)
+_generate_srv_eus(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
+)
+_generate_srv_eus(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
+)
+_generate_srv_eus(moveto
+  "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
 )
 _generate_srv_eus(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
-  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
-)
-_generate_srv_eus(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IKin.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg;/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
-)
-_generate_srv_eus(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
-)
-_generate_srv_eus(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv"
+  "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/moveto
@@ -234,23 +234,23 @@ add_custom_target(moveto_generate_messages_eus
 add_dependencies(moveto_generate_messages moveto_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_eus _moveto_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -263,19 +263,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS moveto_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
 )
 _generate_msg_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Point.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
 )
 _generate_msg_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Point.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
@@ -283,37 +283,37 @@ _generate_msg_lisp(moveto
 
 ### Generating Services
 _generate_srv_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/Grab.srv"
+  "/home/adam/ros_ws/src/moveto/srv/Grab.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
 )
 _generate_srv_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
+  "/home/adam/ros_ws/src/moveto/srv/IKin.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg;/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
+)
+_generate_srv_lisp(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
+)
+_generate_srv_lisp(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
+)
+_generate_srv_lisp(moveto
+  "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
 )
 _generate_srv_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
-)
-_generate_srv_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IKin.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg;/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
-)
-_generate_srv_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
-)
-_generate_srv_lisp(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv"
+  "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/moveto
@@ -331,23 +331,23 @@ add_custom_target(moveto_generate_messages_lisp
 add_dependencies(moveto_generate_messages moveto_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_lisp _moveto_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -360,19 +360,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS moveto_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
 )
 _generate_msg_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Point.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
 )
 _generate_msg_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Point.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
@@ -380,37 +380,37 @@ _generate_msg_nodejs(moveto
 
 ### Generating Services
 _generate_srv_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/srv/Grab.srv"
+  "/home/adam/ros_ws/src/moveto/srv/Grab.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
 )
 _generate_srv_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
+  "/home/adam/ros_ws/src/moveto/srv/IKin.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg;/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
+)
+_generate_srv_nodejs(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
+)
+_generate_srv_nodejs(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
+)
+_generate_srv_nodejs(moveto
+  "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
 )
 _generate_srv_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
-)
-_generate_srv_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IKin.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg;/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
-)
-_generate_srv_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
-)
-_generate_srv_nodejs(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv"
+  "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/moveto
@@ -428,23 +428,23 @@ add_custom_target(moveto_generate_messages_nodejs
 add_dependencies(moveto_generate_messages moveto_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_nodejs _moveto_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -457,19 +457,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS moveto_generate_messages_nodejs)
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
 )
 _generate_msg_py(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Point.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
 )
 _generate_msg_py(moveto
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
+  "/home/adam/ros_ws/src/moveto/msg/Point.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
@@ -477,37 +477,37 @@ _generate_msg_py(moveto
 
 ### Generating Services
 _generate_srv_py(moveto
-  "/home/robot/ros_ws/src/moveto/srv/Grab.srv"
+  "/home/adam/ros_ws/src/moveto/srv/Grab.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
 )
 _generate_srv_py(moveto
-  "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
+  "/home/adam/ros_ws/src/moveto/srv/IKin.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg;/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
+)
+_generate_srv_py(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
+)
+_generate_srv_py(moveto
+  "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv"
+  "${MSG_I_FLAGS}"
+  "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
+)
+_generate_srv_py(moveto
+  "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
 )
 _generate_srv_py(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
-)
-_generate_srv_py(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IKin.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Joints.msg;/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
-)
-_generate_srv_py(moveto
-  "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
-  "${MSG_I_FLAGS}"
-  "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
-)
-_generate_srv_py(moveto
-  "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv"
+  "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/moveto
@@ -525,23 +525,23 @@ add_custom_target(moveto_generate_messages_py
 add_dependencies(moveto_generate_messages moveto_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/Grab.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Joints.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IKin.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Point.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/robot/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
+get_filename_component(_filename "/home/adam/ros_ws/src/moveto/msg/Tip.msg" NAME_WE)
 add_dependencies(moveto_generate_messages_py _moveto_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

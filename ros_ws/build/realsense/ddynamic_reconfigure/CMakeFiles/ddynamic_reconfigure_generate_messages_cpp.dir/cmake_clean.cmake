@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ddynamic_reconfigure_generate_messages_cpp"
-  "/home/robot/ros_ws/devel/include/ddynamic_reconfigure/TutorialParams.h"
+  "/home/adam/ros_ws/devel/include/ddynamic_reconfigure/TutorialParams.h"
 )
 
 # Per-language clean rules from dependency scanning.

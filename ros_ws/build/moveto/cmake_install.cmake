@@ -1,8 +1,8 @@
-# Install script for directory: /home/robot/ros_ws/src/moveto
+# Install script for directory: /home/adam/ros_ws/src/moveto
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/robot/ros_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/adam/ros_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -39,67 +39,67 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/msg" TYPE FILE FILES
-    "/home/robot/ros_ws/src/moveto/msg/Joints.msg"
-    "/home/robot/ros_ws/src/moveto/msg/Tip.msg"
-    "/home/robot/ros_ws/src/moveto/msg/Point.msg"
+    "/home/adam/ros_ws/src/moveto/msg/Joints.msg"
+    "/home/adam/ros_ws/src/moveto/msg/Tip.msg"
+    "/home/adam/ros_ws/src/moveto/msg/Point.msg"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/srv" TYPE FILE FILES
-    "/home/robot/ros_ws/src/moveto/srv/IKin.srv"
-    "/home/robot/ros_ws/src/moveto/srv/IsMoving.srv"
-    "/home/robot/ros_ws/src/moveto/srv/MoveJoints.srv"
-    "/home/robot/ros_ws/src/moveto/srv/MoveTip.srv"
-    "/home/robot/ros_ws/src/moveto/srv/ThrowTo.srv"
-    "/home/robot/ros_ws/src/moveto/srv/Grab.srv"
+    "/home/adam/ros_ws/src/moveto/srv/IKin.srv"
+    "/home/adam/ros_ws/src/moveto/srv/IsMoving.srv"
+    "/home/adam/ros_ws/src/moveto/srv/MoveJoints.srv"
+    "/home/adam/ros_ws/src/moveto/srv/MoveTip.srv"
+    "/home/adam/ros_ws/src/moveto/srv/ThrowTo.srv"
+    "/home/adam/ros_ws/src/moveto/srv/Grab.srv"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/cmake" TYPE FILE FILES "/home/robot/ros_ws/build/moveto/catkin_generated/installspace/moveto-msg-paths.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/cmake" TYPE FILE FILES "/home/adam/ros_ws/build/moveto/catkin_generated/installspace/moveto-msg-paths.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/robot/ros_ws/devel/include/moveto")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/adam/ros_ws/devel/include/moveto")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/robot/ros_ws/devel/share/roseus/ros/moveto")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/roseus/ros" TYPE DIRECTORY FILES "/home/adam/ros_ws/devel/share/roseus/ros/moveto")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/robot/ros_ws/devel/share/common-lisp/ros/moveto")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/common-lisp/ros" TYPE DIRECTORY FILES "/home/adam/ros_ws/devel/share/common-lisp/ros/moveto")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/robot/ros_ws/devel/share/gennodejs/ros/moveto")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/gennodejs/ros" TYPE DIRECTORY FILES "/home/adam/ros_ws/devel/share/gennodejs/ros/moveto")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/robot/ros_ws/devel/lib/python2.7/dist-packages/moveto")
+  execute_process(COMMAND "/usr/bin/python2" -m compileall "/home/adam/ros_ws/devel/lib/python2.7/dist-packages/moveto")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/robot/ros_ws/devel/lib/python2.7/dist-packages/moveto")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/python2.7/dist-packages" TYPE DIRECTORY FILES "/home/adam/ros_ws/devel/lib/python2.7/dist-packages/moveto")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/robot/ros_ws/build/moveto/catkin_generated/installspace/moveto.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/adam/ros_ws/build/moveto/catkin_generated/installspace/moveto.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/cmake" TYPE FILE FILES "/home/robot/ros_ws/build/moveto/catkin_generated/installspace/moveto-msg-extras.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/cmake" TYPE FILE FILES "/home/adam/ros_ws/build/moveto/catkin_generated/installspace/moveto-msg-extras.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto/cmake" TYPE FILE FILES
-    "/home/robot/ros_ws/build/moveto/catkin_generated/installspace/movetoConfig.cmake"
-    "/home/robot/ros_ws/build/moveto/catkin_generated/installspace/movetoConfig-version.cmake"
+    "/home/adam/ros_ws/build/moveto/catkin_generated/installspace/movetoConfig.cmake"
+    "/home/adam/ros_ws/build/moveto/catkin_generated/installspace/movetoConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto" TYPE FILE FILES "/home/robot/ros_ws/src/moveto/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/moveto" TYPE FILE FILES "/home/adam/ros_ws/src/moveto/package.xml")
 endif()
 

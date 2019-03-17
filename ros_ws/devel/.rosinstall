@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/robot/ros_ws/devel/setup.sh
+    local-name: /home/adam/ros_ws/devel/setup.sh

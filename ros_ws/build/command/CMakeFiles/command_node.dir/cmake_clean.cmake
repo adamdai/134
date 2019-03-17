@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/command_node.dir/src/command_node.cpp.o"
-  "/home/robot/ros_ws/devel/lib/command/command_node.pdb"
-  "/home/robot/ros_ws/devel/lib/command/command_node"
+  "/home/adam/ros_ws/devel/lib/command/command_node.pdb"
+  "/home/adam/ros_ws/devel/lib/command/command_node"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -21,18 +21,11 @@ class ThrowToRequest {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.throw_b = null;
       this.max_v = null;
       this.shoulder_release = null;
       this.angle = null;
     }
     else {
-      if (initObj.hasOwnProperty('throw_b')) {
-        this.throw_b = initObj.throw_b
-      }
-      else {
-        this.throw_b = false;
-      }
       if (initObj.hasOwnProperty('max_v')) {
         this.max_v = initObj.max_v
       }
@@ -56,8 +49,6 @@ class ThrowToRequest {
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type ThrowToRequest
-    // Serialize message field [throw_b]
-    bufferOffset = _serializer.bool(obj.throw_b, buffer, bufferOffset);
     // Serialize message field [max_v]
     bufferOffset = _serializer.float64(obj.max_v, buffer, bufferOffset);
     // Serialize message field [shoulder_release]
@@ -71,8 +62,6 @@ class ThrowToRequest {
     //deserializes a message object of type ThrowToRequest
     let len;
     let data = new ThrowToRequest(null);
-    // Deserialize message field [throw_b]
-    data.throw_b = _deserializer.bool(buffer, bufferOffset);
     // Deserialize message field [max_v]
     data.max_v = _deserializer.float64(buffer, bufferOffset);
     // Deserialize message field [shoulder_release]
@@ -83,7 +72,7 @@ class ThrowToRequest {
   }
 
   static getMessageSize(object) {
-    return 25;
+    return 24;
   }
 
   static datatype() {
@@ -93,7 +82,7 @@ class ThrowToRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '402b62759e0bcb3334bcc3da42a3ecd9';
+    return '38aaae39b3b64fbf8bdb1b8d8179dcef';
   }
 
   static messageDefinition() {
@@ -102,7 +91,6 @@ class ThrowToRequest {
     
     
     
-    bool     throw_b
     float64  max_v
     float64  shoulder_release
     float64  angle
@@ -116,13 +104,6 @@ class ThrowToRequest {
       msg = {};
     }
     const resolved = new ThrowToRequest(null);
-    if (msg.throw_b !== undefined) {
-      resolved.throw_b = msg.throw_b;
-    }
-    else {
-      resolved.throw_b = false
-    }
-
     if (msg.max_v !== undefined) {
       resolved.max_v = msg.max_v;
     }
@@ -224,6 +205,6 @@ class ThrowToResponse {
 module.exports = {
   Request: ThrowToRequest,
   Response: ThrowToResponse,
-  md5sum() { return '7a5dee11bcdbd664d3ebfe6ff4c1db9f'; },
+  md5sum() { return '102e4dc19d7d8ac3d2894eae14ba256e'; },
   datatype() { return 'moveto/ThrowTo'; }
 };

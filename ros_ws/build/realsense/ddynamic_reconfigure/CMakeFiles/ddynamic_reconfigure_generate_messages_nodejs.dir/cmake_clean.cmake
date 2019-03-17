@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ddynamic_reconfigure_generate_messages_nodejs"
-  "/home/robot/ros_ws/devel/share/gennodejs/ros/ddynamic_reconfigure/srv/TutorialParams.js"
+  "/home/adam/ros_ws/devel/share/gennodejs/ros/ddynamic_reconfigure/srv/TutorialParams.js"
 )
 
 # Per-language clean rules from dependency scanning.

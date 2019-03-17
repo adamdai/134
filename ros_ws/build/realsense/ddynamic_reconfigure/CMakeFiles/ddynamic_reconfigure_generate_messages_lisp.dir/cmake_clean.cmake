@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ddynamic_reconfigure_generate_messages_lisp"
-  "/home/robot/ros_ws/devel/share/common-lisp/ros/ddynamic_reconfigure/srv/TutorialParams.lisp"
+  "/home/adam/ros_ws/devel/share/common-lisp/ros/ddynamic_reconfigure/srv/TutorialParams.lisp"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -7,12 +7,7 @@
 ;//! \htmlinclude ThrowTo-request.msg.html
 
 (cl:defclass <ThrowTo-request> (roslisp-msg-protocol:ros-message)
-  ((throw_b
-    :reader throw_b
-    :initarg :throw_b
-    :type cl:boolean
-    :initform cl:nil)
-   (max_v
+  ((max_v
     :reader max_v
     :initarg :max_v
     :type cl:float
@@ -37,11 +32,6 @@
   (cl:unless (cl:typep m 'ThrowTo-request)
     (roslisp-msg-protocol:msg-deprecation-warning "using old message class name moveto-srv:<ThrowTo-request> is deprecated: use moveto-srv:ThrowTo-request instead.")))
 
-(cl:ensure-generic-function 'throw_b-val :lambda-list '(m))
-(cl:defmethod throw_b-val ((m <ThrowTo-request>))
-  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader moveto-srv:throw_b-val is deprecated.  Use moveto-srv:throw_b instead.")
-  (throw_b m))
-
 (cl:ensure-generic-function 'max_v-val :lambda-list '(m))
 (cl:defmethod max_v-val ((m <ThrowTo-request>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader moveto-srv:max_v-val is deprecated.  Use moveto-srv:max_v instead.")
@@ -58,7 +48,6 @@
   (angle m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <ThrowTo-request>) ostream)
   "Serializes a message object of type '<ThrowTo-request>"
-  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'throw_b) 1 0)) ostream)
   (cl:let ((bits (roslisp-utils:encode-double-float-bits (cl:slot-value msg 'max_v))))
     (cl:write-byte (cl:ldb (cl:byte 8 0) bits) ostream)
     (cl:write-byte (cl:ldb (cl:byte 8 8) bits) ostream)
@@ -89,7 +78,6 @@
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <ThrowTo-request>) istream)
   "Deserializes a message object of type '<ThrowTo-request>"
-    (cl:setf (cl:slot-value msg 'throw_b) (cl:not (cl:zerop (cl:read-byte istream))))
     (cl:let ((bits 0))
       (cl:setf (cl:ldb (cl:byte 8 0) bits) (cl:read-byte istream))
       (cl:setf (cl:ldb (cl:byte 8 8) bits) (cl:read-byte istream))
@@ -130,19 +118,18 @@
   "moveto/ThrowToRequest")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ThrowTo-request>)))
   "Returns md5sum for a message object of type '<ThrowTo-request>"
-  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
+  "102e4dc19d7d8ac3d2894eae14ba256e")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ThrowTo-request)))
   "Returns md5sum for a message object of type 'ThrowTo-request"
-  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
+  "102e4dc19d7d8ac3d2894eae14ba256e")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ThrowTo-request>)))
   "Returns full string definition for message of type '<ThrowTo-request>"
-  (cl:format cl:nil "~%~%~%bool     throw_b~%float64  max_v~%float64  shoulder_release~%float64  angle~%~%~%"))
+  (cl:format cl:nil "~%~%~%float64  max_v~%float64  shoulder_release~%float64  angle~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'ThrowTo-request)))
   "Returns full string definition for message of type 'ThrowTo-request"
-  (cl:format cl:nil "~%~%~%bool     throw_b~%float64  max_v~%float64  shoulder_release~%float64  angle~%~%~%"))
+  (cl:format cl:nil "~%~%~%float64  max_v~%float64  shoulder_release~%float64  angle~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <ThrowTo-request>))
   (cl:+ 0
-     1
      8
      8
      8
@@ -150,7 +137,6 @@
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <ThrowTo-request>))
   "Converts a ROS message object to a list"
   (cl:list 'ThrowTo-request
-    (cl:cons ':throw_b (throw_b msg))
     (cl:cons ':max_v (max_v msg))
     (cl:cons ':shoulder_release (shoulder_release msg))
     (cl:cons ':angle (angle msg))
@@ -211,10 +197,10 @@
   "moveto/ThrowToResponse")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<ThrowTo-response>)))
   "Returns md5sum for a message object of type '<ThrowTo-response>"
-  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
+  "102e4dc19d7d8ac3d2894eae14ba256e")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'ThrowTo-response)))
   "Returns md5sum for a message object of type 'ThrowTo-response"
-  "7a5dee11bcdbd664d3ebfe6ff4c1db9f")
+  "102e4dc19d7d8ac3d2894eae14ba256e")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<ThrowTo-response>)))
   "Returns full string definition for message of type '<ThrowTo-response>"
   (cl:format cl:nil "~%float64 movetime~%~%~%~%"))

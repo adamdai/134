@@ -1,8 +1,8 @@
-prefix=/home/robot/ros_ws/install
+prefix=/home/adam/ros_ws/install
 
 Name: detection
 Description: Description of detection
 Version: 0.0.0
-Cflags: -I/home/robot/ros_ws/install/include
-Libs: -L/home/robot/ros_ws/install/lib 
+Cflags: -I/home/adam/ros_ws/install/include
+Libs: -L/home/adam/ros_ws/install/lib 
 Requires: message_runtime

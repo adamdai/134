@@ -1,7 +1,6 @@
 # Service to throw to a point
 #
 # Request Definition
-bool     throw_b
 float64  max_v
 float64  shoulder_release
 float64  angle
