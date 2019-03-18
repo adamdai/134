@@ -77,6 +77,7 @@ bool waitMove()
     {
       break;
     }
+    ros::spinOnce();
     usleep(20000);
   }
 
@@ -97,6 +98,8 @@ bool grabBall()
   movetip_srv.request.tip.z = ball_z + 0.1;
   movetip_srv.request.tip.grip = false;
 
+  movetip_srv.request.movetime = 5;
+
   movetip_client.call(movetip_srv);
 
   ROS_INFO("Moving over position");
@@ -110,6 +113,8 @@ bool grabBall()
   movetip_srv.request.tip.z = ball_z;
   movetip_srv.request.tip.grip = false;
 
+  movetip_srv.request.movetime = 2;
+
   movetip_client.call(movetip_srv);
 
   ROS_INFO("Moving down into grip position");
@@ -122,6 +127,8 @@ bool grabBall()
   movetip_srv.request.tip.y = ball_y;
   movetip_srv.request.tip.z = ball_z;
   movetip_srv.request.tip.grip = true;
+
+  movetip_srv.request.movetime = 2;
 
   movetip_client.call(movetip_srv);
 
@@ -159,6 +166,12 @@ bool windup()
   return true;
 }
 
+// double throwCalc(double x)
+// {
+//
+//
+// }
+
 
 /*
 **   Throw the ball to target location
@@ -170,9 +183,26 @@ bool throwTo()
   // Declare services
   moveto::ThrowTo throwto_srv;
 
+  // Calculate speed and release
+  double x = target_dist;
+  double max_v;
+  if (x < 50)
+  {
+    max_v = 0.0625 - 0.0756*x + 0.00743*x*x - 0.00015*pow(x,3) + 0.000000947*pow(x,4);
+  }
+  else
+  {
+    max_v = -6.41 + 0.4435*x - 0.00793*pow(x,2) + 0.0000488*pow(x,3);
+  }
+  //double max_v = 0.0625 - 0.0756*x + 0.00743*x*x - 0.00015*pow(x,3) + 0.000000947*pow(x,4);
+  //double max_v = 1.72 - 0.216*x + 0.0118*pow(x,2) - 0.000208*pow(x,3) + 0.00000124*pow(x,4);
+  //double max_v = -6.41 + 0.4435*x - 0.00793*pow(x,2) + 0.0000488*pow(x,3);
+  //double max_v = -92.9 + 10.2*x -0.45*pow(x,2) + 0.0105*pow(x,3) +
+  double release = 0.2*max_v + 1.3;
+
   // Throw
-  throwto_srv.request.max_v = 3.0;
-  throwto_srv.request.shoulder_release = 1.85;
+  throwto_srv.request.max_v = max_v;
+  throwto_srv.request.shoulder_release = release;
   throwto_srv.request.angle = target_angle;
   throwto_client.call(throwto_srv);
 
@@ -212,20 +242,22 @@ int main(int argc, char **argv)
   ROS_INFO("Running the servo loop with dt %f", dt);
   while(ros::ok())
     {
-      // movejoints_srv.request.joints.joint[0] = target_angle;
-      // movejoints_srv.request.joints.joint[1] = 1.3;
-      // movejoints_srv.request.joints.joint[2] = 1.6;
-      //
-      // movejoints_client.call(movejoints_srv);
 
       if (target_acquired)
       {
         grabBall();
         windup();
+
+        usleep(1000000);
+
         throwTo();
 
         // delay for a few seconds
         usleep(2000000);
+      }
+      else
+      {
+        windup();
       }
 
       // Wait for next turn.

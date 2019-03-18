@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::moveto::MoveTip > {
   static const char* value()
   {
-    return "5ebb5876bcc8be930d43a2e07942295f";
+    return "d8b70359542abe8c9014a48d2925814e";
   }
 
   static const char* value(const ::moveto::MoveTip&) { return value(); }

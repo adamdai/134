@@ -213,12 +213,12 @@ public:
     }
 
     // Print out coords if desired.
-    for(int i = 0; i < pol_coords.size(); i++) {
-      if(pol_coords[i][0] != -1 && pol_coords[i][1] != -1) {
-      	std::cout << "Radius : " << pol_coords[i][0] << std::endl;
-      	std::cout << "Angle : " << pol_coords[i][1] << std::endl;
-      }
-    }
+    // for(int i = 0; i < pol_coords.size(); i++) {
+    //   if(pol_coords[i][0] != -1 && pol_coords[i][1] != -1) {
+    //   	std::cout << "Radius : " << pol_coords[i][0] << std::endl;
+    //   	std::cout << "Angle : " << pol_coords[i][1] << std::endl;
+    //   }
+    // }
 
     //Publish image.
     image_pub.publish(cv_ptr->toImageMsg());

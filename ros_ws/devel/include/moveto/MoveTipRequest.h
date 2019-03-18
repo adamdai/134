@@ -25,10 +25,12 @@ struct MoveTipRequest_
   typedef MoveTipRequest_<ContainerAllocator> Type;
 
   MoveTipRequest_()
-    : tip()  {
+    : tip()
+    , movetime(0.0)  {
     }
   MoveTipRequest_(const ContainerAllocator& _alloc)
-    : tip(_alloc)  {
+    : tip(_alloc)
+    , movetime(0.0)  {
   (void)_alloc;
     }
 
@@ -36,6 +38,9 @@ struct MoveTipRequest_
 
    typedef  ::moveto::Tip_<ContainerAllocator>  _tip_type;
   _tip_type tip;
+
+   typedef double _movetime_type;
+  _movetime_type movetime;
 
 
 
@@ -115,12 +120,12 @@ struct MD5Sum< ::moveto::MoveTipRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "345daa59b4dd0cc9b1994a20bb0ca2a7";
+    return "1a08b6b99f95146724f64dfacea44be6";
   }
 
   static const char* value(const ::moveto::MoveTipRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x345daa59b4dd0cc9ULL;
-  static const uint64_t static_value2 = 0xb1994a20bb0ca2a7ULL;
+  static const uint64_t static_value1 = 0x1a08b6b99f951467ULL;
+  static const uint64_t static_value2 = 0x24f64dfacea44be6ULL;
 };
 
 template<class ContainerAllocator>
@@ -143,6 +148,7 @@ struct Definition< ::moveto::MoveTipRequest_<ContainerAllocator> >
 \n\
 \n\
 Tip     tip\n\
+float64 movetime\n\
 \n\
 ================================================================================\n\
 MSG: moveto/Tip\n\
@@ -172,6 +178,7 @@ namespace serialization
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
       stream.next(m.tip);
+      stream.next(m.movetime);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -193,6 +200,8 @@ struct Printer< ::moveto::MoveTipRequest_<ContainerAllocator> >
     s << indent << "tip: ";
     s << std::endl;
     Printer< ::moveto::Tip_<ContainerAllocator> >::stream(s, indent + "  ", v.tip);
+    s << indent << "movetime: ";
+    Printer<double>::stream(s, indent + "  ", v.movetime);
   }
 };
 

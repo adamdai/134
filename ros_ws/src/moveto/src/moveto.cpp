@@ -67,21 +67,21 @@ static bool throw_error;
 /*
 **   Move To Computation
 */
-double loadmove(double qfinal[5])
+double loadmove(double qfinal[5], double tmove)
 {
   int     i;
-  double  tmove;        // Total move time
+  //double  tmove;        // Total move time
   double  tmp;
 
   // Pick a move time.  Note this is approximate.  We could compute
   // the absolute fastest time or pass as an argument.
-  tmove = 5;
-  for (i = 0 ; i < 5 ; i++)
-  {
-    tmp = 2.0 * fabs(qfinal[i] - q[i]) / qdotmax[i];
-    if (tmp > tmove)
-	   tmove = tmp;
-  }
+  // tmove = 5;
+  // for (i = 0 ; i < 5 ; i++)
+  // {
+  //   tmp = 2.0 * fabs(qfinal[i] - q[i]) / qdotmax[i];
+  //   if (tmp > tmove)
+	//    tmove = tmp;
+  // }
 
   // Set the cubic spline parameters.
   for (i = 0 ; i < 5 ; i++)
@@ -137,7 +137,7 @@ bool movetipCallback(moveto::MoveTip::Request  &req,
   }
 
   // Move the joints to the point
-  res.movetime = loadmove(&iKinSrv.response.joints.joint[0]);
+  res.movetime = loadmove(&iKinSrv.response.joints.joint[0], req.movetime);
 
   return true;
 }
@@ -155,7 +155,7 @@ bool movejointsCallback(moveto::MoveJoints::Request  &req,
   throwing = false;
 
   // Move the joints.
-  res.movetime = loadmove(&req.joints.joint[0]);
+  res.movetime = loadmove(&req.joints.joint[0], 5);
 
   return true;
 }
@@ -183,7 +183,6 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
 
   bool valid_throw = true;
 
-  //throwing = req.throw_b;
   shoulder_release = req.shoulder_release;
   max_v = req.max_v;
   throw_angle = req.angle;
@@ -197,6 +196,11 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
   shoulder_throwtime = 3.14/shoulder_sat_speed - maxv_time;
 
   // handle error cases.
+  if((feedback.position[1] < 2.0) || (feedback.position[2] > -1.5)){
+    ROS_INFO("Error: arm is not in throwing position");
+    valid_throw = false;
+  }
+
   if((shoulder_throwtime < maxv_time || elbow_throwtime < maxv_time)) {
     ROS_INFO("Invalid params : decrease speed.");
     valid_throw = false;
@@ -208,19 +212,7 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
   }
 
   throw_error = !valid_throw;
-  // throwing being false means we wind up.
-  // if(!throwing && valid_throw) {
-  //   q[0] = throw_angle;
-  //   q[1] = 2.35;
-  //   q[2] = -1.57;
-  //   q[3] = GRIPPOS;
-  // } // Else, throw.
-  // else if(throwing && valid_throw) {
-  //   q[0] = throw_angle;
-  //   q[1] = .785;
-  //   q[2] = 0;
-  //   q[3] = 0; // release grip
-  // }
+
   if(valid_throw)
   {
     q[0] = throw_angle;
@@ -228,21 +220,13 @@ bool throwtoCallback(moveto::ThrowTo::Request  &req,
     q[2] = 0;
     q[3] = 0; // release grip
   }
-  res.movetime = loadmove(q);
+  //res.movetime = loadmove(q, );
 
   t = -shoulder_throwtime; // Time begins when shoulder starts moving.
-  // if(throwing)
-  //   t = -shoulder_throwtime; // Time begins when shoulder starts moving.
-  // else
-  //   t = -5; // fixed windup time.
 
   tfinal = ros::Time::now() + ros::Duration(-t);
 
   return valid_throw;
-  // if (throwing)
-  //   return valid_throw;
-  // else
-  //   return true;
 }
 
 
@@ -489,7 +473,7 @@ int main(int argc, char **argv)
       }
     }
     else {
-      // use trapezoid profile for throwing motion 
+      // use trapezoid profile for throwing motion
       if(!throw_error) {
       	qdot[1] = trapezoid_motion(max_v, 3.14, shoulder_throwtime); // shoulder
 

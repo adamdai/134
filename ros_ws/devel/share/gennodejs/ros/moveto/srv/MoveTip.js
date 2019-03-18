@@ -23,6 +23,7 @@ class MoveTipRequest {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
       this.tip = null;
+      this.movetime = null;
     }
     else {
       if (initObj.hasOwnProperty('tip')) {
@@ -31,6 +32,12 @@ class MoveTipRequest {
       else {
         this.tip = new Tip();
       }
+      if (initObj.hasOwnProperty('movetime')) {
+        this.movetime = initObj.movetime
+      }
+      else {
+        this.movetime = 0.0;
+      }
     }
   }
 
@@ -38,6 +45,8 @@ class MoveTipRequest {
     // Serializes a message object of type MoveTipRequest
     // Serialize message field [tip]
     bufferOffset = Tip.serialize(obj.tip, buffer, bufferOffset);
+    // Serialize message field [movetime]
+    bufferOffset = _serializer.float64(obj.movetime, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -47,11 +56,13 @@ class MoveTipRequest {
     let data = new MoveTipRequest(null);
     // Deserialize message field [tip]
     data.tip = Tip.deserialize(buffer, bufferOffset);
+    // Deserialize message field [movetime]
+    data.movetime = _deserializer.float64(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
-    return 25;
+    return 33;
   }
 
   static datatype() {
@@ -61,7 +72,7 @@ class MoveTipRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '345daa59b4dd0cc9b1994a20bb0ca2a7';
+    return '1a08b6b99f95146724f64dfacea44be6';
   }
 
   static messageDefinition() {
@@ -71,6 +82,7 @@ class MoveTipRequest {
     
     
     Tip     tip
+    float64 movetime
     
     ================================================================================
     MSG: moveto/Tip
@@ -96,6 +108,13 @@ class MoveTipRequest {
     }
     else {
       resolved.tip = new Tip()
+    }
+
+    if (msg.movetime !== undefined) {
+      resolved.movetime = msg.movetime;
+    }
+    else {
+      resolved.movetime = 0.0
     }
 
     return resolved;
@@ -178,6 +197,6 @@ class MoveTipResponse {
 module.exports = {
   Request: MoveTipRequest,
   Response: MoveTipResponse,
-  md5sum() { return '5ebb5876bcc8be930d43a2e07942295f'; },
+  md5sum() { return 'd8b70359542abe8c9014a48d2925814e'; },
   datatype() { return 'moveto/MoveTip'; }
 };

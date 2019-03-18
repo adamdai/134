@@ -3,4 +3,6 @@
           TIP
           MOVETIME-VAL
           MOVETIME
+          MOVETIME-VAL
+          MOVETIME
 ))

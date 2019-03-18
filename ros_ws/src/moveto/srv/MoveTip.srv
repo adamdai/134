@@ -2,6 +2,7 @@
 #
 # Request Definition
 Tip     tip
+float64 movetime
 ---
 # Response Definition
 float64 movetime
